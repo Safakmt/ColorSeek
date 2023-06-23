@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
 public class AiMovementController : MonoBehaviour, ISticker
 {
     [SerializeField] private NavMeshAgent agent;
@@ -15,6 +14,7 @@ public class AiMovementController : MonoBehaviour, ISticker
     }
     private void Update()
     {
+
         if (agent.enabled)
         {
             if (agent.remainingDistance <= agent.stoppingDistance && point != null)
@@ -32,5 +32,14 @@ public class AiMovementController : MonoBehaviour, ISticker
     public void SetStickPoint(Transform stickPoint)
     {
         point = stickPoint;
+    }
+
+    public void ToggleNavmesh(bool state)
+    {
+        agent.enabled = state;
+        if (state)
+        {
+            agent.destination = destination.position;
+        }
     }
 }
