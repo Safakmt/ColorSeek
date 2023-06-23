@@ -9,11 +9,9 @@ public class ObjectTriggerController : MonoBehaviour
     public bool isFree = true;
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("something in trigger");
         if (other.TryGetComponent<ISticker>(out ISticker sticker) && isFree)
         {
             currentSticker = sticker;
-            Debug.Log("inTrigger");
             currentSticker.SetStickPoint(stickingPoint);
             isFree = false;
         }

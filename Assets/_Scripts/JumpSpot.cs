@@ -13,5 +13,16 @@ public class JumpSpot : MonoBehaviour
         {
             other.transform.DOJump(endPos.position, 2, 1, 1);
         }
+
+        if (other.TryGetComponent<AiMovementController>(out AiMovementController aiController))
+        {
+            aiController.ToggleNavmesh(false);
+            Quaternion lookRot = Quaternion.LookRotation(other.transform.position, endPos.position);
+            other.transform.DORotate(lookRot.eulerAngles, 1);
+            other.transform.DOJump(endPos.position, 2, 1, 1).OnComplete(() =>
+            {
+                aiController.ToggleNavmesh(true);
+            });
+        }
     }
 }
