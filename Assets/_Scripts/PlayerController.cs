@@ -18,12 +18,21 @@ public class PlayerController : MonoBehaviour, ISticker
     [SerializeField] Transform point;
     Vector3 gravity = new Vector3(0, -9.81f,0);
     bool isMoving = false;
+    bool isTakingInput = false;
+    GamePlayManager gamePlayManager;
+    private void Start()
+    {
+        gamePlayManager= FindObjectOfType<GamePlayManager>();
+        isTakingInput = true;
+
+    }
     private void Update()
     {
         Vector3 input = new Vector3(joystick.Horizontal,0,joystick.Vertical);
 
-        if (Mathf.Abs(input.x) > 0.1f || Mathf.Abs(input.z) > 0.1f)
+        if (Mathf.Abs(input.x) > 0.1f || Mathf.Abs(input.z) > 0.1f && isTakingInput) 
         {
+            gamePlayManager.CurrentGameState = GameState.Hide;
             Move(input);
             Rotation(input);
             isMoving = true;
