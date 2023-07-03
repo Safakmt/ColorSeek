@@ -7,10 +7,15 @@ public class AiMovementController : MonoBehaviour, ISticker
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform point;
     [SerializeField] private Transform destination;
+    public bool IsReached { get; set; }
 
-    private void Start()
+    private void OnEnable()
     {
-        agent.destination = destination.position;
+        GamePlayManager.OnGameStart += StartMovement;
+    }
+    private void OnDisable()
+    {
+        GamePlayManager.OnGameStart -= StartMovement;
     }
     private void Update()
     {
@@ -21,8 +26,13 @@ public class AiMovementController : MonoBehaviour, ISticker
             {
                 agent.enabled = false;
                 transform.position = point.position;
+                IsReached = true;
             }
         }
+    }
+    private void StartMovement()
+    {
+        agent.destination = destination.position;
     }
     public void ClearStickPoint()
     {
@@ -34,9 +44,14 @@ public class AiMovementController : MonoBehaviour, ISticker
         point = stickPoint;
     }
 
+    public void SetDestination(Transform destination)
+    {
+        this.destination = destination;
+    }
     public void ToggleNavmesh(bool state)
     {
         agent.enabled = state;
+        Debug.Log("navmesh disabled");
         if (state)
         {
             agent.destination = destination.position;
