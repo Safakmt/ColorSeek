@@ -51,10 +51,14 @@ public class AiMovementController : MonoBehaviour, ISticker
     public void ToggleNavmesh(bool state)
     {
         agent.enabled = state;
-        Debug.Log("navmesh disabled");
         if (state)
         {
             agent.destination = destination.position;
         }
+    }
+
+    public bool IsOnRightPoint()
+    {
+        throw new System.NotImplementedException();
     }
 }

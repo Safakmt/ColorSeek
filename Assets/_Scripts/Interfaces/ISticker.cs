@@ -9,5 +9,5 @@ public interface ISticker
 
     public void ClearStickPoint();
 
-
+    public bool IsOnRightPoint();
 }

@@ -94,4 +94,8 @@ public class PlayerController : MonoBehaviour, ISticker
         characterController.Move( cameraRelativeMoveInput * moveSpeed * Time.deltaTime);
     }
 
+    public bool IsOnRightPoint()
+    {
+        throw new NotImplementedException();
+    }
 }
