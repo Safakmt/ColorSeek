@@ -69,7 +69,7 @@ MonoBehaviour:
   characterController: {fileID: 4594259840151602997}
   followCamera: {fileID: 0}
   playerVisual: {fileID: 4594259841217894513}
-  moveSpeed: 5
+  moveSpeed: 7
   rotationSpeed: 400
   point: {fileID: 0}
 --- !u!195 &4594259840151602995
