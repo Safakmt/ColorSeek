@@ -10,17 +10,16 @@ public class AiManager : MonoBehaviour
     private void Start()
     {
         _aiMovementControllers = FindObjectsOfType<AiMovementController>();
+        SetNewPositionsForAIs();
     }
-    private void OnEnable()
-    {
-        GamePlayManager.OnGameStart += SetNewPositionsForAIs;
-    }
-    private void OnDisable()
-    {
-        GamePlayManager.OnGameStart -= SetNewPositionsForAIs;
-    }
+
     private void SetNewPositionsForAIs()
     {
+        if (usedTransforms.Count > 0)
+        {
+            stickyTransforms.AddRange(usedTransforms);
+            usedTransforms.Clear();
+        }
         foreach (var item in _aiMovementControllers)
         {
             Transform newDestination = stickyTransforms[Random.Range(0, stickyTransforms.Count)];
