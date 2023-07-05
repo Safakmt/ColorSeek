@@ -3,16 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public class AiMovementController : MonoBehaviour, ISticker
+
+public enum AIState
+{
+    Idle,
+    Moving,
+    Searching,
+    Hide
+}
+public class AiMovementController : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private Transform point;
     [SerializeField] private Transform destination;
+    [SerializeField] private HideController _hideController;
+    private AIState _currentState;
     public bool IsReached { get; set; }
-
     private void Start()
     {
         IsReached = false;
+        _currentState = AIState.Moving;
     }
     private void OnEnable()
     {
@@ -27,14 +36,19 @@ public class AiMovementController : MonoBehaviour, ISticker
     private void Update()
     {
 
-        if (agent.enabled)
+        if (_currentState == AIState.Moving && agent.enabled)
         {
-            if (agent.remainingDistance <= agent.stoppingDistance && point != null)
+            if (agent.remainingDistance <= agent.stoppingDistance && _hideController.IsReadyToHide())
             {
-                agent.enabled = false;
-                transform.position = point.position;
+                _currentState = AIState.Hide;
                 IsReached = true;
             }
+        }
+
+        if (_currentState == AIState.Hide)
+        {
+            agent.enabled = false;
+            _hideController.Hide();
         }
     }
 
@@ -52,15 +66,6 @@ public class AiMovementController : MonoBehaviour, ISticker
     {
         agent.destination = destination.position;
     }
-    public void ClearStickPoint()
-    {
-        point = null;
-    }
-
-    public void SetStickPoint(Transform stickPoint)
-    {
-        point = stickPoint;
-    }
 
     public void SetDestination(Transform destination)
     {
@@ -75,8 +80,4 @@ public class AiMovementController : MonoBehaviour, ISticker
         }
     }
 
-    public bool IsOnRightPoint()
-    {
-        throw new System.NotImplementedException();
-    }
 }
