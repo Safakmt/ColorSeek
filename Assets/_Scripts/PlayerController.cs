@@ -9,20 +9,27 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour, ISticker
 {
-    [SerializeField] FloatingJoystick joystick;
-    [SerializeField] CharacterController characterController;
-    [SerializeField] CinemachineVirtualCamera followCamera;
-    [SerializeField] Transform playerVisual;
-    [SerializeField] float moveSpeed;
-    [SerializeField] float rotationSpeed;
-    [SerializeField] Transform point;
-    Vector3 gravity = new Vector3(0, -9.81f,0);
-    bool isMoving = false;
-    bool isTakingInput = false;
-    GamePlayManager gamePlayManager;
+    [SerializeField] private FloatingJoystick joystick;
+    [SerializeField] private CharacterController characterController;
+    [SerializeField] private CinemachineVirtualCamera followCamera;
+    [SerializeField] private Transform playerVisual;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private Transform point;
+    private Vector3 _gravity = new Vector3(0, -9.81f,0);
+    bool _isMoving = false;
+    public bool IsReached {
+        get { return IsReached; }
+        set {
+            IsReached = value;
+            //OnDestinationReached?.Invoke(IsReached);
+        }
+    }
+    public bool isTakingInput { get; set; }
+
+    public static event Action<bool> OnDestinationReached;
     private void Start()
     {
-        gamePlayManager= FindObjectOfType<GamePlayManager>();
         isTakingInput = true;
 
     }
@@ -32,24 +39,24 @@ public class PlayerController : MonoBehaviour, ISticker
 
         if (Mathf.Abs(input.x) > 0.1f || Mathf.Abs(input.z) > 0.1f && isTakingInput) 
         {
-            gamePlayManager.CurrentGameState = GameState.Hide;
             Move(input);
             Rotation(input);
-            isMoving = true;
+            _isMoving = true;
+            IsReached = false;
         }
         else
         {
-            isMoving = false;
+            _isMoving = false;
         }
 
-        if (!isMoving && point != null)
+        if (!_isMoving && point != null)
         {
             transform.position = point.position;
+            IsReached = true;
         }
-
         if (!characterController.isGrounded)
         {
-            characterController.Move(gravity * Time.deltaTime);
+            characterController.Move(_gravity * Time.deltaTime);
         }
     }
 
