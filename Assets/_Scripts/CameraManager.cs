@@ -22,23 +22,20 @@ public class CameraManager : MonoBehaviour
     }
     public void ChangeCameraTo(CameraTypes type)
     {
+        _activeCam.Priority = 0;
         switch (type)
         {
             case CameraTypes.SelectionCam:
-                _activeCam.Priority = 0;
-                SelectionCam.Priority = 1;
                 _activeCam = SelectionCam;
                 break;
             case CameraTypes.PlayerFollowCam:
-                _activeCam.Priority = 0;
-                PlayerFollowCam.Priority = 1;
                 _activeCam = PlayerFollowCam;
                 break;
             case CameraTypes.HunterCam:
-                _activeCam.Priority = 0;
-                HunterCam.Priority = 1;
                 _activeCam = HunterCam;
                 break;
         }
+
+        _activeCam.Priority = 1;
     }
 }
