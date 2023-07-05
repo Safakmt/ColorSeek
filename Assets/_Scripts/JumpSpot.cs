@@ -17,10 +17,10 @@ public class JumpSpot : MonoBehaviour
         if (other.TryGetComponent<AiMovementController>(out AiMovementController aiController))
         {
             aiController.ToggleNavmesh(false);
-            Quaternion lookRot = Quaternion.LookRotation(other.transform.position, endPos.position);
+            Quaternion lookRot = Quaternion.LookRotation(aiController.transform.position, endPos.position);
             lookRot.eulerAngles = new Vector3(0,lookRot.y,0);
-            other.transform.DORotate(lookRot.eulerAngles, 1);
-            other.transform.DOJump(endPos.position, 2, 1, 1).OnComplete(() =>
+            aiController.transform.DORotate(lookRot.eulerAngles, 1);
+            aiController.transform.DOJump(endPos.position, 2, 1, 1).OnComplete(() =>
             {
                 aiController.ToggleNavmesh(true);
             });
