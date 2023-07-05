@@ -16,7 +16,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera PlayerFollowCam;
     [SerializeField] private CinemachineVirtualCamera HunterCam;
     private CinemachineVirtualCamera _activeCam;
-    private void Start()
+    private void Awake()
     {
         _activeCam = SelectionCam;
     }
