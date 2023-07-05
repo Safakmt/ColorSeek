@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum GameState
 {
@@ -15,14 +16,19 @@ public class GamePlayManager : MonoBehaviour
 {
     [SerializeField] CameraManager cameraManager;
     [SerializeField] GameObject Hunter;
+    [SerializeField] GameObject HideButton;
     public static event Action OnGameStart;
+    public static event Action OnHideButtonPressed;
     public GameState CurrentGameState { get; set; }
 
-
+    private void OnEnable()
+    {
+        PlayerController.OnDestinationReached += PlayerDestinationReached;
+    }
     private void Start()
     {
-        CurrentGameState = GameState.Start;
         cameraManager.ChangeCameraTo(CameraTypes.SelectionCam);
+        CurrentGameState = GameState.Start;
     }
     private void Update()
     {
@@ -31,11 +37,22 @@ public class GamePlayManager : MonoBehaviour
         {
             cameraManager.ChangeCameraTo(CameraTypes.PlayerFollowCam);
             OnGameStart?.Invoke();
+            CurrentGameState= GameState.Hide;
         }
         if (Input.GetMouseButtonDown(1))
         {
             cameraManager.ChangeCameraTo(CameraTypes.HunterCam);
             Hunter.SetActive(true);
         }
+
+    }
+    private void PlayerDestinationReached(bool state)
+    {
+        HideButton.SetActive(state);
+    }
+    public void HideButtonPressed()
+    {
+        OnHideButtonPressed?.Invoke();
+        HideButton.SetActive(false);
     }
 }
