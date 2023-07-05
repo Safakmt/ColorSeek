@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3961497576824921980}
   - component: {fileID: 3961497576824921953}
   - component: {fileID: 3961497576824921952}
+  - component: {fileID: 1389156188050245010}
   - component: {fileID: 3961497576824921981}
   - component: {fileID: 3961497576824921978}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AiContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,6 +75,20 @@ MonoBehaviour:
   agent: {fileID: 3961497576824921953}
   point: {fileID: 0}
   destination: {fileID: 0}
+  _hideController: {fileID: 1389156188050245010}
+--- !u!114 &1389156188050245010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3961497576824921955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e0b80e9bcb5654f93c810d5c8999b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HidingSpot: {fileID: 0}
 --- !u!136 &3961497576824921981
 CapsuleCollider:
   m_ObjectHideFlags: 0
