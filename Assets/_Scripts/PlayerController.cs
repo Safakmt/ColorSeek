@@ -6,8 +6,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-public class PlayerController : MonoBehaviour, ISticker
+public enum PlayerState
+{
+    Idle,
+    Moving,
+    Hide
+}
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private FloatingJoystick joystick;
     [SerializeField] private CharacterController characterController;
@@ -15,58 +20,60 @@ public class PlayerController : MonoBehaviour, ISticker
     [SerializeField] private Transform playerVisual;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotationSpeed;
-    [SerializeField] private Transform point;
+    [SerializeField] private HideController _hideController;
     private Vector3 _gravity = new Vector3(0, -9.81f,0);
+    private PlayerState _currentState;
     bool _isMoving = false;
-    public bool IsReached {
-        get { return IsReached; }
-        set {
-            IsReached = value;
-            //OnDestinationReached?.Invoke(IsReached);
-        }
-    }
+    bool IsReached = false;
     public bool isTakingInput { get; set; }
 
-    public static event Action<bool> OnDestinationReached;
     private void Start()
     {
         isTakingInput = true;
-
+        _currentState = PlayerState.Moving;
     }
     private void Update()
     {
         Vector3 input = new Vector3(joystick.Horizontal,0,joystick.Vertical);
+        
+        if (_currentState == PlayerState.Moving)
+        {
+            if (Mathf.Abs(input.x) > 0.1f || Mathf.Abs(input.z) > 0.1f && isTakingInput) 
+            {
+                Move(input);
+                Rotation(input);
+                _isMoving = true;
+            }
+            else if (_isMoving)
+            {
+                StopPlayer();
+            }
+        }
 
-        if (Mathf.Abs(input.x) > 0.1f || Mathf.Abs(input.z) > 0.1f && isTakingInput) 
+        if (_currentState == PlayerState.Hide)
         {
-            Move(input);
-            Rotation(input);
-            _isMoving = true;
-            IsReached = false;
-        }
-        else
-        {
-            _isMoving = false;
+
         }
 
-        if (!_isMoving && point != null)
-        {
-            transform.position = point.position;
-            IsReached = true;
-        }
+        ApplyGravity();
+    }
+
+    private void ApplyGravity()
+    {
         if (!characterController.isGrounded)
         {
             characterController.Move(_gravity * Time.deltaTime);
         }
     }
 
-    public void SetStickPoint(Transform stickPoint)
+    private void StopPlayer()
     {
-        point = stickPoint;
-    }
-    public void ClearStickPoint()
-    {
-        point = null;
+        _isMoving = false;
+        if (_hideController.IsReadyToHide())
+        {
+            _hideController.Hide();
+            _currentState = PlayerState.Hide;
+        }
     }
 
     private void Rotation(Vector3 input)
@@ -101,8 +108,4 @@ public class PlayerController : MonoBehaviour, ISticker
         characterController.Move( cameraRelativeMoveInput * moveSpeed * Time.deltaTime);
     }
 
-    public bool IsOnRightPoint()
-    {
-        throw new NotImplementedException();
-    }
 }
