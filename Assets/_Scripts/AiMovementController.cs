@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +10,19 @@ public class AiMovementController : MonoBehaviour, ISticker
     [SerializeField] private Transform destination;
     public bool IsReached { get; set; }
 
+    private void Start()
+    {
+        IsReached = false;
+    }
     private void OnEnable()
     {
         GamePlayManager.OnGameStart += StartMovement;
+        GamePlayManager.OnHideButtonPressed += OnHide;
     }
     private void OnDisable()
     {
         GamePlayManager.OnGameStart -= StartMovement;
+        GamePlayManager.OnHideButtonPressed -= OnHide;
     }
     private void Update()
     {
@@ -28,6 +35,17 @@ public class AiMovementController : MonoBehaviour, ISticker
                 transform.position = point.position;
                 IsReached = true;
             }
+        }
+    }
+
+    private void OnHide()
+    {
+        if (!IsReached)
+        {
+            transform.DOKill();
+            agent.enabled = false;
+            transform.position = destination.position;
+            agent.enabled = true;
         }
     }
     private void StartMovement()
