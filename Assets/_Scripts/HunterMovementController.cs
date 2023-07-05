@@ -11,23 +11,17 @@ public class HunterMovementController : MonoBehaviour
     [SerializeField] private PlayerController player;
     [SerializeField] private List<GameObject> hidingList;
     [SerializeField] private int seekingCount;
-    private List<ISticker> _stickerList = new List<ISticker>();
+    private List<HideController> _hidingList = new List<HideController>();
     private List<GameObject> _seekedList = new List<GameObject>();
     private void Start()
     {
         foreach (var item in hidingList)
         {
-            _stickerList.Add(item.GetComponent<ISticker>());
+            _hidingList.Add(item.GetComponent<HideController>());
         }
+        StartCoroutine(Seek());
     }
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            StartCoroutine(Seek());
-        }
-    }
-
+    
     IEnumerator Seek()
     {
         while (seekingCount > 0)
