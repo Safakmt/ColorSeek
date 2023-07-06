@@ -17,14 +17,10 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField] CameraManager cameraManager;
     [SerializeField] GameObject Hunter;
     [SerializeField] GameObject HideButton;
-    public static event Action OnGameStart;
+    
     public static event Action OnHideButtonPressed;
     public GameState CurrentGameState { get; set; }
 
-    private void OnEnable()
-    {
-        PlayerController.OnDestinationReached += PlayerDestinationReached;
-    }
     private void Start()
     {
         cameraManager.ChangeCameraTo(CameraTypes.SelectionCam);
@@ -35,14 +31,9 @@ public class GamePlayManager : MonoBehaviour
 
         if (CurrentGameState == GameState.Start && Input.GetMouseButtonDown(0)) 
         {
+            EventManager.GameStart();
             cameraManager.ChangeCameraTo(CameraTypes.PlayerFollowCam);
-            OnGameStart?.Invoke();
             CurrentGameState= GameState.Hide;
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            cameraManager.ChangeCameraTo(CameraTypes.HunterCam);
-            Hunter.SetActive(true);
         }
 
     }
@@ -54,5 +45,7 @@ public class GamePlayManager : MonoBehaviour
     {
         OnHideButtonPressed?.Invoke();
         HideButton.SetActive(false);
+        cameraManager.ChangeCameraTo(CameraTypes.HunterCam);
+        Hunter.SetActive(true);
     }
 }
