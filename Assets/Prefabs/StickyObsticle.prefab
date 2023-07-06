@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 206918816097872390}
   - component: {fileID: 206918816097872391}
   - component: {fileID: 206918816097872632}
-  - component: {fileID: 206918816097872388}
   - component: {fileID: 206918816097872635}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StickyObsticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,20 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stickingPoint: {fileID: 206918816899456590}
-  isFree: 1
---- !u!65 &206918816097872388
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 206918816097872389}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2, y: 1, z: 1.2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &206918816097872635
 BoxCollider:
   m_ObjectHideFlags: 0
