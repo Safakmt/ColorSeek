@@ -25,12 +25,12 @@ public class AiMovementController : MonoBehaviour
     }
     private void OnEnable()
     {
-        GamePlayManager.OnGameStart += StartMovement;
+        EventManager.OnGameStart += StartMovement;
         GamePlayManager.OnHideButtonPressed += OnHide;
     }
     private void OnDisable()
     {
-        GamePlayManager.OnGameStart -= StartMovement;
+        EventManager.OnGameStart -= StartMovement;
         GamePlayManager.OnHideButtonPressed -= OnHide;
     }
     private void Update()
