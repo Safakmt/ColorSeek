@@ -4,23 +4,27 @@ using UnityEngine;
 
 public class HideController : MonoBehaviour
 {
-    [SerializeField] private Transform HidingSpot;
+    [SerializeField] private HidingSpot hidingSpot;
 
-    public void SetHidingSpot(Transform HidingSpot)
+    public void SetHidingSpot(HidingSpot spot)
     {
-        this.HidingSpot = HidingSpot;
+        hidingSpot = spot;
     }
     public void ClearHidingSpot()
     {
-        this.HidingSpot = null;
+        this.hidingSpot = null;
     }
     public bool IsReadyToHide()
     {
-        return HidingSpot != null;
+        if (hidingSpot != null)
+            return hidingSpot.IsFreeToHide();
+        return false;
+
     }
 
     public void Hide()
     {
-        transform.position = HidingSpot.position;
+        transform.position = hidingSpot.GetHidingSpot();
+        hidingSpot.SetCurrentHider(this);
     }
 }
