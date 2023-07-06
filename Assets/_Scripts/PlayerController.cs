@@ -52,7 +52,11 @@ public class PlayerController : MonoBehaviour
 
         if (_currentState == PlayerState.Hide)
         {
-
+            if (Mathf.Abs(input.x) > 0.1f || Mathf.Abs(input.z) > 0.1f && isTakingInput)
+            {
+                _hideController.Unhide();
+                _currentState = PlayerState.Moving;
+            }
         }
 
         ApplyGravity();
