@@ -16,11 +16,13 @@ public class AiMovementController : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform destination;
     [SerializeField] private HideController _hideController;
+    [SerializeField] private AnimatorController _animatorController;
     private AIState _currentState;
     public bool IsReached { get; set; }
     private void Start()
     {
         IsReached = false;
+        agent.enabled = false;
         _currentState = AIState.Moving;
     }
     private void OnEnable()
@@ -38,6 +40,7 @@ public class AiMovementController : MonoBehaviour
 
         if (_currentState == AIState.Moving && agent.enabled)
         {
+            _animatorController.PlayRunAnim();
             if (agent.remainingDistance <= agent.stoppingDistance && _hideController.IsReadyToHide())
             {
                 _currentState = AIState.Hide;
@@ -48,6 +51,7 @@ public class AiMovementController : MonoBehaviour
         if (_currentState == AIState.Hide)
         {
             agent.enabled = false;
+            _animatorController.PlayTPoseAnim();
             _hideController.Hide();
         }
     }
@@ -64,6 +68,7 @@ public class AiMovementController : MonoBehaviour
     }
     private void StartMovement()
     {
+        agent.enabled = true;
         agent.destination = destination.position;
     }
 
