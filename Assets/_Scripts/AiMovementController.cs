@@ -23,7 +23,6 @@ public class AiMovementController : MonoBehaviour
     {
         IsReached = false;
         agent.enabled = false;
-        _currentState = AIState.Moving;
     }
     private void OnEnable()
     {
@@ -69,16 +68,24 @@ public class AiMovementController : MonoBehaviour
         }
         else
         {
-            SearchForNewLocation();
+            if (agent.enabled)
+                SearchForNewLocation();
             _currentState = AIState.Moving;
         }
     }
 
     private void SearchForNewLocation()
     {
-        
+        Vector3 positionVector = Random.onUnitSphere * Random.Range(2, 30);
+        positionVector += transform.position;
+        agent.destination = positionVector;
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, agent.destination);
+    }
     private void HideStateActivities()
     {
         agent.enabled = false;
@@ -99,7 +106,7 @@ public class AiMovementController : MonoBehaviour
     private void StartMovement()
     {
         agent.enabled = true;
-        agent.destination = destination.position;
+        _currentState = AIState.Idle;
     }
 
     public void SetDestination(Transform destination)

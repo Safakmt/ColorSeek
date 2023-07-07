@@ -19,6 +19,9 @@ public class CameraManager : MonoBehaviour
     private void Awake()
     {
         _activeCam = SelectionCam;
+        PlayerController player = FindObjectOfType<PlayerController>();
+        PlayerFollowCam.Follow = player.transform;
+        PlayerFollowCam.LookAt= player.transform;
     }
     public void ChangeCameraTo(CameraTypes type)
     {
