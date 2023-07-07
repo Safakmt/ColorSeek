@@ -76,8 +76,8 @@ public class AiMovementController : MonoBehaviour
 
     private void SearchForNewLocation()
     {
-        Vector3 positionVector = Random.onUnitSphere * Random.Range(2, 30);
-        positionVector += transform.position;
+        Vector3 positionVector = Random.onUnitSphere * Random.Range(1, 10);
+        positionVector += destination.position;
         agent.destination = positionVector;
     }
 
