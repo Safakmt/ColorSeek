@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Windows;
 
 public enum PlayerState
 {
@@ -14,17 +15,23 @@ public enum PlayerState
 }
 public class PlayerController : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private FloatingJoystick joystick;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private CinemachineVirtualCamera followCamera;
     [SerializeField] private Transform playerVisual;
+    [SerializeField] private HideController _hideController;
+    [SerializeField] private AnimatorController _animatorController;
+
+    [Header("Values")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotationSpeed;
-    [SerializeField] private HideController _hideController;
+
     private Vector3 _gravity = new Vector3(0, -9.81f,0);
     private PlayerState _currentState;
-    bool _isMoving = false;
-    bool IsReached = false;
+    private bool _isMoving = false;
+    private bool IsReached = false;
+    private Vector3 _inputData = new Vector3();
     public bool isTakingInput { get; set; }
 
     private void Start()
@@ -34,34 +41,68 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        Vector3 input = new Vector3(joystick.Horizontal,0,joystick.Vertical);
+        _inputData = new Vector3(joystick.Horizontal,0,joystick.Vertical);
         
         if (_currentState == PlayerState.Moving)
         {
-            if (Mathf.Abs(input.x) > 0.1f || Mathf.Abs(input.z) > 0.1f && isTakingInput) 
-            {
-                Move(input);
-                Rotation(input);
-                _isMoving = true;
-            }
-            else if (_isMoving)
-            {
-                StopPlayer();
-            }
+            MovingStateActivities();
+        }
+
+        if (_currentState == PlayerState.Idle)
+        {
+            IdleStateActivities();
         }
 
         if (_currentState == PlayerState.Hide)
         {
-            if (Mathf.Abs(input.x) > 0.1f || Mathf.Abs(input.z) > 0.1f && isTakingInput)
-            {
-                _hideController.Unhide();
-                _currentState = PlayerState.Moving;
-            }
+            HideStateActivites();
         }
 
-        ApplyGravity();
     }
 
+    private void HideStateActivites ()
+    {
+        if (Mathf.Abs(_inputData.x) > 0.1f || Mathf.Abs(_inputData.z) > 0.1f && isTakingInput)
+        {
+            _hideController.Unhide();
+            _currentState = PlayerState.Moving;
+        }
+        else
+        {
+            _hideController.Hide();
+            _animatorController.PlayTPoseAnim();
+        }
+    }
+    private void IdleStateActivities()
+    {
+        _isMoving = false;
+        _animatorController.PlayIdleAnim();
+        if (Mathf.Abs(_inputData.x) > 0.1f || Mathf.Abs(_inputData.z) > 0.1f && isTakingInput)
+        {
+            _currentState = PlayerState.Moving;
+        }
+        else if (_hideController.IsReadyToHide())
+        {
+
+            _currentState = PlayerState.Hide;
+        }
+        ApplyGravity();
+
+    }
+    private void MovingStateActivities() {
+
+        if (Mathf.Abs(_inputData.x) > 0.1f || Mathf.Abs(_inputData.z) > 0.1f && isTakingInput)
+        {
+            Move(_inputData);
+            Rotation(_inputData);
+            _animatorController.PlayRunAnim();
+        }
+        else if (_isMoving)
+        {
+            _currentState = PlayerState.Idle;
+        }
+        ApplyGravity();
+    }
     private void ApplyGravity()
     {
         if (!characterController.isGrounded)
@@ -70,16 +111,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void StopPlayer()
-    {
-        _isMoving = false;
-        if (_hideController.IsReadyToHide())
-        {
-            _hideController.Hide();
-            _currentState = PlayerState.Hide;
-        }
-    }
 
+    #region Move And Rotate Methods
     private void Rotation(Vector3 input)
     {
         Vector3 forward = followCamera.transform.forward;
@@ -110,6 +143,9 @@ public class PlayerController : MonoBehaviour
 
         Vector3 cameraRelativeMoveInput = forwardRelativeVerticalInput + rightRelativeHorizontalInput;
         characterController.Move( cameraRelativeMoveInput * moveSpeed * Time.deltaTime);
-    }
 
+        _isMoving = true;
+
+    }
+    #endregion
 }
