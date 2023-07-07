@@ -40,20 +40,50 @@ public class AiMovementController : MonoBehaviour
 
         if (_currentState == AIState.Moving && agent.enabled)
         {
-            _animatorController.PlayRunAnim();
-            if (agent.remainingDistance <= agent.stoppingDistance && _hideController.IsReadyToHide())
-            {
-                _currentState = AIState.Hide;
-                IsReached = true;
-            }
+            MovingStateActivities();
         }
 
+        if (_currentState == AIState.Idle)
+        {
+            IdleStateActivities();
+        }
         if (_currentState == AIState.Hide)
         {
-            agent.enabled = false;
-            _animatorController.PlayTPoseAnim();
-            _hideController.Hide();
+            HideStateActivities();
         }
+    }
+    private void MovingStateActivities()
+    {
+        _animatorController.PlayRunAnim();
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            _currentState = AIState.Idle;
+            IsReached = true;
+        }
+    }
+    private void IdleStateActivities()
+    {
+        if (_hideController.IsReadyToHide())
+        {
+            _currentState = AIState.Hide;
+        }
+        else
+        {
+            SearchForNewLocation();
+            _currentState = AIState.Moving;
+        }
+    }
+
+    private void SearchForNewLocation()
+    {
+        
+    }
+
+    private void HideStateActivities()
+    {
+        agent.enabled = false;
+        _animatorController.PlayTPoseAnim();
+        _hideController.Hide();
     }
 
     private void OnHide()
