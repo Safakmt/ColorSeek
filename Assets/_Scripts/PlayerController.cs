@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        joystick = FindObjectOfType<FloatingJoystick>();
         isTakingInput = true;
         _currentState = PlayerState.Moving;
     }
