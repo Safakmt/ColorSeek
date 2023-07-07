@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: General Material
-  m_Shader: {fileID: 4800000, guid: 30a56ab657b774ec49e5f236913e3060, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8302807d5c3d34f85a1cfdcde75e1871, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
