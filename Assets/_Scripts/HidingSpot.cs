@@ -25,7 +25,7 @@ public class HidingSpot : MonoBehaviour
         return _isFree;
     }
 
-    public Vector3 GetHidingSpot()
+    public Vector3 GetHidingPosition()
     {
         return stickingPoint.position;
     }
