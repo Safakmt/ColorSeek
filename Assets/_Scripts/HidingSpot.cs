@@ -29,4 +29,8 @@ public class HidingSpot : MonoBehaviour
     {
         return stickingPoint.position;
     }
+    public Vector3 GetHidingRotation()
+    {
+        return stickingPoint.eulerAngles;
+    }
 }
