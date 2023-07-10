@@ -66,11 +66,14 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(_inputData.x) > 0.1f || Mathf.Abs(_inputData.z) > 0.1f && isTakingInput)
         {
             _hideController.Unhide();
+            transform.rotation = Quaternion.Euler(Vector3.zero);
+            characterController.enabled = true;
             _currentState = PlayerState.Moving;
         }
         else
         {
             _hideController.Hide();
+            characterController.enabled = false;
             _animatorController.PlayTPoseAnim();
         }
     }
