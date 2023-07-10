@@ -80,8 +80,8 @@ public class AiMovementController : MonoBehaviour
     private void SearchForNewLocation()
     {
         Vector3 distance = destination.position - transform.position;
-        Vector3 randomVector = Random.onUnitSphere * Random.Range(0, Randomness);
-        Vector3 targetPos = transform.position + Random.Range(2,5) * distance.normalized;
+        Vector3 randomVector = Random.onUnitSphere * Random.Range(0, Randomness+1);
+        Vector3 targetPos = transform.position + Random.Range(0,Randomness+1) * distance.normalized;
         targetPos += randomVector;
         agent.destination = targetPos;
         Debug.Log(transform.name +targetPos);
@@ -95,9 +95,10 @@ public class AiMovementController : MonoBehaviour
     }
     private void HideStateActivities()
     {
-        agent.enabled = false;
+        if (agent.enabled)
+            _hideController.Hide();
         _animatorController.PlayTPoseAnim();
-        _hideController.Hide();
+        agent.enabled = false;
     }
 
     private void OnHide()
