@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Toon Glass
+  m_Name: ToonGlass2
   m_Shader: {fileID: 4800000, guid: 7ae0bffb8b7184c78966c1a98fe75104, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -94,7 +94,7 @@ Material:
     - __dummy__: 0
     - __outline_gui_dummy__: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 0.6509804}
+    - _Color: {r: 0.39609292, g: 0.6478825, b: 0.6509434, a: 0.6509804}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 0.27450982, g: 0.43921572, b: 0.50980395, a: 1}
     - _OutlineColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
