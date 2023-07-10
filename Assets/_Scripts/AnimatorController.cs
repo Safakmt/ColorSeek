@@ -10,6 +10,10 @@ public class AnimatorController : MonoBehaviour
     private const string TPOSE = "Tpose";
     private string ActiveAnim;
 
+    private void Start()
+    {
+        ActiveAnim = IDLE;
+    }
     public void PlayRunAnim()
     {
         _animator.SetBool(ActiveAnim, false);
