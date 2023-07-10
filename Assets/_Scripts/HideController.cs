@@ -24,7 +24,7 @@ public class HideController : MonoBehaviour
 
     public void Hide()
     {
-        transform.position = hidingSpot.GetHidingPosition();
+        transform.SetPositionAndRotation(hidingSpot.GetHidingPosition(), Quaternion.Euler(hidingSpot.GetHidingRotation()));
         hidingSpot.SetCurrentHider(this);
     }
 
