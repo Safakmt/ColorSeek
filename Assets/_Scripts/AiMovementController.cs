@@ -18,11 +18,14 @@ public class AiMovementController : MonoBehaviour
     [SerializeField] private HideController _hideController;
     [SerializeField] private AnimatorController _animatorController;
     private AIState _currentState;
+    private Vector3 _randomVector;
+    public float Randomness;
     public bool IsReached { get; set; }
     private void Start()
     {
         IsReached = false;
         agent.enabled = false;
+        _randomVector = Random.onUnitSphere * Random.Range(1, 10);
     }
     private void OnEnable()
     {
@@ -76,9 +79,13 @@ public class AiMovementController : MonoBehaviour
 
     private void SearchForNewLocation()
     {
-        Vector3 positionVector = Random.onUnitSphere * Random.Range(1, 10);
-        positionVector += destination.position;
-        agent.destination = positionVector;
+        Vector3 distance = destination.position - transform.position;
+        Vector3 randomVector = Random.onUnitSphere * Random.Range(0, Randomness);
+        Vector3 targetPos = transform.position + Random.Range(2,5) * distance.normalized;
+        targetPos += randomVector;
+        agent.destination = targetPos;
+        Debug.Log(transform.name +targetPos);
+        Randomness /= 1.3f;
     }
 
     private void OnDrawGizmosSelected()
