@@ -6,9 +6,9 @@ using UnityEngine;
 public class HidingSpot : MonoBehaviour
 {
     [SerializeField] private Transform stickingPoint;
+    [SerializeField] private Color _hidingColor;
     private HideController currentHider;
     private bool _isFree = true;
-
     public void SetCurrentHider(HideController currentHider)
     {
         _isFree = false;
@@ -25,6 +25,18 @@ public class HidingSpot : MonoBehaviour
         return _isFree;
     }
 
+    public Transform GetHidingTransform()
+    {
+        return stickingPoint;
+    }
+    public void SetHidingColor(Color newColor)
+    {
+        _hidingColor = newColor;
+    }
+    public Color GetHidingColor()
+    {
+        return _hidingColor;
+    }
     public Vector3 GetHidingPosition()
     {
         return stickingPoint.position;
@@ -32,5 +44,10 @@ public class HidingSpot : MonoBehaviour
     public Vector3 GetHidingRotation()
     {
         return stickingPoint.eulerAngles;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Debug.DrawLine(transform.position, GetHidingPosition());
     }
 }
