@@ -623,6 +623,58 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.97120047, y: 0.82847035, z: 1.4264644}
   m_Center: {x: -0.030671, y: 0.4052493, z: -0.0045248866}
+--- !u!1 &1731957157110385579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1084838916796787314}
+  - component: {fileID: 1425380564032529938}
+  m_Layer: 7
+  m_Name: NavMeshLink
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1084838916796787314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731957157110385579}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.155, y: 6.662, z: 9.74}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9067822007469762186}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1425380564032529938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731957157110385579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0, y: -0.04, z: -0.7}
+  m_EndPoint: {x: 0, y: -1.65, z: -1.38}
+  m_Width: 1.1333523
+  m_CostModifier: -1
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 0
+  m_Area: 0
 --- !u!1 &2033759082494766625
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,7 +926,7 @@ GameObject:
   - component: {fileID: 2263611307177973308}
   - component: {fileID: 2033021216807704749}
   - component: {fileID: 8293745754379267448}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -978,7 +1030,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.033333335
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 11fa636341bfe9a4f89ff8d78aba7a68, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 29f940fda0903934faa47ce948922506, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &2635548844942142579
 GameObject:
@@ -2125,7 +2177,7 @@ GameObject:
   - component: {fileID: 8463043827176569099}
   - component: {fileID: 6232318576982256800}
   - component: {fileID: 4327345975401465720}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shelf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2143,7 +2195,8 @@ Transform:
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1084838916796787314}
   m_Father: {fileID: 6145684157118306491}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
