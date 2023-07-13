@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private bool _isMoving = false;
     private bool IsReached = false;
     private Vector3 _inputData = new Vector3();
+    private bool _isHiding = false;
     public bool isTakingInput { get; set; }
 
     private void Start()
@@ -69,12 +70,18 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(Vector3.zero);
             characterController.enabled = true;
             _currentState = PlayerState.Moving;
+            _isHiding= false;
+        }
+        else if(_isHiding)
+        {
+            
         }
         else
         {
             _hideController.Hide();
             characterController.enabled = false;
             _animatorController.PlayTPoseAnim();
+            _isHiding = true;
         }
     }
     private void IdleStateActivities()
