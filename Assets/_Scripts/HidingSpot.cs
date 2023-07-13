@@ -46,8 +46,8 @@ public class HidingSpot : MonoBehaviour
         return stickingPoint.eulerAngles;
     }
 
-    private void OnDrawGizmos()
-    {
-        Debug.DrawLine(transform.position, GetHidingPosition());
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Debug.DrawLine(transform.position, GetHidingPosition());
+    //}
 }
