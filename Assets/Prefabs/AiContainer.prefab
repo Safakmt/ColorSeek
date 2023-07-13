@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7491320829394787429}
   - component: {fileID: 3961497576824921978}
   - component: {fileID: 9212488018455002480}
+  - component: {fileID: 4068871662318843755}
   m_Layer: 0
   m_Name: AiContainer
   m_TagString: Untagged
@@ -147,6 +148,19 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.6, z: 0}
+--- !u!114 &4068871662318843755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3961497576824921955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ad64185929bb34e8f43ada2dfddd37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 4056590150927673362}
 --- !u!1001 &2030564267048923864
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -232,5 +246,10 @@ Animator:
 --- !u!4 &1991921496874816819 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0effab31759f5ea4ebe7c12bf0744f0e, type: 3}
+  m_PrefabInstance: {fileID: 2030564267048923864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &4056590150927673362 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2622753384463669962, guid: 0effab31759f5ea4ebe7c12bf0744f0e, type: 3}
   m_PrefabInstance: {fileID: 2030564267048923864}
   m_PrefabAsset: {fileID: 0}

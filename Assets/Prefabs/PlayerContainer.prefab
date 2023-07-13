@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 7781939037610249486}
   - component: {fileID: 2229279600933872813}
   - component: {fileID: 4594259840151602995}
+  - component: {fileID: 4591178439517246597}
   m_Layer: 0
   m_Name: PlayerContainer
   m_TagString: Untagged
@@ -201,6 +202,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &4591178439517246597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4594259840151602999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ad64185929bb34e8f43ada2dfddd37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 7879843406771931021}
 --- !u!1001 &5277998426828660039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -270,5 +284,10 @@ Animator:
 --- !u!4 &5671596430990260908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0effab31759f5ea4ebe7c12bf0744f0e, type: 3}
+  m_PrefabInstance: {fileID: 5277998426828660039}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7879843406771931021 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2622753384463669962, guid: 0effab31759f5ea4ebe7c12bf0744f0e, type: 3}
   m_PrefabInstance: {fileID: 5277998426828660039}
   m_PrefabAsset: {fileID: 0}
