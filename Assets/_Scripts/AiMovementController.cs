@@ -11,6 +11,10 @@ public enum AIState
     Searching,
     Hide
 }
+public enum PoseType
+{
+    Tpose
+}
 public class AiMovementController : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
@@ -18,14 +22,12 @@ public class AiMovementController : MonoBehaviour
     [SerializeField] private HideController _hideController;
     [SerializeField] private AnimatorController _animatorController;
     private AIState _currentState;
-    private Vector3 _randomVector;
     public float Randomness;
     public bool IsReached { get; set; }
     private void Start()
     {
         IsReached = false;
         agent.enabled = false;
-        _randomVector = Random.onUnitSphere * Random.Range(1, 10);
     }
     private void OnEnable()
     {
@@ -114,6 +116,7 @@ public class AiMovementController : MonoBehaviour
     private void StartMovement()
     {
         agent.enabled = true;
+        SetDestination(_hideController.GetRightSpot());
         _currentState = AIState.Idle;
     }
 
