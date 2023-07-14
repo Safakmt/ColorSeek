@@ -7,6 +7,7 @@ public class HidingSpot : MonoBehaviour
 {
     [SerializeField] private Transform stickingPoint;
     [SerializeField] private Color _hidingColor;
+    [SerializeField] private PoseType _type;
     private HideController currentHider;
     private bool _isFree = true;
     public void SetCurrentHider(HideController currentHider)
@@ -45,7 +46,10 @@ public class HidingSpot : MonoBehaviour
     {
         return stickingPoint.eulerAngles;
     }
-
+    public PoseType GetPose()
+    {
+        return _type;
+    }
     //private void OnDrawGizmos()
     //{
     //    Debug.DrawLine(transform.position, GetHidingPosition());
