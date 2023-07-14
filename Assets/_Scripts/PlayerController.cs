@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            playerVisual.rotation = Quaternion.Euler(Vector3.zero);
             _hideController.Hide();
             characterController.enabled = false;
             _animatorController.PlayTPoseAnim();
