@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 1389156188050245010}
   - component: {fileID: 1188028559389407982}
   - component: {fileID: 7491320829394787429}
+  - component: {fileID: 4068871662318843755}
   - component: {fileID: 3961497576824921978}
   - component: {fileID: 9212488018455002480}
-  - component: {fileID: 4068871662318843755}
   m_Layer: 0
   m_Name: AiContainer
   m_TagString: Untagged
@@ -53,7 +53,7 @@ NavMeshAgent:
   m_Speed: 3
   m_Acceleration: 5
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 200
   m_StoppingDistance: 0.3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -91,7 +91,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e0b80e9bcb5654f93c810d5c8999b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hidingSpot: {fileID: 0}
+  _closestSpot: {fileID: 0}
+  _colorHandler: {fileID: 4068871662318843755}
+  _rightSpot: {fileID: 0}
 --- !u!114 &1188028559389407982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +120,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 3123589684605516731}
+--- !u!114 &4068871662318843755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3961497576824921955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ad64185929bb34e8f43ada2dfddd37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 4056590150927673362}
 --- !u!54 &3961497576824921978
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -148,19 +163,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.6, z: 0}
---- !u!114 &4068871662318843755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3961497576824921955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98ad64185929bb34e8f43ada2dfddd37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshRenderer: {fileID: 4056590150927673362}
 --- !u!1001 &2030564267048923864
 PrefabInstance:
   m_ObjectHideFlags: 0
