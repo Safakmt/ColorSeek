@@ -4,32 +4,42 @@ using UnityEngine;
 
 public class HideController : MonoBehaviour
 {
-    [SerializeField] private HidingSpot hidingSpot;
-
-    public void SetHidingSpot(HidingSpot spot)
+    [SerializeField] private HidingSpot _closestSpot;
+    [SerializeField] private MeshColorHandler _colorHandler;
+    [SerializeField] private HidingSpot _rightSpot;
+    public void SetClosestSpot(HidingSpot spot)
     {
-        hidingSpot = spot;
+        _closestSpot = spot;
     }
-    public void ClearHidingSpot()
+    public void SetRightSpot(HidingSpot spot)
     {
-        this.hidingSpot = null;
+        _rightSpot = spot;
+        _colorHandler.SetColor(_rightSpot.GetHidingColor());
+    }
+    public Transform GetRightSpot()
+    {
+        return _rightSpot.GetHidingTransform();
+    }
+    public void ClearClosestSpot()
+    {
+        this._closestSpot = null;
     }
     public bool IsReadyToHide()
     {
-        if (hidingSpot != null)
-            return hidingSpot.IsFreeToHide();
+        if (_closestSpot != null)
+            return _closestSpot.IsFreeToHide();
         return false;
 
     }
 
     public void Hide()
     {
-        transform.SetPositionAndRotation(hidingSpot.GetHidingPosition(), Quaternion.Euler(hidingSpot.GetHidingRotation()));
-        hidingSpot.SetCurrentHider(this);
+        transform.SetPositionAndRotation(_closestSpot.GetHidingPosition(), Quaternion.Euler(_closestSpot.GetHidingRotation()));
+        _closestSpot.SetCurrentHider(this);
     }
 
     public void Unhide()
     {
-        hidingSpot.ClearCurrentHider();
+        _closestSpot.ClearCurrentHider();
     }
 }
