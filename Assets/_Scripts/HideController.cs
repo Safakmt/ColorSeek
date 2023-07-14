@@ -35,11 +35,13 @@ public class HideController : MonoBehaviour
     public void Hide()
     {
         transform.SetPositionAndRotation(_closestSpot.GetHidingPosition(), Quaternion.Euler(_closestSpot.GetHidingRotation()));
+        _colorHandler.HidingValues();
         _closestSpot.SetCurrentHider(this);
     }
 
     public void Unhide()
     {
+        _colorHandler.UnhidingValues();
         _closestSpot.ClearCurrentHider();
     }
 }
