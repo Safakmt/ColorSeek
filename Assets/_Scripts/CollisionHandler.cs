@@ -18,7 +18,7 @@ public class CollisionHandler : MonoBehaviour
         if (other.gameObject.layer == _layerIndex)
         {
             HidingSpot currentSpot = other.GetComponent<HidingSpot>();
-            hideController.SetHidingSpot(currentSpot);
+            hideController.SetClosestSpot(currentSpot);
         }
     }
 
@@ -26,7 +26,7 @@ public class CollisionHandler : MonoBehaviour
     {
         if (other.gameObject.layer == _layerIndex)
         {
-            hideController.ClearHidingSpot();
+            hideController.ClearClosestSpot();
         }
     }
 }
