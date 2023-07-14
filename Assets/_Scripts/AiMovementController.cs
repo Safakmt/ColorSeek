@@ -17,12 +17,15 @@ public enum PoseType
 }
 public class AiMovementController : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private Transform destination;
     [SerializeField] private HideController _hideController;
     [SerializeField] private AnimatorController _animatorController;
+
+    [Header("Values")]
+    [SerializeField]private float _randomness;
+    [SerializeField] private Transform destination;
     private AIState _currentState;
-    public float Randomness;
     public bool IsReached { get; set; }
     private void Start()
     {
@@ -82,12 +85,12 @@ public class AiMovementController : MonoBehaviour
     private void SearchForNewLocation()
     {
         Vector3 distance = destination.position - transform.position;
-        Vector3 randomVector = Random.onUnitSphere * Random.Range(0, Randomness+1);
-        Vector3 targetPos = transform.position + Random.Range(0,Randomness+1) * distance.normalized;
+        Vector3 randomVector = Random.onUnitSphere * Random.Range(0, _randomness+1);
+        Vector3 targetPos = transform.position + Random.Range(0,_randomness+1) * distance.normalized;
         targetPos += randomVector;
         agent.destination = targetPos;
         Debug.Log(transform.name +targetPos);
-        Randomness /= 1.3f;
+        _randomness /= 1.3f;
     }
 
     private void OnDrawGizmosSelected()
