@@ -6,7 +6,12 @@ public class MeshColorHandler : MonoBehaviour
 {
     [SerializeField] private SkinnedMeshRenderer meshRenderer;
     [SerializeField] private float hidingOutlineWidth;
-    private float _unhidingOutlineWidth;
+    private float _unhidingOutlineWidth = 2f;
+
+    private void Awake()
+    {
+        meshRenderer.sharedMaterial.SetFloat("_Outline", _unhidingOutlineWidth);
+    }
     public void SetColor(Color color)
     {
         meshRenderer.sharedMaterial.color = color;
