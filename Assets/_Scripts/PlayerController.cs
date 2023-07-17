@@ -35,13 +35,15 @@ public class PlayerController : MonoBehaviour
     private bool IsReached = false;
     private Vector3 _inputData = new Vector3();
     private bool _isHiding = false;
-    public bool isTakingInput {
+    private bool _isTakingInput;
+    public bool IsTakingInput {
         get
         {
-            return isTakingInput;
-        } 
-        set {
-            isTakingInput = value;
+            return _isTakingInput;
+        }
+        set
+        {
+            _isTakingInput = value;
             joystick.enabled = value;
         } 
     }
@@ -49,7 +51,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         joystick = FindObjectOfType<FloatingJoystick>();
-        isTakingInput = true;
+        IsTakingInput = true;
         _currentState = PlayerState.Moving;
     }
     private void Update()
@@ -75,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
     private void HideStateActivites ()
     {
-        if (Mathf.Abs(_inputData.x) > 0.1f || Mathf.Abs(_inputData.z) > 0.1f && isTakingInput)
+        if (Mathf.Abs(_inputData.x) > 0.1f || Mathf.Abs(_inputData.z) > 0.1f && IsTakingInput)
         {
             _hideController.Unhide();
             transform.rotation = Quaternion.Euler(Vector3.zero);
@@ -102,7 +104,7 @@ public class PlayerController : MonoBehaviour
     {
         _isMoving = false;
         _animatorController.PlayIdleAnim();
-        if (Mathf.Abs(_inputData.x) > 0.1f || Mathf.Abs(_inputData.z) > 0.1f && isTakingInput)
+        if (Mathf.Abs(_inputData.x) > 0.1f || Mathf.Abs(_inputData.z) > 0.1f && IsTakingInput)
         {
             _currentState = PlayerState.Moving;
         }
@@ -116,7 +118,7 @@ public class PlayerController : MonoBehaviour
     }
     private void MovingStateActivities() {
 
-        if (Mathf.Abs(_inputData.x) > 0.1f || Mathf.Abs(_inputData.z) > 0.1f && isTakingInput)
+        if (Mathf.Abs(_inputData.x) > 0.1f || Mathf.Abs(_inputData.z) > 0.1f && IsTakingInput)
         {
             Move(_inputData);
             Rotation(_inputData);
