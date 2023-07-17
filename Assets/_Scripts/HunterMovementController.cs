@@ -80,7 +80,7 @@ public class HunterMovementController : MonoBehaviour
             currentChased.transform.localPosition = Vector3.zero;
             _animator.SetTrigger("Catch");
             GameObject deactive = currentChased.gameObject;
-            DOVirtual.DelayedCall(1f, () =>
+            DOVirtual.DelayedCall(2f, () =>
             {
                 _currentState = HunterState.Walk;
                 deactive.gameObject.SetActive(false);
