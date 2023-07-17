@@ -23,7 +23,17 @@ public class HunterMovementController : MonoBehaviour
     private List<HideController> _hidingList = new List<HideController>();
     private List<HideController> _seekedList = new List<HideController>();
     private HideController currentChased;
+    private Transform currentChasedTransform;
     private HunterState _currentState;
+
+    private void OnEnable()
+    {
+        EventManager.OnHunterCatch += OnCatchAnimationEvent;
+    }
+    private void OnDisable()
+    {
+        EventManager.OnHunterCatch -= OnCatchAnimationEvent;
+    }
     private void Start()
     {
         HideController[] controllers = FindObjectsOfType<HideController>();
@@ -74,21 +84,26 @@ public class HunterMovementController : MonoBehaviour
     {
         if (currentChased != null)
         {
+            currentChasedTransform = currentChased.transform;
             agent.SetDestination(transform.position);
             transform.LookAt(currentChased.transform.position);
-            currentChased.transform.SetParent(_catchingObjectPosition);
-            currentChased.transform.localPosition = Vector3.zero;
             _animator.SetTrigger("Catch");
             GameObject deactive = currentChased.gameObject;
             DOVirtual.DelayedCall(2f, () =>
             {
                 _currentState = HunterState.Walk;
-                deactive.gameObject.SetActive(false);
+                deactive.SetActive(false);
             });
     
         currentChased = null;
         seekingCount -= 1;
         }
+    }
+    public void OnCatchAnimationEvent()
+    {
+        currentChasedTransform.SetParent(_catchingObjectPosition);
+        currentChasedTransform.localPosition = Vector3.zero;
+
     }
     private void OnDrawGizmosSelected()
     {
