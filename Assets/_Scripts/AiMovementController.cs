@@ -8,8 +8,8 @@ public enum AIState
 {
     Idle,
     Moving,
-    Searching,
-    Hide
+    Hide,
+    Escaping
 }
 public enum PoseType
 {
@@ -35,12 +35,12 @@ public class AiMovementController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnGameStart += StartMovement;
-        GamePlayManager.OnHideButtonPressed += OnHide;
+        EventManager.OnSeekState += OnHide;
     }
     private void OnDisable()
     {
         EventManager.OnGameStart -= StartMovement;
-        GamePlayManager.OnHideButtonPressed -= OnHide;
+        EventManager.OnSeekState -= OnHide;
     }
     private void Update()
     {
@@ -57,6 +57,11 @@ public class AiMovementController : MonoBehaviour
         if (_currentState == AIState.Hide)
         {
             HideStateActivities();
+        }
+        if (_currentState == AIState.Escaping)
+        {
+            agent.enabled = false;
+            _animatorController.PlayTPoseAnim();
         }
     }
     private void MovingStateActivities()
@@ -89,7 +94,6 @@ public class AiMovementController : MonoBehaviour
         Vector3 targetPos = transform.position + Random.Range(0,_randomness+1) * distance.normalized;
         targetPos += randomVector;
         agent.destination = targetPos;
-        Debug.Log(transform.name +targetPos);
         _randomness /= 1.3f;
     }
 
@@ -114,6 +118,15 @@ public class AiMovementController : MonoBehaviour
             agent.enabled = false;
             transform.position = destination.position;
             agent.enabled = true;
+        }
+
+        if (_currentState == AIState.Hide)
+        {
+            return;
+        }
+        else
+        {
+            _currentState = AIState.Escaping;
         }
     }
     private void StartMovement()
