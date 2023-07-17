@@ -11,4 +11,7 @@ public static class EventManager
 
     public static event Action OnSeekState;
     public static void SeekState() => OnSeekState?.Invoke();
+
+    public static event Action OnHunterCatch;
+    public static void HunterCatch() => OnHunterCatch?.Invoke();
 }
