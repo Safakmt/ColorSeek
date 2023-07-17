@@ -27,13 +27,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotationSpeed;
 
+    public event Action OnPlayerHide;
+    public event Action OnPlayerUnhide;
     private Vector3 _gravity = new Vector3(0, -9.81f,0);
     private PlayerState _currentState;
     private bool _isMoving = false;
     private bool IsReached = false;
     private Vector3 _inputData = new Vector3();
     private bool _isHiding = false;
-    public bool isTakingInput { get; set; }
+    public bool isTakingInput {
+        get
+        {
+            return isTakingInput;
+        } 
+        set {
+            isTakingInput = value;
+            joystick.enabled = value;
+        } 
+    }
 
     private void Start()
     {
@@ -71,6 +82,7 @@ public class PlayerController : MonoBehaviour
             characterController.enabled = true;
             _currentState = PlayerState.Moving;
             _isHiding= false;
+            OnPlayerUnhide?.Invoke();
         }
         else if(_isHiding)
         {
@@ -83,6 +95,7 @@ public class PlayerController : MonoBehaviour
             characterController.enabled = false;
             _animatorController.PlayTPoseAnim();
             _isHiding = true;
+            OnPlayerHide?.Invoke();
         }
     }
     private void IdleStateActivities()

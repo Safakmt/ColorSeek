@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -17,10 +18,24 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField] CameraManager cameraManager;
     [SerializeField] GameObject Hunter;
     [SerializeField] GameObject HideButton;
+    [SerializeField] private PlayerController _playerController;
+    [SerializeField] private float playTime;
+    [SerializeField] private TextMeshProUGUI playTimeText;
     
-    public static event Action OnHideButtonPressed;
     public GameState CurrentGameState { get; set; }
 
+    private void OnEnable()
+    {
+        _playerController.OnPlayerHide += ShowHideButton;
+        _playerController.OnPlayerUnhide += HideHideButton;
+    }
+
+    private void OnDisable()
+    {
+        _playerController.OnPlayerHide -= ShowHideButton;
+        _playerController.OnPlayerUnhide -= HideHideButton;
+        
+    }
     private void Start()
     {
         cameraManager.ChangeCameraTo(CameraTypes.SelectionCam);
@@ -35,17 +50,40 @@ public class GamePlayManager : MonoBehaviour
             cameraManager.ChangeCameraTo(CameraTypes.PlayerFollowCam);
             CurrentGameState= GameState.Hide;
         }
+        if (CurrentGameState == GameState.Hide)
+        {
+            playTime -= Time.deltaTime;
+            playTimeText.text = playTime.ToString("0.0");
+            if (playTime <= 0)
+            {
+                playTimeText.text = "0";
+                CurrentGameState = GameState.Seek;
+            }
+        }
+
+        if (CurrentGameState == GameState.Seek)
+        {
+            if (!Hunter.activeSelf)
+            {
+                EventManager.SeekState();
+                Hunter.SetActive(true);
+                cameraManager.ChangeCameraTo(CameraTypes.HunterCam);
+                HideButton.SetActive(false);
+
+            }
+        }
 
     }
-    private void PlayerDestinationReached(bool state)
+    private void ShowHideButton()
     {
-        HideButton.SetActive(state);
+        HideButton.SetActive(true);
+    }
+    private void HideHideButton()
+    {
+        HideButton.SetActive(false);
     }
     public void HideButtonPressed()
     {
-        OnHideButtonPressed?.Invoke();
-        HideButton.SetActive(false);
-        cameraManager.ChangeCameraTo(CameraTypes.HunterCam);
-        Hunter.SetActive(true);
+        playTime = 0;
     }
 }
