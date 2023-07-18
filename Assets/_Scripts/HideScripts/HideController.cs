@@ -6,7 +6,9 @@ public class HideController : MonoBehaviour
 {
     [SerializeField] private HidingSpot _closestSpot;
     [SerializeField] private MeshColorHandler _colorHandler;
+    [SerializeField] private AnimatorController _animController;
     [SerializeField] private HidingSpot _rightSpot;
+    public bool IsHiding { get; set; }
     public void SetClosestSpot(HidingSpot spot)
     {
         _closestSpot = spot;
@@ -37,11 +39,13 @@ public class HideController : MonoBehaviour
         transform.SetPositionAndRotation(_closestSpot.GetHidingPosition(), Quaternion.Euler(_closestSpot.GetHidingRotation()));
         _colorHandler.HidingValues();
         _closestSpot.SetCurrentHider(this);
+        IsHiding = true;
     }
 
     public void Unhide()
     {
         _colorHandler.UnhidingValues();
         _closestSpot.ClearCurrentHider();
+        IsHiding = false;
     }
 }

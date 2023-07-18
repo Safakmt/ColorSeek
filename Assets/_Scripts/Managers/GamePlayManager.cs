@@ -21,7 +21,7 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private float playTime;
     [SerializeField] private TextMeshProUGUI playTimeText;
-    
+    [SerializeField] private Transform characterCreatePivot;
     public GameState CurrentGameState { get; set; }
 
     private void OnEnable()
@@ -40,6 +40,7 @@ public class GamePlayManager : MonoBehaviour
     {
         cameraManager.ChangeCameraTo(CameraTypes.SelectionCam);
         CurrentGameState = GameState.Start;
+        PlaceCircular(FindObjectsOfType<HideController>());
     }
     private void Update()
     {
@@ -85,5 +86,16 @@ public class GamePlayManager : MonoBehaviour
     public void HideButtonPressed()
     {
         playTime = 0;
+    }
+
+    public void PlaceCircular(HideController[] hiders)
+    {
+        for (int i = 0; i < hiders.Length; i++)
+        {
+            float radius = hiders.Length;
+            float angle = i * Mathf.PI * 2f / radius;
+            Vector3 pos = characterCreatePivot.position + (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
+            hiders[i].transform.position = pos;
+        }
     }
 }
