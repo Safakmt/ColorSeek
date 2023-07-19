@@ -12,13 +12,8 @@ public class HidingSpotAssigner : MonoBehaviour
 
     private void Awake()
     {
-        _hidingSpots = FindObjectsOfType<HidingSpot>();
-        _hiders= FindObjectsOfType<HideController>();
-
-        for (int i = 0; i < _hidingSpots.Length; i++)
-        {
-            _hidingSpotList.Add(_hidingSpots[i]);
-        }
+        SearchForHiders();
+        SearchForHideSpots();
         SetNewPositions();
     }
 
@@ -42,5 +37,17 @@ public class HidingSpotAssigner : MonoBehaviour
 
     }
 
+    public void SearchForHiders()
+    {
+        _hiders = FindObjectsOfType<HideController>();
+    }
 
+    public void SearchForHideSpots()
+    {
+        _hidingSpots = FindObjectsOfType<HidingSpot>();
+        for (int i = 0; i < _hidingSpots.Length; i++)
+        {
+            _hidingSpotList.Add(_hidingSpots[i]);
+        }
+    }
 }
