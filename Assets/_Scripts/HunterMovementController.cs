@@ -74,9 +74,9 @@ public class HunterMovementController : MonoBehaviour
                 _seekedList.Add(currentChased);
             }
         }
-        else if (currentChased != null)
+        else if (currentChased == null && seekingCount == 0)
         {
-            _animator.SetTrigger("Idle");
+            _animator.SetBool("Idle",true);
         }
     }
 
@@ -87,7 +87,7 @@ public class HunterMovementController : MonoBehaviour
             currentChasedTransform = currentChased.transform;
             agent.SetDestination(transform.position);
             transform.LookAt(currentChased.transform.position);
-            _animator.SetTrigger("Catch");
+            _animator.SetTrigger("Catch");  //OnCatchAnimationEvent trigger
             GameObject deactive = currentChased.gameObject;
             DOVirtual.DelayedCall(2f, () =>
             {
