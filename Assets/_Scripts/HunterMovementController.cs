@@ -10,7 +10,8 @@ using static Cinemachine.CinemachineOrbitalTransposer;
 public enum HunterState
 {
     Walk,
-    Catch
+    Catch,
+    Idle
 }
 public class HunterMovementController : MonoBehaviour
 {
@@ -62,6 +63,15 @@ public class HunterMovementController : MonoBehaviour
         {
             CatchStateActivities();
         }
+        if (_currentState == HunterState.Idle)
+        {
+            IdleStateActivities();
+        }
+    }
+
+    private void IdleStateActivities()
+    {
+        _animator.SetBool("Idle", true);
     }
 
     void WalkStateActivites()
@@ -83,7 +93,7 @@ public class HunterMovementController : MonoBehaviour
         }
         else if (currentChased == null && seekingCount == 0)
         {
-            _animator.SetBool("Idle",true);
+            _currentState = HunterState.Idle;
         }
     }
 
@@ -96,23 +106,28 @@ public class HunterMovementController : MonoBehaviour
             transform.LookAt(currentChased.transform.position);
             _animator.SetTrigger("Catch");  //OnCatchAnimationEvent trigger
             GameObject deactive = currentChased.gameObject;
+            currentChased = null;
+            seekingCount -= 1;
+
             DOVirtual.DelayedCall(2f, () =>
             {
-                _currentState = HunterState.Walk;
                 deactive.SetActive(false);
-            });
-    
-        currentChased = null;
-        seekingCount -= 1;
-        }
-        if (seekingCount == 0)
-        {
-            _animator.SetTrigger("Scream");
-            isScreaming = true;
-            DOVirtual.DelayedCall(2.8f, () =>
+
+            }).OnComplete(() =>
             {
-                _currentState = HunterState.Walk;
-                isScreaming = false;
+                if (seekingCount > 0)
+                {
+                    _currentState = HunterState.Walk;
+                }
+                else if(seekingCount == 0)
+                {
+                    transform.LookAt(Camera.main.transform.position);
+                    _animator.SetTrigger("Scream");
+                    DOVirtual.DelayedCall(2.8f, () =>
+                    {
+                        _currentState = HunterState.Idle;
+                    });
+                }
             });
         }
     }
