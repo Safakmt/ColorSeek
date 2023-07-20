@@ -14,4 +14,7 @@ public static class EventManager
 
     public static event Action OnHunterCatch;
     public static void HunterCatch() => OnHunterCatch?.Invoke();
+
+    public static event Action OnHunterScream;
+    public static void HunterScream()=> OnHunterScream?.Invoke();
 }

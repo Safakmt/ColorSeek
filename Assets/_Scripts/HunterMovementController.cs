@@ -31,6 +31,7 @@ public class HunterMovementController : MonoBehaviour
     {
         EventManager.OnHunterCatch += OnCatchAnimationEvent;
         _animator.SetTrigger("Scream");
+        EventManager.HunterScream();
         isScreaming = true;
         DOVirtual.DelayedCall(2.8f, () =>
         {
@@ -123,6 +124,7 @@ public class HunterMovementController : MonoBehaviour
                 {
                     transform.LookAt(Camera.main.transform.position);
                     _animator.SetTrigger("Scream");
+                    EventManager.HunterCatch();
                     DOVirtual.DelayedCall(2.8f, () =>
                     {
                         _currentState = HunterState.Idle;

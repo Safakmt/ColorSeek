@@ -20,6 +20,14 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera StartCam;
     private CinemachineVirtualCamera _activeCam;
 
+    private void OnEnable()
+    {
+        EventManager.OnHunterScream += ShakeCamera;
+    }
+    private void OnDisable()
+    {
+        EventManager.OnHunterScream -= ShakeCamera;    
+    }
     private void Awake()
     {
         _activeCam = StartCam;
