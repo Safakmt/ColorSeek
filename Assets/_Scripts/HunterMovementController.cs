@@ -25,10 +25,17 @@ public class HunterMovementController : MonoBehaviour
     private HideController currentChased;
     private Transform currentChasedTransform;
     private HunterState _currentState;
-
+    private bool isScreaming = false;
     private void OnEnable()
     {
         EventManager.OnHunterCatch += OnCatchAnimationEvent;
+        _animator.SetTrigger("Scream");
+        isScreaming = true;
+        DOVirtual.DelayedCall(2.8f, () =>
+        {
+            _currentState = HunterState.Walk;
+            isScreaming= false;
+        });
     }
     private void OnDisable()
     {
@@ -41,17 +48,17 @@ public class HunterMovementController : MonoBehaviour
         {
             _hidingList.Add(controller);
         }
-        _currentState = HunterState.Walk;
+
     }
 
     private void Update()
     {
-        if (_currentState == HunterState.Walk)
+        if (_currentState == HunterState.Walk && !isScreaming)
         {
             WalkStateActivites();
         }
 
-        if (_currentState == HunterState.Catch)
+        if (_currentState == HunterState.Catch && !isScreaming)
         {
             CatchStateActivities();
         }
@@ -97,6 +104,16 @@ public class HunterMovementController : MonoBehaviour
     
         currentChased = null;
         seekingCount -= 1;
+        }
+        if (seekingCount == 0)
+        {
+            _animator.SetTrigger("Scream");
+            isScreaming = true;
+            DOVirtual.DelayedCall(2.8f, () =>
+            {
+                _currentState = HunterState.Walk;
+                isScreaming = false;
+            });
         }
     }
     public void OnCatchAnimationEvent()
