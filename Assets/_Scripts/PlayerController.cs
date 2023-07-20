@@ -48,15 +48,25 @@ public class PlayerController : MonoBehaviour
         } 
     }
 
+    private void OnEnable()
+    {
+        EventManager.OnGameStart += StartTakingInput;
+    }
+    private void OnDisable()
+    {
+        EventManager.OnGameStart -= StartTakingInput;
+    }
     private void Start()
     {
-        joystick = FindObjectOfType<FloatingJoystick>();
-        IsTakingInput = true;
+        IsTakingInput = false;
         _currentState = PlayerState.Moving;
     }
+
+
     private void Update()
     {
-        _inputData = new Vector3(joystick.Horizontal,0,joystick.Vertical);
+        if (IsTakingInput)
+            _inputData = new Vector3(joystick.Horizontal,0,joystick.Vertical);
         
         if (_currentState == PlayerState.Moving)
         {
@@ -138,6 +148,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void StartTakingInput()
+    {
+        IsTakingInput = true;
+    }
 
     #region Move And Rotate Methods
     private void Rotation(Vector3 input)
