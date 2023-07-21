@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 3996034470846083424}
   - component: {fileID: 8162441011781105793}
   - component: {fileID: 2165687066131383929}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: JumpSpot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1046,7 +1046,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stickingPoint: {fileID: 1847593016}
-  _hidingColor: {r: 0.8745099, g: 0.43137258, b: 0.023529414, a: 1}
+  _hidingColor: {r: 0.9607843, g: 0.49019608, b: 0.05882353, a: 1}
   _type: 0
 --- !u!1 &3286765652940457805
 GameObject:
@@ -1704,7 +1704,7 @@ GameObject:
   - component: {fileID: 8302297918676973090}
   - component: {fileID: 7779606866178932796}
   - component: {fileID: 8156262375467439510}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Seat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1777,8 +1777,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8156262375467439510
-BoxCollider:
+--- !u!64 &8156262375467439510
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1787,9 +1787,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.500003, y: 1.99, z: 3.4999855}
-  m_Center: {x: 0.00000011920929, y: 1, z: -0.00000011920929}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6827640314013697367, guid: a49dab21ea52a5744bc77210b6296f3d, type: 3}
 --- !u!1 &8124041999497955433
 GameObject:
   m_ObjectHideFlags: 0
