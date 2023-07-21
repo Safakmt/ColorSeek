@@ -11,7 +11,10 @@ public class HideController : MonoBehaviour
     public bool IsHiding { get; set; }
     public void SetClosestSpot(HidingSpot spot)
     {
-        _closestSpot = spot;
+        if (!IsHiding)
+        {
+            _closestSpot = spot;
+        }
     }
     public void SetRightSpot(HidingSpot spot)
     {
@@ -24,7 +27,10 @@ public class HideController : MonoBehaviour
     }
     public void ClearClosestSpot()
     {
-        this._closestSpot = null;
+        if (!IsHiding)
+        {
+            _closestSpot = null;
+        }
     }
     public bool IsReadyToHide()
     {
