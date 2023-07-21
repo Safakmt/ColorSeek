@@ -98,4 +98,14 @@ public class GamePlayManager : MonoBehaviour
             hiders[i].transform.position = pos;
         }
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            float radius = 5;
+            float angle = i * Mathf.PI *2f / radius;
+            Gizmos.DrawWireSphere(characterCreatePivot.position + (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))),0.3f);
+        }
+    }
 }
