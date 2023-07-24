@@ -17,4 +17,7 @@ public static class EventManager
 
     public static event Action OnHunterScream;
     public static void HunterScream()=> OnHunterScream?.Invoke();
+
+    public static event Action OnPlayerUnhide;
+    public static void PlayerUnhide() => OnPlayerUnhide?.Invoke();
 }
