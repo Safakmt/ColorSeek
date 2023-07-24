@@ -27,8 +27,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotationSpeed;
 
-    public event Action OnPlayerHide;
-    public event Action OnPlayerUnhide;
     private Vector3 _gravity = new Vector3(0, -9.81f,0);
     private PlayerState _currentState;
     private bool _isMoving = false;
@@ -94,7 +92,7 @@ public class PlayerController : MonoBehaviour
             characterController.enabled = true;
             _currentState = PlayerState.Moving;
             _isHiding= false;
-            OnPlayerUnhide?.Invoke();
+            EventManager.PlayerUnhide();
         }
         else if(_isHiding)
         {
@@ -107,7 +105,7 @@ public class PlayerController : MonoBehaviour
             characterController.enabled = false;
             _animatorController.PlayTPoseAnim();
             _isHiding = true;
-            OnPlayerHide?.Invoke();
+            EventManager.PlayerHide();
         }
     }
     private void IdleStateActivities()

@@ -16,6 +16,7 @@ public enum GameState
 public class GamePlayManager : MonoBehaviour
 {
     [SerializeField] CameraManager cameraManager;
+    [SerializeField] LevelManager levelManager;
     [SerializeField] GameObject Hunter;
     [SerializeField] GameObject HideButton;
     [SerializeField] private PlayerController _playerController;
@@ -26,14 +27,14 @@ public class GamePlayManager : MonoBehaviour
 
     private void OnEnable()
     {
-        _playerController.OnPlayerHide += ShowHideButton;
-        _playerController.OnPlayerUnhide += HideHideButton;
+        EventManager.OnPlayerHide += ShowHideButton;
+        EventManager.OnPlayerUnhide += HideHideButton;
     }
 
     private void OnDisable()
     {
-        _playerController.OnPlayerHide -= ShowHideButton;
-        _playerController.OnPlayerUnhide -= HideHideButton;
+        EventManager.OnPlayerHide -= ShowHideButton;
+        EventManager.OnPlayerUnhide -= HideHideButton;
         
     }
     private void Start()
