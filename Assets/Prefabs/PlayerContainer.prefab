@@ -195,6 +195,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 7879843406771931021}
+  hidingSpecularColor: {r: 0, g: 0, b: 0, a: 0}
+  hidingOutlineWidth: 0
+  colorChangeDuration: 1.5
 --- !u!195 &4594259840151602995
 NavMeshAgent:
   m_ObjectHideFlags: 0
