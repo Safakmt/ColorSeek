@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,16 +16,22 @@ public enum GameState
 }
 public class GamePlayManager : MonoBehaviour
 {
-    [SerializeField] CameraManager cameraManager;
-    [SerializeField] LevelManager levelManager;
-    [SerializeField] GameObject Hunter;
-    [SerializeField] GameObject HideButton;
+    [SerializeField] private CameraManager cameraManager;
+    [SerializeField] private GameObject Hunter;
+    [SerializeField] private GameObject HideButton;
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private float playTime;
     [SerializeField] private TextMeshProUGUI playTimeText;
     [SerializeField] private Transform characterCreatePivot;
+    [SerializeField] private LevelManager _levelManager;
+    [SerializeField] private HidingSpotAssigner _hidingSpotAssigner;
     public GameState CurrentGameState { get; set; }
+    public static GamePlayManager Instance { get; private set; }
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void OnEnable()
     {
         EventManager.OnPlayerHide += ShowHideButton;
@@ -35,13 +42,13 @@ public class GamePlayManager : MonoBehaviour
     {
         EventManager.OnPlayerHide -= ShowHideButton;
         EventManager.OnPlayerUnhide -= HideHideButton;
-        
+
+
     }
     private void Start()
     {
         cameraManager.ChangeCameraTo(CameraTypes.SelectionCam);
         CurrentGameState = GameState.Start;
-        PlaceCircular(FindObjectsOfType<HideController>());
     }
     private void Update()
     {
@@ -76,6 +83,7 @@ public class GamePlayManager : MonoBehaviour
         }
 
     }
+
     private void ShowHideButton()
     {
         HideButton.SetActive(true);
@@ -100,13 +108,25 @@ public class GamePlayManager : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
+        if (characterCreatePivot == null)
+            return;
         for (int i = 0; i < 5; i++)
         {
             float radius = 5;
             float angle = i * Mathf.PI *2f / radius;
             Gizmos.DrawWireSphere(characterCreatePivot.position + (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))),0.3f);
         }
+    }
+
+    public void OnEnvironmentLoaded(EnvironmentData environmentData)
+    {
+        _levelManager.activeEnvData = environmentData;
+        _hidingSpotAssigner.SetHideSpotList(environmentData.hidingSpots);
+        cameraManager.SetHunterCameraPos(environmentData.hunterCamPos.position);
+        Hunter.transform.position = environmentData.hunterSpawnPos.position;
+        characterCreatePivot = environmentData.charSpawnPos;
+        PlaceCircular(FindObjectsOfType<HideController>());
     }
 }
