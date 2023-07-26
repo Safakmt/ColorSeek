@@ -23,4 +23,11 @@ public static class EventManager
 
     public static event Action OnSceneLoad;
     public static void SceneLoad() => OnSceneLoad?.Invoke();
+
+    public static event Action OnSceneUnload;
+    public static void SceneUnload() => OnSceneUnload?.Invoke();
+
+    public static event Action OnRefrencesSet;
+    public static void RefrencesSet() => OnRefrencesSet?.Invoke();
+
 }
