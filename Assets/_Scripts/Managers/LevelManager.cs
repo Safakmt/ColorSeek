@@ -18,19 +18,21 @@ public class LevelManager : MonoBehaviour
         switch (levelList[currentLevel].Environment)
         {
             case Environment.kitchen:
-                AsyncOperation asyncOp = SceneManager.LoadSceneAsync("Kitchen", LoadSceneMode.Additive);
-                StartCoroutine(WaitForSceneLoad(asyncOp,Environment.kitchen));
+                StartCoroutine(WaitForSceneLoad(SceneManager.LoadSceneAsync("Kitchen", LoadSceneMode.Additive)));
                 break;
             case Environment.childroom:
+                StartCoroutine(WaitForSceneLoad(SceneManager.LoadSceneAsync("ChildRoom", LoadSceneMode.Additive)));
                 break;
             case Environment.table:
+                StartCoroutine(WaitForSceneLoad(SceneManager.LoadSceneAsync("Table", LoadSceneMode.Additive)));
                 break;
             case Environment.tutorial:
+                StartCoroutine(WaitForSceneLoad(SceneManager.LoadSceneAsync("Tutorial", LoadSceneMode.Additive)));
                 break;
         }
     }
 
-    IEnumerator WaitForSceneLoad(AsyncOperation op, Environment env)
+    IEnumerator WaitForSceneLoad(AsyncOperation op)
     {
         yield return new WaitUntil(() => op.isDone == true);
         EventManager.SceneLoad();
