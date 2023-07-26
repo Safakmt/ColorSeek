@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Hideable
       objectReference: {fileID: 0}
+    - target: {fileID: 1425380564032529938, guid: db97ffffc5b97dd45b26ea94369785e0, type: 3}
+      propertyPath: m_EndPoint.y
+      value: -1.89
+      objectReference: {fileID: 0}
     - target: {fileID: 2334436233494548812, guid: db97ffffc5b97dd45b26ea94369785e0, type: 3}
       propertyPath: m_TagString
       value: Hideable
