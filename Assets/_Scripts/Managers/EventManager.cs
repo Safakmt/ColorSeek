@@ -20,4 +20,7 @@ public static class EventManager
 
     public static event Action OnPlayerUnhide;
     public static void PlayerUnhide() => OnPlayerUnhide?.Invoke();
+
+    public static event Action OnSceneLoad;
+    public static void SceneLoad() => OnSceneLoad?.Invoke();
 }
