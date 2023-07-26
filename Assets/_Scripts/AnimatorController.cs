@@ -9,7 +9,7 @@ public class AnimatorController : MonoBehaviour
     private const string IDLE = "Idle";
     private const string TPOSE = "Tpose";
     private string ActiveAnim;
-
+    private string HidingAnim;
     private void Start()
     {
         ActiveAnim = IDLE;
@@ -32,5 +32,8 @@ public class AnimatorController : MonoBehaviour
         _animator.SetBool(TPOSE, true);
         ActiveAnim = TPOSE;
     }
+    public void SetHidingAnim()
+    {
 
+    }
 }
