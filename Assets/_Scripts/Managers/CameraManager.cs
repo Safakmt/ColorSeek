@@ -59,12 +59,17 @@ public class CameraManager : MonoBehaviour
 
     public void ShakeCamera()
     {
-        HunterCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 1f;
-        HunterCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1f;
-        DOVirtual.DelayedCall(1f, () =>
+        HunterCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 2f;
+        HunterCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 4f;
+        DOVirtual.DelayedCall(1.5f, () =>
         {
             HunterCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0f;
             HunterCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0f;
         });
+    }
+
+    public void SetHunterCameraPos(Vector3 position)
+    {
+        HunterCam.transform.position = position;
     }
 }
