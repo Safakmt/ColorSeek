@@ -75,10 +75,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 3961497576824921953}
-  destination: {fileID: 0}
   _hideController: {fileID: 1389156188050245010}
   _animatorController: {fileID: 7491320829394787429}
-  Randomness: 20
+  _randomness: 0
+  destination: {fileID: 0}
 --- !u!114 &1389156188050245010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _closestSpot: {fileID: 0}
   _colorHandler: {fileID: 4068871662318843755}
+  _animController: {fileID: 7491320829394787429}
   _rightSpot: {fileID: 0}
 --- !u!114 &1188028559389407982
 MonoBehaviour:
@@ -133,6 +134,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 4056590150927673362}
+  hidingSpecularColor: {r: 0, g: 0, b: 0, a: 0}
+  hidingOutlineWidth: 0
+  colorChangeDuration: 1.5
 --- !u!54 &3961497576824921978
 Rigidbody:
   m_ObjectHideFlags: 0
