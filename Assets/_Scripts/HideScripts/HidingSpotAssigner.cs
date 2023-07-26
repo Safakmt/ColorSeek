@@ -7,13 +7,16 @@ public class HidingSpotAssigner : MonoBehaviour
 {
     [SerializeField] private List<HidingSpot> _hidingSpotList = new List<HidingSpot>();
     private List<HidingSpot> usedSpots= new List<HidingSpot>();
-    private HidingSpot[] _hidingSpots;
     private HideController[] _hiders;
 
-    private void Awake()
+    private void Start()
     {
         SearchForHiders();
-        SearchForHideSpots();
+    }
+
+    public void SetHideSpotList(List<HidingSpot> hidingSpotList)
+    {
+        _hidingSpotList = hidingSpotList;
         SetNewPositions();
     }
 
@@ -42,12 +45,4 @@ public class HidingSpotAssigner : MonoBehaviour
         _hiders = FindObjectsOfType<HideController>();
     }
 
-    public void SearchForHideSpots()
-    {
-        _hidingSpots = FindObjectsOfType<HidingSpot>();
-        for (int i = 0; i < _hidingSpots.Length; i++)
-        {
-            _hidingSpotList.Add(_hidingSpots[i]);
-        }
-    }
 }
