@@ -72,4 +72,9 @@ public class CameraManager : MonoBehaviour
     {
         HunterCam.transform.position = position;
     }
+    public void SetSelectionFollowAndLookAt(Transform lookAtTransform)
+    {
+        SelectionCam.LookAt = lookAtTransform;
+        SelectionCam.Follow = lookAtTransform;
+    }
 }
