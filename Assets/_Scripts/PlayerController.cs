@@ -48,11 +48,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OnGameStart += StartTakingInput;
+        EventManager.OnSceneLoad += StartTakingInput;
+        EventManager.OnSceneUnload += StopTakingInput;
     }
     private void OnDisable()
     {
-        EventManager.OnGameStart -= StartTakingInput;
+        EventManager.OnSceneLoad -= StartTakingInput;
+        EventManager.OnSceneUnload -= StopTakingInput;
     }
     private void Start()
     {
@@ -149,8 +151,22 @@ public class PlayerController : MonoBehaviour
     private void StartTakingInput()
     {
         IsTakingInput = true;
+        characterController.enabled = true;
+        _currentState = PlayerState.Idle;
+        ResetTransform();
+        _hideController.Unhide();
     }
-
+    private void ResetTransform()
+    {
+        transform.rotation = Quaternion.Euler(Vector3.zero);
+        playerVisual.localPosition = Vector3.zero;
+        transform.localScale = Vector3.one;
+    }
+    public void StopTakingInput()
+    {
+        IsTakingInput = false;
+        characterController.enabled = false;
+    }
     #region Move And Rotate Methods
     private void Rotation(Vector3 input)
     {
