@@ -51,7 +51,8 @@ public class HideController : MonoBehaviour
     public void Unhide()
     {
         _colorHandler.UnhidingValues();
-        _closestSpot.ClearCurrentHider();
+        if (_closestSpot)
+            _closestSpot.ClearCurrentHider();
         IsHiding = false;
     }
 }
