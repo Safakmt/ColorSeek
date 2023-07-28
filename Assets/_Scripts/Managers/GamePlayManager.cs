@@ -25,6 +25,7 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField] private Transform characterCreatePivot;
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] private HidingSpotAssigner _hidingSpotAssigner;
+    private bool isHideButtonPressed = false;
     public GameState CurrentGameState { get; set; }
     public static GamePlayManager Instance { get; private set; }
 
@@ -36,14 +37,14 @@ public class GamePlayManager : MonoBehaviour
     {
         EventManager.OnPlayerHide += ShowHideButton;
         EventManager.OnPlayerUnhide += HideHideButton;
+        EventManager.OnEnvironmentInitalized += OnEnvironmentLoaded;
     }
 
     private void OnDisable()
     {
         EventManager.OnPlayerHide -= ShowHideButton;
         EventManager.OnPlayerUnhide -= HideHideButton;
-
-
+        EventManager.OnEnvironmentInitalized -= OnEnvironmentLoaded;
     }
     private void Start()
     {
@@ -63,9 +64,8 @@ public class GamePlayManager : MonoBehaviour
         {
             playTime -= Time.deltaTime;
             playTimeText.text = playTime.ToString("0.0");
-            if (playTime <= 0)
+            if (playTime <= 0 || isHideButtonPressed)
             {
-                playTimeText.text = "0";
                 CurrentGameState = GameState.Seek;
             }
         }
@@ -94,11 +94,13 @@ public class GamePlayManager : MonoBehaviour
     }
     public void HideButtonPressed()
     {
-        playTime = 0;
+        isHideButtonPressed= true;
+        _playerController.StopTakingInput();
     }
 
-    public void PlaceCircular(HideController[] hiders)
+    public void PlaceCircular()
     {
+        HideController[] hiders = _hidingSpotAssigner.GetHideControllers();
         for (int i = 0; i < hiders.Length; i++)
         {
             float radius = hiders.Length;
@@ -108,6 +110,16 @@ public class GamePlayManager : MonoBehaviour
         }
     }
 
+    private void ResetGamePlay()
+    {
+        cameraManager.ChangeCameraTo(CameraTypes.SelectionCam);
+        CurrentGameState = GameState.Start;
+        Hunter.SetActive(false);
+        isHideButtonPressed = false;
+        HideHideButton();
+        playTimeText.text = "";
+        PlaceCircular();
+    }
     private void OnDrawGizmos()
     {
         if (characterCreatePivot == null)
@@ -119,7 +131,11 @@ public class GamePlayManager : MonoBehaviour
             Gizmos.DrawWireSphere(characterCreatePivot.position + (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))),0.3f);
         }
     }
-
+    private void GetCurrentPlayTime()
+    {
+        playTime =_levelManager.GetCurrentLevelData().PlayTime;
+        playTimeText.text = playTime.ToString();
+    }
     public void OnEnvironmentLoaded(EnvironmentData environmentData)
     {
         _levelManager.activeEnvData = environmentData;
@@ -127,6 +143,9 @@ public class GamePlayManager : MonoBehaviour
         cameraManager.SetHunterCameraPos(environmentData.hunterCamPos.position);
         Hunter.transform.position = environmentData.hunterSpawnPos.position;
         characterCreatePivot = environmentData.charSpawnPos;
-        PlaceCircular(FindObjectsOfType<HideController>());
+        cameraManager.SetSelectionFollowAndLookAt(characterCreatePivot);
+        GetCurrentPlayTime();
+        ResetGamePlay();
+        EventManager.RefrencesSet();
     }
 }
