@@ -16,9 +16,9 @@ public class EnvironmentData : MonoBehaviour
     public Environment environment;
     public List<HidingSpot> hidingSpots;
 
-    private void Start()
+    private void Awake()
     {
-        GamePlayManager.Instance.OnEnvironmentLoaded(this);
+        EventManager.EnvironmentInitialized(this);
         Debug.Log(environment.ToString() + " Loaded");
     }
 
