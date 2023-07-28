@@ -27,6 +27,7 @@ public class HunterMovementController : MonoBehaviour
     private Transform currentChasedTransform;
     private HunterState _currentState;
     private bool isScreaming = false;
+    private Tween _catchAnimDelayedCall;
     private void OnEnable()
     {
         EventManager.OnHunterCatch += OnCatchAnimationEvent;
@@ -38,19 +39,20 @@ public class HunterMovementController : MonoBehaviour
             _currentState = HunterState.Walk;
             isScreaming= false;
         });
-    }
-    private void OnDisable()
-    {
-        EventManager.OnHunterCatch -= OnCatchAnimationEvent;
-    }
-    private void Start()
-    {
         HideController[] controllers = FindObjectsOfType<HideController>();
         foreach (HideController controller in controllers)
         {
             _hidingList.Add(controller);
         }
 
+    }
+    private void OnDisable()
+    {
+        EventManager.OnHunterCatch -= OnCatchAnimationEvent;
+        ResetHunter();
+    }
+    private void Start()
+    {
     }
 
     private void Update()
@@ -70,6 +72,20 @@ public class HunterMovementController : MonoBehaviour
         }
     }
 
+    private void ResetHunter()
+    {
+        _hidingList.Clear();
+        _catchAnimDelayedCall.Kill();
+        foreach (var seeked in _seekedList)
+        {
+            seeked.gameObject.SetActive(true);
+            seeked.transform.SetParent(null);
+        }
+        _seekedList.Clear();
+        currentChased = null;
+        currentChasedTransform = null;
+        seekingCount = 3;
+    }
     private void IdleStateActivities()
     {
         _animator.SetBool("Idle", true);
@@ -110,7 +126,7 @@ public class HunterMovementController : MonoBehaviour
             currentChased = null;
             seekingCount -= 1;
 
-            DOVirtual.DelayedCall(2f, () =>
+            _catchAnimDelayedCall = DOVirtual.DelayedCall(2f, () =>
             {
                 deactive.SetActive(false);
 
