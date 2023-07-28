@@ -1,5 +1,5 @@
 using System;
-
+using UnityEditor;
 
 public static class EventManager 
 {
@@ -30,4 +30,6 @@ public static class EventManager
     public static event Action OnRefrencesSet;
     public static void RefrencesSet() => OnRefrencesSet?.Invoke();
 
+    public static event Action<EnvironmentData> OnEnvironmentInitalized;
+    public static void EnvironmentInitialized(EnvironmentData environmentData) => OnEnvironmentInitalized?.Invoke(environmentData);
 }
