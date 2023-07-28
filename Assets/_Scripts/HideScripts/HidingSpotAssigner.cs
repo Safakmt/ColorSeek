@@ -17,17 +17,13 @@ public class HidingSpotAssigner : MonoBehaviour
     public void SetHideSpotList(List<HidingSpot> hidingSpotList)
     {
         _hidingSpotList = hidingSpotList;
+        usedSpots.Clear();
         SetNewPositions();
     }
 
     private void SetNewPositions()
     {
 
-        if (usedSpots.Count > 0)
-        {
-            _hidingSpotList.AddRange(usedSpots);
-            usedSpots.Clear();
-        }
         foreach (var item in _hiders)
         {
             int randomInt = Random.Range(0, _hidingSpotList.Count);
@@ -45,4 +41,7 @@ public class HidingSpotAssigner : MonoBehaviour
         _hiders = FindObjectsOfType<HideController>();
     }
 
+    public HideController[] GetHideControllers() {
+        return _hiders;
+    }
 }
