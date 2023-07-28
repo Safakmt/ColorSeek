@@ -11,33 +11,63 @@ public class LevelManager : MonoBehaviour
     private Environment _currentEnvironment;
     private void Start()
     {
-        LoadLevel();
+        LoadLevel(levelList[currentLevel].Environment);
     }
-    public void LoadLevel()
+    public void LoadLevel(Environment env)
     {
-        switch (levelList[currentLevel].Environment)
+        //switch (levelList[currentLevel].Environment)
+        //{
+        //    case Environment.kitchen:
+        //        break;
+        //    case Environment.childroom:
+        //        StartCoroutine(WaitForSceneLoad(SceneManager.LoadSceneAsync("ChildRoom", LoadSceneMode.Additive)));
+        //        break;
+        //    case Environment.table:
+        //        StartCoroutine(WaitForSceneLoad(SceneManager.LoadSceneAsync("Table", LoadSceneMode.Additive)));
+        //        break;
+        //    case Environment.tutorial:
+        //        StartCoroutine(WaitForSceneLoad(SceneManager.LoadSceneAsync("Tutorial", LoadSceneMode.Additive)));
+        //        break;
+        //}
+        if (SceneManager.GetSceneByName(_currentEnvironment.ToString()).isLoaded)
         {
-            case Environment.kitchen:
-                StartCoroutine(WaitForSceneLoad(SceneManager.LoadSceneAsync("Kitchen", LoadSceneMode.Additive)));
-                break;
-            case Environment.childroom:
-                StartCoroutine(WaitForSceneLoad(SceneManager.LoadSceneAsync("ChildRoom", LoadSceneMode.Additive)));
-                break;
-            case Environment.table:
-                StartCoroutine(WaitForSceneLoad(SceneManager.LoadSceneAsync("Table", LoadSceneMode.Additive)));
-                break;
-            case Environment.tutorial:
-                StartCoroutine(WaitForSceneLoad(SceneManager.LoadSceneAsync("Tutorial", LoadSceneMode.Additive)));
-                break;
+            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(_currentEnvironment.ToString());
+            StartCoroutine(WaitForAsyncOp(unloadOp, false));
+        }
+        _currentEnvironment = env;
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync(_currentEnvironment.ToString(), LoadSceneMode.Additive);
+        StartCoroutine(WaitForAsyncOp(loadOp, true));
+
+    }
+    public LevelDataSO GetCurrentLevelData()
+    {
+        return levelList[currentLevel];
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            LoadLevel(Environment.childroom);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            LoadLevel(Environment.tutorial);
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            LoadLevel(Environment.kitchen);
+
         }
     }
-
-    IEnumerator WaitForSceneLoad(AsyncOperation op)
+    IEnumerator WaitForAsyncOp(AsyncOperation op,bool isLoadOperation)
     {
         yield return new WaitUntil(() => op.isDone == true);
-        EventManager.SceneLoad();
+        if (isLoadOperation)
+            EventManager.SceneLoad();
+        else
+            EventManager.SceneUnload();
     }
-
     public void NextLevel()
     {
         if (currentLevel+1 < levelList.Count)
