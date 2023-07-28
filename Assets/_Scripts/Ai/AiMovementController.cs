@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -29,19 +30,21 @@ public class AiMovementController : MonoBehaviour
     public bool IsReached { get; set; }
     private void Start()
     {
-        IsReached = false;
-        agent.enabled = false;
+        ResetAI();
     }
     private void OnEnable()
     {
         EventManager.OnGameStart += StartMovement;
         EventManager.OnSeekState += OnHide;
+        EventManager.OnRefrencesSet += ResetAI;
     }
     private void OnDisable()
     {
         EventManager.OnGameStart -= StartMovement;
         EventManager.OnSeekState -= OnHide;
+        EventManager.OnRefrencesSet -= ResetAI;
     }
+
     private void Update()
     {
 
@@ -50,7 +53,7 @@ public class AiMovementController : MonoBehaviour
             MovingStateActivities();
         }
 
-        if (_currentState == AIState.Idle)
+        if (_currentState == AIState.Idle && agent.enabled)
         {
             IdleStateActivities();
         }
@@ -84,9 +87,19 @@ public class AiMovementController : MonoBehaviour
             if (agent.enabled)
                 SearchForNewLocation();
             _currentState = AIState.Moving;
+            IsReached = false;
         }
     }
-
+    private void ResetAI()
+    {
+        transform.DOKill();
+        transform.rotation = Quaternion.Euler(Vector3.zero);
+        agent.enabled = false;
+        _currentState = AIState.Idle;
+        IsReached = false;
+        _animatorController.PlayIdleAnim();
+        _hideController.Unhide();
+    }
     private void SearchForNewLocation()
     {
         Vector3 distance = destination.position - transform.position;
@@ -140,7 +153,7 @@ public class AiMovementController : MonoBehaviour
     {
         this.destination = destination;
     }
-    public void ToggleNavmesh(bool state)
+    public void ToggleAgent(bool state)
     {
         agent.enabled = state;
         if (state)
