@@ -140,10 +140,11 @@ public class HunterMovementController : MonoBehaviour
                 {
                     transform.LookAt(Camera.main.transform.position);
                     _animator.SetTrigger("Scream");
-                    EventManager.HunterCatch();
+                    EventManager.HunterScream();
                     DOVirtual.DelayedCall(2.8f, () =>
                     {
-                        _currentState = HunterState.Idle;
+                        EventManager.HuntingFinished();
+                        Debug.Log("huntung finished");
                     });
                 }
             });
@@ -160,7 +161,6 @@ public class HunterMovementController : MonoBehaviour
         if (currentChased!=null)
         {
             Gizmos.DrawRay(_catchingSpot.position,currentChased.transform.position);
-
         }
     }
 }
