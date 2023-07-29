@@ -38,6 +38,7 @@ public class GamePlayManager : MonoBehaviour
         EventManager.OnPlayerHide += ShowHideButton;
         EventManager.OnPlayerUnhide += HideHideButton;
         EventManager.OnEnvironmentInitalized += OnEnvironmentLoaded;
+        EventManager.OnHuntingFinished += StartNextLevel;
     }
 
     private void OnDisable()
@@ -45,6 +46,7 @@ public class GamePlayManager : MonoBehaviour
         EventManager.OnPlayerHide -= ShowHideButton;
         EventManager.OnPlayerUnhide -= HideHideButton;
         EventManager.OnEnvironmentInitalized -= OnEnvironmentLoaded;
+        EventManager.OnHuntingFinished -= StartNextLevel;
     }
     private void Start()
     {
@@ -83,7 +85,10 @@ public class GamePlayManager : MonoBehaviour
         }
 
     }
-
+    private void StartNextLevel()
+    {
+        _levelManager.LoadNextLevel();
+    }
     private void ShowHideButton()
     {
         HideButton.SetActive(true);
