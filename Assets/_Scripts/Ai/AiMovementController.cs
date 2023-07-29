@@ -94,6 +94,7 @@ public class AiMovementController : MonoBehaviour
     {
         transform.DOKill();
         transform.rotation = Quaternion.Euler(Vector3.zero);
+        transform.localScale = Vector3.one;
         agent.enabled = false;
         _currentState = AIState.Idle;
         IsReached = false;
