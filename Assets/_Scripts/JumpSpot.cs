@@ -13,7 +13,11 @@ public class JumpSpot : MonoBehaviour
     {
         if (other.TryGetComponent<PlayerController>(out PlayerController controller))
         {
-            other.transform.DOJump(endPos.position, 2, 1, 1);
+            controller.StopTakingInput();
+            other.transform.DOJump(endPos.position, 2, 1, 1).OnComplete(() =>
+            {
+                controller.StartTakingInputs();
+            });
         }
 
         if (other.TryGetComponent<AiMovementController>(out AiMovementController aiController))

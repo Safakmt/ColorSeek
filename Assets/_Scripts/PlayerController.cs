@@ -42,18 +42,18 @@ public class PlayerController : MonoBehaviour
         set
         {
             _isTakingInput = value;
-            joystick.enabled = value;
+            characterController.enabled = value;
         } 
     }
 
     private void OnEnable()
     {
-        EventManager.OnSceneLoad += StartTakingInput;
+        EventManager.OnSceneLoad += ResetPlayer;
         EventManager.OnSceneUnload += StopTakingInput;
     }
     private void OnDisable()
     {
-        EventManager.OnSceneLoad -= StartTakingInput;
+        EventManager.OnSceneLoad -= ResetPlayer;
         EventManager.OnSceneUnload -= StopTakingInput;
     }
     private void Start()
@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
     }
     private void MovingStateActivities() {
 
-        if (Mathf.Abs(_inputData.x) > 0.1f || Mathf.Abs(_inputData.z) > 0.1f && IsTakingInput)
+        if ((Mathf.Abs(_inputData.x) > 0.1f || Mathf.Abs(_inputData.z) > 0.1f) && IsTakingInput)
         {
             Move(_inputData);
             Rotation(_inputData);
@@ -148,10 +148,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void StartTakingInput()
+    private void ResetPlayer()
     {
-        IsTakingInput = true;
-        characterController.enabled = true;
+        StartTakingInputs();
         _currentState = PlayerState.Idle;
         ResetTransform();
         _hideController.Unhide();
@@ -165,7 +164,10 @@ public class PlayerController : MonoBehaviour
     public void StopTakingInput()
     {
         IsTakingInput = false;
-        characterController.enabled = false;
+    }
+    public void StartTakingInputs()
+    {
+        IsTakingInput = true;
     }
     #region Move And Rotate Methods
     private void Rotation(Vector3 input)
