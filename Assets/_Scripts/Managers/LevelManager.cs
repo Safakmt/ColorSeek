@@ -43,6 +43,16 @@ public class LevelManager : MonoBehaviour
     {
         return levelList[currentLevel];
     }
+
+    public void LoadNextLevel()
+    {
+        if (currentLevel+1 != levelList.Count)
+        {
+            currentLevel++;
+            LoadLevel(levelList[currentLevel].Environment);
+            Debug.Log("loading next level");
+        }
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
