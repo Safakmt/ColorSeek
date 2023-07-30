@@ -14,8 +14,14 @@ public class JumpSpot : MonoBehaviour
         if (other.TryGetComponent<PlayerController>(out PlayerController controller))
         {
             controller.StopTakingInput();
-            other.transform.DOJump(endPos.position, 2, 1, 1).OnComplete(() =>
+            controller.TriggerJumpAnim();
+            other.transform.DOJump(startPos.position, 1, 1, 0.5f).OnComplete(() =>
             {
+                other.transform.DOJump(endPos.position, 1.5f, 1, 1.5f).SetEase(Ease.OutBack);
+            });
+            DOVirtual.DelayedCall(1.7f, () =>
+            {
+                other.transform.DOKill();
                 controller.StartTakingInputs();
             });
         }
