@@ -11,7 +11,8 @@ public enum PlayerState
 {
     Idle,
     Moving,
-    Hide
+    Hide,
+    Escape
 }
 public class PlayerController : MonoBehaviour
 {
@@ -50,11 +51,13 @@ public class PlayerController : MonoBehaviour
     {
         EventManager.OnSceneLoad += ResetPlayer;
         EventManager.OnSceneUnload += StopTakingInput;
+        EventManager.OnSeekState += OnSeekStateChange;
     }
     private void OnDisable()
     {
         EventManager.OnSceneLoad -= ResetPlayer;
         EventManager.OnSceneUnload -= StopTakingInput;
+        EventManager.OnSeekState -= OnSeekStateChange;
     }
     private void Start()
     {
@@ -83,8 +86,26 @@ public class PlayerController : MonoBehaviour
             HideStateActivites();
         }
 
+        if (_currentState == PlayerState.Escape)
+        {
+            EscapeStateActivites();
+        }
     }
 
+    private void EscapeStateActivites()
+    {
+        StopTakingInput();
+        _animatorController.PlayTPoseAnim();
+    }
+
+    private void OnSeekStateChange()
+    {
+        if (!_isHiding)
+        {
+            _currentState = PlayerState.Escape;
+        }
+
+    }
     private void HideStateActivites ()
     {
         if (Mathf.Abs(_inputData.x) > 0.1f || Mathf.Abs(_inputData.z) > 0.1f && IsTakingInput)
@@ -168,6 +189,10 @@ public class PlayerController : MonoBehaviour
     public void StartTakingInputs()
     {
         IsTakingInput = true;
+    }
+    public void TriggerJumpAnim()
+    {
+        _animatorController.PlayJumpAnim();
     }
     #region Move And Rotate Methods
     private void Rotation(Vector3 input)
