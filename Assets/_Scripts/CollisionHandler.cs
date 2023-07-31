@@ -22,7 +22,10 @@ public class CollisionHandler : MonoBehaviour
             {
                 currentSpot = other.GetComponentInParent<HidingSpot>();
             }
-            hideController.SetClosestSpot(currentSpot);
+            if (currentSpot.IsFreeToHide())
+            {
+                hideController.SetClosestSpot(currentSpot);
+            }
         }
     }
 
