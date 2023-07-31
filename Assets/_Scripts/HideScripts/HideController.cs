@@ -40,7 +40,13 @@ public class HideController : MonoBehaviour
         return false;
 
     }
-
+    public bool IsHidingRightSpot()
+    {
+        if (_closestSpot == _rightSpot)
+            return true;
+        else
+            return false;
+    }
     public void Hide()
     {
         //transform.SetPositionAndRotation(_closestSpot.GetHidingPosition(), Quaternion.Euler(_closestSpot.GetHidingRotation()));
