@@ -18,8 +18,8 @@ public class JumpSpot : MonoBehaviour
             //other.transform.DOJump(startPos.position, 0.7f, 1, 0.7f).SetEase(Ease.InSine).OnComplete(() =>
             //{
             //});
-            other.transform.DOJump(endPos.position, 1f, 1, 1f).SetEase(Ease.InBack);
-            DOVirtual.DelayedCall(1.2f, () =>
+            other.transform.DOJump(endPos.position, 1.2f, 1, 0.6f).SetEase(Ease.InSine);
+            DOVirtual.DelayedCall(0.9f, () =>
             {
                 controller.StartTakingInputs();
             });
