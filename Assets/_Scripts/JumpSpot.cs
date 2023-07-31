@@ -15,13 +15,12 @@ public class JumpSpot : MonoBehaviour
         {
             controller.StopTakingInput();
             controller.TriggerJumpAnim();
-            other.transform.DOJump(startPos.position, 1, 1, 0.5f).OnComplete(() =>
+            //other.transform.DOJump(startPos.position, 0.7f, 1, 0.7f).SetEase(Ease.InSine).OnComplete(() =>
+            //{
+            //});
+            other.transform.DOJump(endPos.position, 1f, 1, 1f).SetEase(Ease.InBack);
+            DOVirtual.DelayedCall(1.2f, () =>
             {
-                other.transform.DOJump(endPos.position, 1.5f, 1, 1.5f).SetEase(Ease.OutBack);
-            });
-            DOVirtual.DelayedCall(1.7f, () =>
-            {
-                other.transform.DOKill();
                 controller.StartTakingInputs();
             });
         }
