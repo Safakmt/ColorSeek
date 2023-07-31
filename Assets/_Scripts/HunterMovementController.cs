@@ -22,29 +22,21 @@ public class HunterMovementController : MonoBehaviour
     [SerializeField] private Transform _catchingObjectPosition;
     [SerializeField] private Animator _animator;
     private List<HideController> _hidingList = new List<HideController>();
+    private List<HideController> _huntingList = new List<HideController>();
     private List<HideController> _seekedList = new List<HideController>();
     private HideController currentChased;
     private Transform currentChasedTransform;
     private HunterState _currentState;
     private bool isScreaming = false;
     private Tween _catchAnimDelayedCall;
+    private HideController _playerHideController;
+    private int _huntingCount;
     private void OnEnable()
     {
         EventManager.OnHunterCatch += OnCatchAnimationEvent;
-        _animator.SetTrigger("Scream");
-        EventManager.HunterScream();
-        isScreaming = true;
-        DOVirtual.DelayedCall(2.8f, () =>
-        {
-            _currentState = HunterState.Walk;
-            isScreaming= false;
-        });
-        HideController[] controllers = FindObjectsOfType<HideController>();
-        foreach (HideController controller in controllers)
-        {
-            _hidingList.Add(controller);
-        }
-
+        transform.LookAt(Camera.main.transform.position);
+        HunterScreamActivities();
+        CreateHuntingList();
     }
     private void OnDisable()
     {
@@ -82,9 +74,20 @@ public class HunterMovementController : MonoBehaviour
             seeked.transform.SetParent(null);
         }
         _seekedList.Clear();
+        _huntingList.Clear();
         currentChased = null;
         currentChasedTransform = null;
-        seekingCount = 3;
+    }
+    private void HunterScreamActivities()
+    {
+        _animator.SetTrigger("Scream");
+        EventManager.HunterScream();
+        isScreaming = true;
+        DOVirtual.DelayedCall(2.8f, () =>
+        {
+            _currentState = HunterState.Walk;
+            isScreaming = false;
+        });
     }
     private void IdleStateActivities()
     {
@@ -93,9 +96,10 @@ public class HunterMovementController : MonoBehaviour
 
     void WalkStateActivites()
     {
-        if (currentChased == null && seekingCount > 0)
+        if (currentChased == null && _huntingCount > 0)
         {
-            currentChased = _hidingList[Random.Range(0, _hidingList.Count)];
+            currentChased = _huntingList[0];
+            _huntingList.RemoveAt(0);
             _animator.SetTrigger("Walk");
         }
         else if (currentChased != null)
@@ -104,16 +108,47 @@ public class HunterMovementController : MonoBehaviour
             if (Vector3.Distance(_catchingSpot.position, currentChased.transform.position) <= 5f)
             {
                 _currentState = HunterState.Catch;
-                _hidingList.Remove(currentChased);
                 _seekedList.Add(currentChased);
             }
         }
-        else if (currentChased == null && seekingCount == 0)
+        else if (currentChased == null && _huntingCount == seekingCount)
         {
             _currentState = HunterState.Idle;
         }
     }
 
+    private void CreateHuntingList()
+    {
+        _huntingCount = seekingCount;
+
+        HideController[] controllers = FindObjectsOfType<HideController>();
+        _playerHideController = player.GetComponent<HideController>();
+
+        int firstIndex = 0;
+        foreach (HideController controller in controllers)
+        {
+            if(controller != _playerHideController)
+            {
+                if (!controller.IsHiding)
+                {
+                    _huntingList.Insert(0,controller);
+                    firstIndex++;
+                }
+                else if (!controller.IsHidingRightSpot())
+                {
+                    _huntingList.Insert(firstIndex,controller);
+                }
+                else
+                {
+                    _huntingList.Add(controller);
+                }
+            }
+        }
+        if (!_playerHideController.IsHidingRightSpot() || !_playerHideController.IsHiding)
+        {
+            _huntingList.Insert(2,_playerHideController);
+        }
+    }
     void CatchStateActivities()
     {
         if (currentChased != null)
@@ -124,7 +159,7 @@ public class HunterMovementController : MonoBehaviour
             _animator.SetTrigger("Catch");  //OnCatchAnimationEvent trigger
             GameObject deactive = currentChased.gameObject;
             currentChased = null;
-            seekingCount -= 1;
+            _huntingCount -= 1;
 
             _catchAnimDelayedCall = DOVirtual.DelayedCall(2f, () =>
             {
@@ -132,11 +167,11 @@ public class HunterMovementController : MonoBehaviour
 
             }).OnComplete(() =>
             {
-                if (seekingCount > 0)
+                if (_huntingCount > 0)
                 {
                     _currentState = HunterState.Walk;
                 }
-                else if(seekingCount == 0)
+                else if(_huntingCount == 0)
                 {
                     transform.LookAt(Camera.main.transform.position);
                     _animator.SetTrigger("Scream");
