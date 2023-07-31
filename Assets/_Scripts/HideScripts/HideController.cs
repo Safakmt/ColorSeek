@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,7 +43,9 @@ public class HideController : MonoBehaviour
 
     public void Hide()
     {
-        transform.SetPositionAndRotation(_closestSpot.GetHidingPosition(), Quaternion.Euler(_closestSpot.GetHidingRotation()));
+        //transform.SetPositionAndRotation(_closestSpot.GetHidingPosition(), Quaternion.Euler(_closestSpot.GetHidingRotation()));
+        transform.DOJump(_closestSpot.GetHidingPosition(), 0.5f, 1, 0.5f);
+        transform.DORotate(_closestSpot.GetHidingRotation(), 0.5f);
         _colorHandler.HidingValues();
         _closestSpot.SetCurrentHider(this);
         IsHiding = true;
