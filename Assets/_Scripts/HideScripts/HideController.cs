@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class HideController : MonoBehaviour
@@ -9,6 +10,7 @@ public class HideController : MonoBehaviour
     [SerializeField] private MeshColorHandler _colorHandler;
     [SerializeField] private AnimatorController _animController;
     [SerializeField] private HidingSpot _rightSpot;
+    [SerializeField] private TextMeshProUGUI _name;
     public bool IsHiding { get; set; }
     public void SetClosestSpot(HidingSpot spot)
     {
@@ -59,9 +61,15 @@ public class HideController : MonoBehaviour
 
     public void Unhide()
     {
+        transform.DOKill();
         _colorHandler.UnhidingValues();
         if (_closestSpot)
             _closestSpot.ClearCurrentHider();
         IsHiding = false;
+    }
+
+    public string GetName()
+    {
+        return _name.text;
     }
 }
