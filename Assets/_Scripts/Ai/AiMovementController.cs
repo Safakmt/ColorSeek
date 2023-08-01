@@ -126,13 +126,6 @@ public class AiMovementController : MonoBehaviour
 
     private void OnHide()
     {
-        if (!IsReached)
-        {
-            transform.DOKill();
-            agent.enabled = false;
-            transform.position = destination.position;
-            agent.enabled = true;
-        }
 
         if (_currentState == AIState.Hide)
         {
@@ -140,6 +133,7 @@ public class AiMovementController : MonoBehaviour
         }
         else
         {
+            transform.DOKill();
             _currentState = AIState.Escaping;
         }
     }
