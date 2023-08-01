@@ -35,4 +35,7 @@ public static class EventManager
 
     public static event Action<bool> OnHuntingFinished;
     public static void HuntingFinished(bool isPlayerCatch) => OnHuntingFinished?.Invoke(isPlayerCatch);
+    
+    public static event Action<string> OnHuntedName;
+    public static void HuntedName(string name) => OnHuntedName?.Invoke(name);
 }
