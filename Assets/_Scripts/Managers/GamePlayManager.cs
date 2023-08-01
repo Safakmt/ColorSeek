@@ -23,7 +23,6 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField] private float playTime;
     [SerializeField] private TextMeshProUGUI playTimeText;
     [SerializeField] private Transform characterCreatePivot;
-    [SerializeField] private LevelManager _levelManager;
     [SerializeField] private HidingSpotAssigner _hidingSpotAssigner;
     private bool isHideButtonPressed = false;
     public GameState CurrentGameState { get; set; }
@@ -38,7 +37,6 @@ public class GamePlayManager : MonoBehaviour
         EventManager.OnPlayerHide += ShowHideButton;
         EventManager.OnPlayerUnhide += HideHideButton;
         EventManager.OnEnvironmentInitalized += OnEnvironmentLoaded;
-        EventManager.OnHuntingFinished += StartNextLevel;
     }
 
     private void OnDisable()
@@ -46,7 +44,6 @@ public class GamePlayManager : MonoBehaviour
         EventManager.OnPlayerHide -= ShowHideButton;
         EventManager.OnPlayerUnhide -= HideHideButton;
         EventManager.OnEnvironmentInitalized -= OnEnvironmentLoaded;
-        EventManager.OnHuntingFinished -= StartNextLevel;
     }
     private void Start()
     {
@@ -80,14 +77,16 @@ public class GamePlayManager : MonoBehaviour
                 Hunter.SetActive(true);
                 cameraManager.ChangeCameraTo(CameraTypes.HunterCam);
                 HideButton.SetActive(false);
-
-            }
+            } 
         }
 
     }
+
+    
+
     private void StartNextLevel()
     {
-        _levelManager.LoadNextLevel();
+        LevelManager.Instance.LoadNextLevel();
     }
     private void ShowHideButton()
     {
@@ -138,12 +137,12 @@ public class GamePlayManager : MonoBehaviour
     }
     private void GetCurrentPlayTime()
     {
-        playTime =_levelManager.GetCurrentLevelData().PlayTime;
+        playTime = LevelManager.Instance.GetCurrentLevelData().PlayTime;
         playTimeText.text = playTime.ToString();
     }
     public void OnEnvironmentLoaded(EnvironmentData environmentData)
     {
-        _levelManager.activeEnvData = environmentData;
+        LevelManager.Instance.activeEnvData = environmentData;
         _hidingSpotAssigner.SetHideSpotList(environmentData.hidingSpots);
         cameraManager.SetHunterCameraPos(environmentData.hunterCamPos.position);
         Hunter.transform.position = environmentData.hunterSpawnPos.position;

@@ -9,6 +9,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private List<LevelDataSO> levelList;
     public EnvironmentData activeEnvData;
     private Environment _currentEnvironment;
+
+    public static LevelManager Instance { get; private set; }
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
     {
         LoadLevel(levelList[currentLevel].Environment);
