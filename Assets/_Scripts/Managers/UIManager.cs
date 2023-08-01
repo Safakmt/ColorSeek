@@ -1,30 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject HidePanel;
     [SerializeField] private GameObject StartMenuPanel;
-    [SerializeField] private GameObject EndMenuPanel;
+    [SerializeField] private GameObject LoseMenuPanel;
+    [SerializeField] private GameObject WinMenuPanel;
+    [SerializeField] private GameObject SeekMenuPanel;
     private GameObject _activePanel;
 
-    private void Start()
-    {
-        _activePanel = StartMenuPanel;
-    }
     private void OnEnable()
     {
-        EventManager.OnGameStart += GameStart;
+        _activePanel = StartMenuPanel;
+        EventManager.OnSceneLoad += GameStart;
+        EventManager.OnGameStart += GamePlayStart;
+        EventManager.OnHuntingFinished += EndPanel;
+        EventManager.OnSeekState += SeekPanel;
     }
     private void OnDisable()
     {
-        EventManager.OnGameStart -= GameStart;
+        EventManager.OnSceneLoad -= GameStart;
+        EventManager.OnGameStart -= GamePlayStart;
+        EventManager.OnHuntingFinished -= EndPanel;
+        EventManager.OnSeekState -= SeekPanel;
     }
-
-    private void GameStart()
+    private void SeekPanel()
+    {
+        ActivatePanel(SeekMenuPanel);
+    }
+    private void GamePlayStart()
     {
         ActivatePanel(HidePanel);
+    }
+    private void GameStart()
+    {
+        ActivatePanel(StartMenuPanel);
+    }
+    private void EndPanel(bool isPlayerCatch)
+    {
+        if (isPlayerCatch)
+        {
+            ActivatePanel(LoseMenuPanel);
+        }
+        else
+        {
+            ActivatePanel(WinMenuPanel);
+        }
     }
     private void ActivatePanel(GameObject panel)
     {
