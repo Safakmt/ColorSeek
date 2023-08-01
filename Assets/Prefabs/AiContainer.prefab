@@ -78,7 +78,7 @@ MonoBehaviour:
   agent: {fileID: 3961497576824921953}
   _hideController: {fileID: 1389156188050245010}
   _animatorController: {fileID: 7491320829394787429}
-  _randomness: 0
+  _randomness: 5
   destination: {fileID: 0}
 --- !u!114 &1389156188050245010
 MonoBehaviour:
@@ -96,6 +96,7 @@ MonoBehaviour:
   _colorHandler: {fileID: 4068871662318843755}
   _animController: {fileID: 7491320829394787429}
   _rightSpot: {fileID: 0}
+  _name: {fileID: 4175182911286752639}
 --- !u!114 &1188028559389407982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +181,8 @@ GameObject:
   - component: {fileID: 619326267776643182}
   - component: {fileID: 7168466581485165218}
   - component: {fileID: 7436473243305935819}
+  - component: {fileID: 1651029640905963243}
+  - component: {fileID: 5103184495748352394}
   m_Layer: 0
   m_Name: NameUI
   m_TagString: Untagged
@@ -269,6 +272,133 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1651029640905963243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5162995846914493339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 406aa6b6c6b760a4285f4de643f8f67a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraTransform: {fileID: 0}
+--- !u!114 &5103184495748352394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5162995846914493339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47346e3b868016b42986e5528fbc47d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textMeshPro: {fileID: 4175182911286752639}
+  _names:
+  - thehustler
+  - ryethedude
+  - darkmatter
+  - lionabloom
+  - gollumwind
+  - trailbat
+  - batpanda
+  - pigearth
+  - beeolive
+  - farmland
+  - floral
+  - "am\xE9lie"
+  - melody
+  - saltspider
+  - mementofog
+  - blackberry
+  - lavaplanet
+  - kidneymars
+  - pancakesswan
+  - webpureapplepie
+  - cabbageednamode
+  - blackeyepiebeer
+  - drumlinpianoneo
+  - climbinggoggles
+  - batgogglesrugby
+  - poolshootingbat
+  - tabletennisjudo
+  - pineapple
+  - snowwoddy
+  - ariessong
+  - basshorse
+  - alligator
+  - walker
+  - whalecheese
+  - underground
+  - psychomaven
+  - citizenkane
+  - batelephant
+  - hamsterrush
+  - hoagsobject
+  - fencingharp
+  - flykangaroo
+  - piglemonade
+  - runningbush
+  - puppisamilk
+  - "pandaam\xE9lie"
+  - donniedarko
+  - garlicbread
+  - gollumtimon
+  - cocoalyrics
+  - grasshopper
+  - thethingsea
+  - sagittarius
+  - riverpotato
+  - clefperseus
+  - asteroidfig
+  - papillonnix
+  - saltrunning
+  - breadnamaka
+  - greatsquare
+  - icestormweb
+  - tennisopera
+  - rainfallred
+  - ransputnik1
+  - curlingjuno
+  - drumketchup
+  - violinmaven
+  - venisonbeef
+  - hanggliding
+  - vibrantmoon
+  - floodlyrics
+  - snailmenkar
+  - menkarolive
+  - elephantran
+  - ranbroccoli
+  - verdantsing
+  - geminivirgo
+  - apricotbird
+  - milkywayrye
+  - steakturkey
+  - singsn1987a
+  - logshooting
+  - bushvibrant
+  - hornyojimbo
+  - lobsterbass
+  - eggtoystory
+  - icefarmland
+  - kangarooice
+  - barleybeach
+  - oboetrumpet
+  - ryepapillon
+  - voyager2nix
+  - thebigsleep
+  - planetarfog
+  - erisdolphin
+  - tenniswater
+  - alivewooded
+  - tomatojuice
+  - sweetpotato
+  - coffeeshark
 --- !u!1 &5370287473830052322
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +465,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'safak
+  m_text: 'nick
 
 '
   m_isRightToLeft: 0
@@ -364,13 +494,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.2
-  m_fontSizeBase: 0.2
+  m_fontSize: 0.16
+  m_fontSizeBase: 0.16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -461,6 +591,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stickman
       objectReference: {fileID: 0}
+    - target: {fileID: 2622753384463669962, guid: 0effab31759f5ea4ebe7c12bf0744f0e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: acf8c4f437a919043b86c9b89740385c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0effab31759f5ea4ebe7c12bf0744f0e, type: 3}
 --- !u!1 &1220311262202711945 stripped
