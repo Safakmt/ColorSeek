@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,7 +22,8 @@ public class HunterMovementController : MonoBehaviour
     [SerializeField] private Transform _catchingSpot;
     [SerializeField] private Transform _catchingObjectPosition;
     [SerializeField] private Animator _animator;
-    private List<HideController> _hidingList = new List<HideController>();
+    [SerializeField] private HideController _playerHideController;
+    [SerializeField] private List<HideController> _hidingList = new List<HideController>();
     private List<HideController> _huntingList = new List<HideController>();
     private List<HideController> _seekedList = new List<HideController>();
     private HideController currentChased;
@@ -29,7 +31,6 @@ public class HunterMovementController : MonoBehaviour
     private HunterState _currentState;
     private bool isScreaming = false;
     private Tween _catchAnimDelayedCall;
-    private HideController _playerHideController;
     private int _huntingCount;
     private bool _isPlayerCatched = false;
     private void OnEnable()
@@ -43,9 +44,6 @@ public class HunterMovementController : MonoBehaviour
     {
         EventManager.OnHunterCatch -= OnCatchAnimationEvent;
         ResetHunter();
-    }
-    private void Start()
-    {
     }
 
     private void Update()
@@ -67,7 +65,6 @@ public class HunterMovementController : MonoBehaviour
 
     private void ResetHunter()
     {
-        _hidingList.Clear();
         _catchAnimDelayedCall.Kill();
         foreach (var seeked in _seekedList)
         {
@@ -123,11 +120,8 @@ public class HunterMovementController : MonoBehaviour
     {
         _huntingCount = seekingCount;
 
-        HideController[] controllers = FindObjectsOfType<HideController>();
-        _playerHideController = player.GetComponent<HideController>();
-
         int firstIndex = 0;
-        foreach (HideController controller in controllers)
+        foreach (HideController controller in _hidingList)
         {
             if(controller != _playerHideController)
             {
@@ -156,6 +150,7 @@ public class HunterMovementController : MonoBehaviour
     {
         if (currentChased != null)
         {
+            EventManager.HuntedName(currentChased.GetName());
             currentChasedTransform = currentChased.transform;
             agent.SetDestination(transform.position);
             transform.LookAt(currentChased.transform.position);
