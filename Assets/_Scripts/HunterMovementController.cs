@@ -31,6 +31,7 @@ public class HunterMovementController : MonoBehaviour
     private Tween _catchAnimDelayedCall;
     private HideController _playerHideController;
     private int _huntingCount;
+    private bool _isPlayerCatched = false;
     private void OnEnable()
     {
         EventManager.OnHunterCatch += OnCatchAnimationEvent;
@@ -77,6 +78,7 @@ public class HunterMovementController : MonoBehaviour
         _huntingList.Clear();
         currentChased = null;
         currentChasedTransform = null;
+        _isPlayerCatched = false;
     }
     private void HunterScreamActivities()
     {
@@ -147,6 +149,7 @@ public class HunterMovementController : MonoBehaviour
         if (!_playerHideController.IsHidingRightSpot() || !_playerHideController.IsHiding)
         {
             _huntingList.Insert(2,_playerHideController);
+            _isPlayerCatched = true;
         }
     }
     void CatchStateActivities()
@@ -178,7 +181,7 @@ public class HunterMovementController : MonoBehaviour
                     EventManager.HunterScream();
                     DOVirtual.DelayedCall(2.8f, () =>
                     {
-                        EventManager.HuntingFinished();
+                        EventManager.HuntingFinished(_isPlayerCatched);
                         Debug.Log("huntung finished");
                     });
                 }

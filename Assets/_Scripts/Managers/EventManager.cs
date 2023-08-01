@@ -33,6 +33,6 @@ public static class EventManager
     public static event Action<EnvironmentData> OnEnvironmentInitalized;
     public static void EnvironmentInitialized(EnvironmentData environmentData) => OnEnvironmentInitalized?.Invoke(environmentData);
 
-    public static event Action OnHuntingFinished;
-    public static void HuntingFinished() => OnHuntingFinished?.Invoke();
+    public static event Action<bool> OnHuntingFinished;
+    public static void HuntingFinished(bool isPlayerCatch) => OnHuntingFinished?.Invoke(isPlayerCatch);
 }
