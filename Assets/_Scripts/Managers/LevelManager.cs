@@ -59,6 +59,10 @@ public class LevelManager : MonoBehaviour
             Debug.Log("loading next level");
         }
     }
+    public void ReloadLevel()
+    {
+        LoadLevel(levelList[currentLevel].Environment);
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
