@@ -17,13 +17,13 @@ public class SeekPanel : MonoBehaviour
     {
         EventManager.OnHuntedName -= ShowHuntedName;
     }
-    private void ShowHuntedName(string name)
+    private void ShowHuntedName(TextMeshProUGUI name)
     {
        if (activeCoroutine != null)
         {
             StopCoroutine(activeCoroutine);
         }
-       _huntedName.text = name + " Caught!";
+       _huntedName.text = name.text + " Caught!";
        activeCoroutine = StartCoroutine(NameShowDuration(2f));
     }
 

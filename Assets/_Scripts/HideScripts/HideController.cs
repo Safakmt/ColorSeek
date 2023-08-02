@@ -68,8 +68,8 @@ public class HideController : MonoBehaviour
         IsHiding = false;
     }
 
-    public string GetName()
+    public TextMeshProUGUI GetName()
     {
-        return _name.text;
+        return _name;
     }
 }
