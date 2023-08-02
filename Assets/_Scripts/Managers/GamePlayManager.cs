@@ -17,8 +17,7 @@ public enum GameState
 }
 public class GamePlayManager : MonoBehaviour
 {
-    [SerializeField] private CameraManager cameraManager;
-    [SerializeField] private GameObject Hunter;
+    [SerializeField] private GameObject Hunter;  //HunterController ref verilip catchdistance degisecek
     [SerializeField] private GameObject HideButton;
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private HideController _playerHideController;
@@ -50,7 +49,7 @@ public class GamePlayManager : MonoBehaviour
     }
     private void Start()
     {
-        cameraManager.ChangeCameraTo(CameraTypes.SelectionCam);
+        CameraManager.Instance.ChangeCameraTo(CameraTypes.SelectionCam);
         CurrentGameState = GameState.Start;
     }
     private void Update()
@@ -60,7 +59,7 @@ public class GamePlayManager : MonoBehaviour
         {
             EventManager.GameStart();
             _selectionArrow.SetActive(false);
-            cameraManager.ChangeCameraTo(CameraTypes.PlayerFollowCam);
+            CameraManager.Instance.ChangeCameraTo(CameraTypes.PlayerFollowCam);
             CurrentGameState= GameState.Hide;
         }
         if (CurrentGameState == GameState.Hide)
@@ -79,7 +78,7 @@ public class GamePlayManager : MonoBehaviour
             {
                 EventManager.SeekState();
                 Hunter.SetActive(true);
-                cameraManager.ChangeCameraTo(CameraTypes.HunterCam);
+                CameraManager.Instance.ChangeCameraTo(CameraTypes.HunterCam);
                 HideButton.SetActive(false);
             } 
         }
@@ -148,7 +147,7 @@ public class GamePlayManager : MonoBehaviour
 
     private void ResetGamePlay()
     {
-        cameraManager.ChangeCameraTo(CameraTypes.SelectionCam);
+        CameraManager.Instance.ChangeCameraTo(CameraTypes.SelectionCam);
         CurrentGameState = GameState.Start;
         Hunter.SetActive(false);
         isHideButtonPressed = false;
@@ -176,11 +175,11 @@ public class GamePlayManager : MonoBehaviour
     {
         LevelManager.Instance.activeEnvData = environmentData;
         _hidingSpotAssigner.SetHideSpotList(environmentData.hidingSpots);
-        cameraManager.SetHunterCameraPos(environmentData.hunterCamPos.position);
+        CameraManager.Instance.SetHunterCameraPos(environmentData.hunterCamPos.position);
         Hunter.transform.position = environmentData.hunterSpawnPos.position;
         Hunter.transform.localScale = environmentData.hunterScale;
         characterCreatePivot = environmentData.charSpawnPos;
-        cameraManager.SetSelectionFollowAndLookAt(characterCreatePivot);
+        CameraManager.Instance.SetSelectionFollowAndLookAt(characterCreatePivot);
         GetCurrentPlayTime();
         ResetGamePlay();
         EventManager.RefrencesSet();

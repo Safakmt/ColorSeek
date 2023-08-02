@@ -20,6 +20,8 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera StartCam;
     private CinemachineVirtualCamera _activeCam;
 
+    public static CameraManager Instance { get; private set; }
+
     private void OnEnable()
     {
         EventManager.OnHunterScream += ShakeCamera;
@@ -30,6 +32,7 @@ public class CameraManager : MonoBehaviour
     }
     private void Awake()
     {
+        Instance = this;
         _activeCam = StartCam;
         PlayerController player = FindObjectOfType<PlayerController>();
         PlayerFollowCam.Follow = player.transform;
@@ -71,6 +74,10 @@ public class CameraManager : MonoBehaviour
     public void SetHunterCameraPos(Vector3 position)
     {
         HunterCam.transform.position = position;
+    }
+    public void SetHunterCamLookAt(Transform lookAtTransform)
+    {
+        HunterCam.LookAt = lookAtTransform;
     }
     public void SetSelectionFollowAndLookAt(Transform lookAtTransform)
     {
