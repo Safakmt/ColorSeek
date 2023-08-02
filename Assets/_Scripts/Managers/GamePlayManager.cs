@@ -178,6 +178,7 @@ public class GamePlayManager : MonoBehaviour
         _hidingSpotAssigner.SetHideSpotList(environmentData.hidingSpots);
         cameraManager.SetHunterCameraPos(environmentData.hunterCamPos.position);
         Hunter.transform.position = environmentData.hunterSpawnPos.position;
+        Hunter.transform.localScale = environmentData.hunterScale;
         characterCreatePivot = environmentData.charSpawnPos;
         cameraManager.SetSelectionFollowAndLookAt(characterCreatePivot);
         GetCurrentPlayTime();

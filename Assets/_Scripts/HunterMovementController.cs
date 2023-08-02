@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using TMPro.EditorUtilities;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using static Cinemachine.CinemachineOrbitalTransposer;
@@ -16,14 +17,18 @@ public enum HunterState
 }
 public class HunterMovementController : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private PlayerController player;
-    [SerializeField] private int seekingCount;
     [SerializeField] private Transform _catchingSpot;
     [SerializeField] private Transform _catchingHandPosition;
     [SerializeField] private Animator _animator;
     [SerializeField] private HideController _playerHideController;
     [SerializeField] private List<HideController> _hidingList = new List<HideController>();
+
+    [Header("Values")]
+    [SerializeField] private int seekingCount;
+    [SerializeField] private float _catchingDistance = 5f;
     private List<HideController> _huntingList = new List<HideController>();
     private List<HideController> _seekedList = new List<HideController>();
     private HideController currentChased;
@@ -104,7 +109,7 @@ public class HunterMovementController : MonoBehaviour
         else if (currentChased != null)
         {
             agent.destination = currentChased.transform.position;
-            if (Vector3.Distance(_catchingSpot.position, currentChased.transform.position) <= 5f)
+            if (Vector3.Distance(_catchingSpot.position, currentChased.transform.position) <= _catchingDistance)
             {
                 _currentState = HunterState.Catch;
                 _seekedList.Add(currentChased);
@@ -191,9 +196,6 @@ public class HunterMovementController : MonoBehaviour
     }
     private void OnDrawGizmosSelected()
     {
-        if (currentChased!=null)
-        {
-            Gizmos.DrawRay(_catchingSpot.position,currentChased.transform.position);
-        }
+        Gizmos.DrawWireSphere(_catchingSpot.position, _catchingDistance);
     }
 }

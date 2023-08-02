@@ -15,7 +15,7 @@ public class EnvironmentData : MonoBehaviour
     public Transform hunterCamPos;
     public Environment environment;
     public List<HidingSpot> hidingSpots;
-
+    public Vector3 hunterScale;
     private void Awake()
     {
         EventManager.EnvironmentInitialized(this);
