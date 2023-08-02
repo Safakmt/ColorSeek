@@ -105,6 +105,7 @@ public class GamePlayManager : MonoBehaviour
     public void PlaceCircular()
     {
         List<HideController> hiders = _hidingSpotAssigner.GetHideControllers();
+        Shuffle(hiders);
         for (int i = 0; i < hiders.Count; i++)
         {
             float radius = hiders.Count;
@@ -152,4 +153,16 @@ public class GamePlayManager : MonoBehaviour
         ResetGamePlay();
         EventManager.RefrencesSet();
     }
+
+    public void Shuffle(List<HideController> values)
+    {
+        for (int i = values.Count - 1; i > 0; i--)
+        {
+            int k = UnityEngine.Random.Range(0, i + 1);
+            HideController value = values[k];
+            values[k] = values[i];
+            values[i] = value;
+        }
+    }
 }
+
