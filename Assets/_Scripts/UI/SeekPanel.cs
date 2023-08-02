@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class SeekPanel : MonoBehaviour
 {
+    [SerializeField] private GameObject _labelObject;
     [SerializeField] private TextMeshProUGUI _huntedName;
     Coroutine activeCoroutine;
     private void OnEnable()
     {
-        _huntedName.enabled = false;
+        _labelObject.SetActive(false);
         EventManager.OnHuntedName += ShowHuntedName;
     }
     private void OnDisable()
@@ -28,8 +29,9 @@ public class SeekPanel : MonoBehaviour
 
     IEnumerator NameShowDuration(float duration)
     {
-        _huntedName.enabled = true;
+        _labelObject.SetActive(true);
         yield return new WaitForSeconds(duration);
-        _huntedName.enabled = false;
+        _labelObject.SetActive(false);
+
     }
 }
