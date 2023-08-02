@@ -249,6 +249,7 @@ MonoBehaviour:
   playTimeText: {fileID: 364735473}
   characterCreatePivot: {fileID: 0}
   _hidingSpotAssigner: {fileID: 269974006}
+  _selectionArrow: {fileID: 897295405}
 --- !u!4 &122028363
 Transform:
   m_ObjectHideFlags: 0
@@ -1629,6 +1630,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a47f546fc70ec8428172694e78e4288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &897295405 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4511277664780073499, guid: 405b683cdada74c4782f6d39efd0462c, type: 3}
+  m_PrefabInstance: {fileID: 4124260332134422257}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
