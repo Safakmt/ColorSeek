@@ -20,7 +20,7 @@ public class HunterMovementController : MonoBehaviour
     [SerializeField] private PlayerController player;
     [SerializeField] private int seekingCount;
     [SerializeField] private Transform _catchingSpot;
-    [SerializeField] private Transform _catchingObjectPosition;
+    [SerializeField] private Transform _catchingHandPosition;
     [SerializeField] private Animator _animator;
     [SerializeField] private HideController _playerHideController;
     [SerializeField] private List<HideController> _hidingList = new List<HideController>();
@@ -185,7 +185,7 @@ public class HunterMovementController : MonoBehaviour
     }
     public void OnCatchAnimationEvent()
     {
-        currentChasedTransform.SetParent(_catchingObjectPosition);
+        currentChasedTransform.SetParent(_catchingHandPosition);
         currentChasedTransform.localPosition = Vector3.zero;
 
     }
