@@ -1619,6 +1619,7 @@ MonoBehaviour:
   - {fileID: 8445579773551722266}
   - {fileID: 7515249417384952098}
   - {fileID: 6663889612054264838}
+  hunterScale: {x: 7.5, y: 7.5, z: 7.5}
 --- !u!1 &2807068277775721775
 GameObject:
   m_ObjectHideFlags: 0

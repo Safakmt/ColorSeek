@@ -1275,6 +1275,7 @@ MonoBehaviour:
   - {fileID: 8367614265400696491}
   - {fileID: 9106883545240647457}
   - {fileID: 7649283900873345545}
+  hunterScale: {x: 5, y: 5, z: 5}
 --- !u!1 &1082338556178813531
 GameObject:
   m_ObjectHideFlags: 0
