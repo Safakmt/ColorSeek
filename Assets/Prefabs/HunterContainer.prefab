@@ -118,7 +118,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6203696435364286757}
-  m_LocalRotation: {x: -0, y: 0.92387867, z: -0, w: 0.38268548}
+  m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
   m_LocalPosition: {x: 0.45, y: 0.76, z: 0.97}
   m_LocalScale: {x: 7.6, y: 7.6, z: 7.6}
   m_ConstrainProportionsScale: 1
@@ -138,10 +138,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -902729914
   m_Radius: 0.3
-  m_Speed: 7
+  m_Speed: 9
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 150
+  m_AngularSpeed: 170
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
@@ -164,10 +164,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 6203696435364286759}
   player: {fileID: 0}
-  seekingCount: 3
   _catchingSpot: {fileID: 3954074340701080857}
-  _catchingObjectPosition: {fileID: 3954074340810781410}
+  _catchingHandPosition: {fileID: 3954074340810781410}
   _animator: {fileID: 4668773672350905464}
+  _playerHideController: {fileID: 0}
+  _hidingList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  seekingCount: 3
+  _catchingDistance: 5
 --- !u!1001 &1270091248160164329
 PrefabInstance:
   m_ObjectHideFlags: 0
