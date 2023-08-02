@@ -5,14 +5,9 @@ using UnityEngine;
 
 public class HidingSpotAssigner : MonoBehaviour
 {
+    [SerializeField] private List<HideController> _hiders = new List<HideController>();
     [SerializeField] private List<HidingSpot> _hidingSpotList = new List<HidingSpot>();
     private List<HidingSpot> usedSpots= new List<HidingSpot>();
-    private HideController[] _hiders;
-
-    private void Start()
-    {
-        SearchForHiders();
-    }
 
     public void SetHideSpotList(List<HidingSpot> hidingSpotList)
     {
@@ -36,12 +31,7 @@ public class HidingSpotAssigner : MonoBehaviour
 
     }
 
-    public void SearchForHiders()
-    {
-        _hiders = FindObjectsOfType<HideController>();
-    }
-
-    public HideController[] GetHideControllers() {
+    public List<HideController> GetHideControllers() {
         return _hiders;
     }
 }

@@ -104,10 +104,10 @@ public class GamePlayManager : MonoBehaviour
 
     public void PlaceCircular()
     {
-        HideController[] hiders = _hidingSpotAssigner.GetHideControllers();
-        for (int i = 0; i < hiders.Length; i++)
+        List<HideController> hiders = _hidingSpotAssigner.GetHideControllers();
+        for (int i = 0; i < hiders.Count; i++)
         {
-            float radius = hiders.Length;
+            float radius = hiders.Count;
             float angle = i * Mathf.PI * 2f / radius;
             Vector3 pos = characterCreatePivot.position + (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
             hiders[i].transform.position = pos;
