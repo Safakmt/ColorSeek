@@ -158,7 +158,7 @@ public class HunterMovementController : MonoBehaviour
             EventManager.HuntedName(currentChased.GetName());
             currentChasedTransform = currentChased.transform;
             agent.SetDestination(transform.position);
-            transform.LookAt(currentChased.transform.position);
+            transform.DOLookAt(currentChased.transform.position, 0.5f,AxisConstraint.Y);
             _animator.SetTrigger("Catch");  //OnCatchAnimationEvent trigger
             GameObject deactive = currentChased.gameObject;
             currentChased = null;
