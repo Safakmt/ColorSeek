@@ -124,7 +124,20 @@ public class HunterMovementController : MonoBehaviour
     private void CreateHuntingList()
     {
         _huntingCount = seekingCount;
-
+        if (LevelManager.Instance.CurrentEnvironment == Environment.tutorial)
+        {
+            _huntingCount = 1;
+            foreach (var controller in _hidingList)
+            {
+                if (controller != _playerHideController && controller.gameObject.activeSelf)
+                {
+                    _huntingList.Add(controller);
+                }
+                else
+                    _seekedList.Add(controller);
+            }
+            return;
+        }
         int firstIndex = 0;
         foreach (HideController controller in _hidingList)
         {
