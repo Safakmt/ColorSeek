@@ -7,8 +7,8 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private int currentLevel = 0;
     [SerializeField] private List<LevelDataSO> levelList;
-    public EnvironmentData activeEnvData;
-    private Environment _currentEnvironment;
+    public EnvironmentData ActiveEnvData;
+    public Environment CurrentEnvironment;
 
     public static LevelManager Instance { get; private set; }
     private void Awake()
@@ -35,13 +35,13 @@ public class LevelManager : MonoBehaviour
         //        StartCoroutine(WaitForSceneLoad(SceneManager.LoadSceneAsync("Tutorial", LoadSceneMode.Additive)));
         //        break;
         //}
-        if (SceneManager.GetSceneByName(_currentEnvironment.ToString()).isLoaded)
+        if (SceneManager.GetSceneByName(CurrentEnvironment.ToString()).isLoaded)
         {
-            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(_currentEnvironment.ToString());
+            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(CurrentEnvironment.ToString());
             StartCoroutine(WaitForAsyncOp(unloadOp, false));
         }
-        _currentEnvironment = env;
-        AsyncOperation loadOp = SceneManager.LoadSceneAsync(_currentEnvironment.ToString(), LoadSceneMode.Additive);
+        CurrentEnvironment = env;
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync(CurrentEnvironment.ToString(), LoadSceneMode.Additive);
         StartCoroutine(WaitForAsyncOp(loadOp, true));
 
     }

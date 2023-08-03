@@ -207,7 +207,7 @@ public class GamePlayManager : MonoBehaviour
     }
     public void OnEnvironmentLoaded(EnvironmentData environmentData)
     {
-        LevelManager.Instance.activeEnvData = environmentData;
+        LevelManager.Instance.ActiveEnvData = environmentData;
         _hidingSpotAssigner.SetHideSpotList(environmentData.hidingSpots);
         CameraManager.Instance.SetHunterCameraPos(environmentData.hunterCamPos.position);
         _hunter.transform.position = environmentData.hunterSpawnPos.position;   
