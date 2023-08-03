@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro.EditorUtilities;
+using System.Linq;
 using UnityEngine;
 
 public class HidingSpotAssigner : MonoBehaviour
@@ -18,17 +18,31 @@ public class HidingSpotAssigner : MonoBehaviour
 
     private void SetNewPositions()
     {
-
-        foreach (var item in _hiders)
+        if (LevelManager.Instance.CurrentEnvironment == Environment.tutorial )
         {
-            int randomInt = Random.Range(0, _hidingSpotList.Count);
-            HidingSpot Spot = _hidingSpotList[randomInt];
-            _hidingSpotList.Remove(Spot);
-            usedSpots.Add(Spot);
+            foreach (var item in _hiders)
+            {
+                if (item.gameObject.activeSelf)
+                {
+                    HidingSpot Spot = _hidingSpotList.First();
+                    _hidingSpotList.Remove(Spot);
+                    usedSpots.Add(Spot);
+                    item.SetRightSpot(Spot);
+                }
 
-            item.SetRightSpot(Spot);
+            }
         }
-
+        else
+        {
+            foreach (var item in _hiders)
+            {
+                int randomInt = Random.Range(0, _hidingSpotList.Count);
+                HidingSpot Spot = _hidingSpotList[randomInt];
+                _hidingSpotList.Remove(Spot);
+                usedSpots.Add(Spot);
+                item.SetRightSpot(Spot);
+            }
+        }
     }
 
     public List<HideController> GetHideControllers() {
