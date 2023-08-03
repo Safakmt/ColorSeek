@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a41faa632dc5034ba5e737bfbd15e15, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  Environment: 0
+  Environment: 3
   PlayTime: 100
