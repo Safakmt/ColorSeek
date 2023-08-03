@@ -129,14 +129,19 @@ public class GamePlayManager : MonoBehaviour
         _selectionArrow.SetActive(true);
         float selectionDegree = 360 / hiderAngles.Count;
         selectionDegree = selectionDegree * 0.5f;
-        _selectionArrow.transform.DORotate(new Vector3(0,360,0) * 3 +new Vector3(0,_playerAngle,0), 3, RotateMode.FastBeyond360)
+        _selectionArrow.transform.DORotate(new Vector3(0,360,0) * 3 +new Vector3(0,_playerAngle,0), 2.5f, RotateMode.FastBeyond360)
             .SetEase(Ease.Linear)
             .OnUpdate(() =>
             {
                 
                 for (int i = 0; i < hiderAngles.Count; i++)
                 {
-                    if (_selectionArrow.transform.localRotation.eulerAngles.y > hiderAngles[i] - selectionDegree && _selectionArrow.transform.localRotation.eulerAngles.y < hiderAngles[i] + selectionDegree)
+                    float arrowYRotation = _selectionArrow.transform.localRotation.eulerAngles.y;
+
+                    if (arrowYRotation > 360 - selectionDegree)
+                        arrowYRotation = arrowYRotation - 360;
+
+                    if (arrowYRotation > hiderAngles[i] - selectionDegree && arrowYRotation < hiderAngles[i] + selectionDegree)
                     {
                         hiders[i].ToggleSelection(true);
                     }
@@ -160,7 +165,7 @@ public class GamePlayManager : MonoBehaviour
             });
         });
 
-        DOVirtual.DelayedCall(4.5f, () =>
+        DOVirtual.DelayedCall(4.3f, () =>
         {
             EventManager.GameStart();
             CameraManager.Instance.ChangeCameraTo(CameraTypes.PlayerFollowCam);
