@@ -16,6 +16,7 @@ public class EnvironmentData : MonoBehaviour
     public Environment environment;
     public List<HidingSpot> hidingSpots;
     public Vector3 hunterScale;
+    public float hunterCatchDistance;
     private void Awake()
     {
         EventManager.EnvironmentInitialized(this);

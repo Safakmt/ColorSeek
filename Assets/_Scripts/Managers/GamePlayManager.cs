@@ -176,10 +176,11 @@ public class GamePlayManager : MonoBehaviour
         LevelManager.Instance.activeEnvData = environmentData;
         _hidingSpotAssigner.SetHideSpotList(environmentData.hidingSpots);
         CameraManager.Instance.SetHunterCameraPos(environmentData.hunterCamPos.position);
-        Hunter.transform.position = environmentData.hunterSpawnPos.position;
-        Hunter.transform.localScale = environmentData.hunterScale;
-        characterCreatePivot = environmentData.charSpawnPos;
-        CameraManager.Instance.SetSelectionFollowAndLookAt(characterCreatePivot);
+        _hunter.transform.position = environmentData.hunterSpawnPos.position;   
+        _hunter.transform.localScale = environmentData.hunterScale;
+        _hunterController.SetCatchDistance(environmentData.hunterCatchDistance);
+        _characterCreatePivot = environmentData.charSpawnPos;
+        CameraManager.Instance.SetSelectionFollowAndLookAt(_characterCreatePivot);
         GetCurrentPlayTime();
         ResetGamePlay();
         EventManager.RefrencesSet();
