@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class UICameraFacing : MonoBehaviour
 {
-    [SerializeField] private Transform _cameraTransform;
-
     void LateUpdate()
     {
-        transform.rotation = Quaternion.LookRotation(transform.position - _cameraTransform.position);
+        transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
     }
 }
