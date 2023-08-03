@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6841273988448397351, guid: 1143b45d5e93598448f91aad4574768b, type: 3}
+      propertyPath: hidingSpots.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8243435364869181703, guid: 1143b45d5e93598448f91aad4574768b, type: 3}
       propertyPath: m_Name
       value: TutorialLevel
