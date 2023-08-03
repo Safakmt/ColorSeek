@@ -16,14 +16,14 @@ public class UIManager : MonoBehaviour
     {
         _activePanel = StartMenuPanel;
         EventManager.OnSceneLoad += GameStart;
-        EventManager.OnGameStart += GamePlayStart;
+        EventManager.OnSelectionStart += SelectionStart;
         EventManager.OnHuntingFinished += EndPanel;
         EventManager.OnSeekState += SeekPanel;
     }
     private void OnDisable()
     {
         EventManager.OnSceneLoad -= GameStart;
-        EventManager.OnGameStart -= GamePlayStart;
+        EventManager.OnSelectionStart -= SelectionStart;
         EventManager.OnHuntingFinished -= EndPanel;
         EventManager.OnSeekState -= SeekPanel;
     }
@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
     {
         ActivatePanel(SeekMenuPanel);
     }
-    private void GamePlayStart()
+    private void SelectionStart()
     {
         ActivatePanel(HidePanel);
     }

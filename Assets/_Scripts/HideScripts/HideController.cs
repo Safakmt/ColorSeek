@@ -11,6 +11,7 @@ public class HideController : MonoBehaviour
     [SerializeField] private AnimatorController _animController;
     [SerializeField] private HidingSpot _rightSpot;
     [SerializeField] private TextMeshProUGUI _name;
+    [SerializeField] private GameObject _selectionHighlight;
     public bool IsHiding { get; set; }
     public void SetClosestSpot(HidingSpot spot)
     {
@@ -71,5 +72,10 @@ public class HideController : MonoBehaviour
     public TextMeshProUGUI GetName()
     {
         return _name;
+    }
+
+    public void ToggleSelection(bool value)
+    {
+        _selectionHighlight.SetActive(value);
     }
 }

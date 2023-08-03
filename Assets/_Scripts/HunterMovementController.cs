@@ -188,6 +188,10 @@ public class HunterMovementController : MonoBehaviour
             });
         }
     }
+    public void SetCatchDistance(float distance)
+    {
+        _catchingDistance = distance;
+    }
     public void OnCatchAnimationEvent()
     {
         currentChasedTransform.SetParent(_catchingHandPosition);

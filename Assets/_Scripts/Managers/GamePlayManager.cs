@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using TMPro;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -17,16 +18,21 @@ public enum GameState
 }
 public class GamePlayManager : MonoBehaviour
 {
-    [SerializeField] private GameObject Hunter;  //HunterController ref verilip catchdistance degisecek
-    [SerializeField] private GameObject HideButton;
+    [SerializeField] private GameObject _hunter;
+    [SerializeField] private HunterMovementController _hunterController;
+    [SerializeField] private GameObject _hideButton;
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private HideController _playerHideController;
-    [SerializeField] private float playTime;
-    [SerializeField] private TextMeshProUGUI playTimeText;
-    [SerializeField] private Transform characterCreatePivot;
+    [SerializeField] private float _playTime;
+    [SerializeField] private TextMeshProUGUI _playTimeText;
+    [SerializeField] private Transform _characterCreatePivot;
     [SerializeField] private HidingSpotAssigner _hidingSpotAssigner;
     [SerializeField] private GameObject _selectionArrow;
     private bool isHideButtonPressed = false;
+    private bool _isSelectionPartPlaying = false;
+    private float _playerAngle;
+    private List<HideController> hiders = new List<HideController>();
+    private List<float> hiderAngles = new List<float>();
     public GameState CurrentGameState { get; set; }
     public static GamePlayManager Instance { get; private set; }
 
@@ -49,24 +55,23 @@ public class GamePlayManager : MonoBehaviour
     }
     private void Start()
     {
+        hiders = _hidingSpotAssigner.GetHideControllers();
         CameraManager.Instance.ChangeCameraTo(CameraTypes.SelectionCam);
         CurrentGameState = GameState.Start;
     }
     private void Update()
     {
 
-        if (CurrentGameState == GameState.Start && Input.GetMouseButtonDown(0)) 
+        if (CurrentGameState == GameState.Start && Input.GetMouseButtonDown(0) && !_isSelectionPartPlaying) 
         {
-            EventManager.GameStart();
-            _selectionArrow.SetActive(false);
-            CameraManager.Instance.ChangeCameraTo(CameraTypes.PlayerFollowCam);
-            CurrentGameState= GameState.Hide;
+            PlaySelectionSection();
+
         }
         if (CurrentGameState == GameState.Hide)
         {
-            playTime -= Time.deltaTime;
-            playTimeText.text = playTime.ToString("0.0");
-            if (playTime <= 0 || isHideButtonPressed)
+            _playTime -= Time.deltaTime;
+            _playTimeText.text = _playTime.ToString("0.0");
+            if (_playTime <= 0 || isHideButtonPressed)
             {
                 CurrentGameState = GameState.Seek;
             }
@@ -74,12 +79,12 @@ public class GamePlayManager : MonoBehaviour
 
         if (CurrentGameState == GameState.Seek)
         {
-            if (!Hunter.activeSelf)
+            if (!_hunter.activeSelf)
             {
                 EventManager.SeekState();
-                Hunter.SetActive(true);
+                _hunter.SetActive(true);
                 CameraManager.Instance.ChangeCameraTo(CameraTypes.HunterCam);
-                HideButton.SetActive(false);
+                _hideButton.SetActive(false);
             } 
         }
 
@@ -87,11 +92,11 @@ public class GamePlayManager : MonoBehaviour
 
     private void ShowHideButton()
     {
-        HideButton.SetActive(true);
+        _hideButton.SetActive(true);
     }
     private void HideHideButton()
     {
-        HideButton.SetActive(false);
+        _hideButton.SetActive(false);
     }
     public void HideButtonPressed()
     {
@@ -101,75 +106,99 @@ public class GamePlayManager : MonoBehaviour
 
     public void PlaceCircular()
     {
-        List<HideController> hiders = _hidingSpotAssigner.GetHideControllers();
         Shuffle(hiders);
-        float playerAngle = 0;
         for (int i = 0; i < hiders.Count; i++)
         {
             float degreeForEach = 360 / hiders.Count;
+            hiderAngles.Add(degreeForEach * i);
             if (hiders[i] == _playerHideController)
-            {
-                playerAngle = degreeForEach * i;
-                Debug.Log(playerAngle);
-            }
-            Vector3 pos = characterCreatePivot.position + Quaternion.Euler(0, degreeForEach * i, 0) * Vector3.forward;
+                _playerAngle = degreeForEach* i;
+
+            Vector3 pos = _characterCreatePivot.position + Quaternion.Euler(0, degreeForEach * i, 0) * Vector3.forward;
             hiders[i].transform.position = pos;
             hiders[i].GetName().enabled = false;
         }
-        PlaySelectionArrow(hiders, playerAngle);
 
     }
 
-    private void PlaySelectionArrow(List<HideController> hiders,float angle)
+    private void PlaySelectionSection()
     {
-        _selectionArrow.transform.position = characterCreatePivot.position;
+        EventManager.SelectionStart();
+        _isSelectionPartPlaying = true;
+        _selectionArrow.transform.position = _characterCreatePivot.position;
         _selectionArrow.SetActive(true);
-        _selectionArrow.transform.DOLocalRotate(new Vector3(0,360,0) * 4 +new Vector3(0,angle,0), 3, RotateMode.FastBeyond360)
-            .SetEase(Ease.OutCirc)
+        float selectionDegree = 360 / hiderAngles.Count;
+        selectionDegree = selectionDegree * 0.5f;
+        _selectionArrow.transform.DORotate(new Vector3(0,360,0) * 3 +new Vector3(0,_playerAngle,0), 3, RotateMode.FastBeyond360)
+            .SetEase(Ease.Linear)
             .OnUpdate(() =>
             {
-                //_selectionArrow.transform.localRotation.eulerAngles.y
+                
+                for (int i = 0; i < hiderAngles.Count; i++)
+                {
+                    if (_selectionArrow.transform.localRotation.eulerAngles.y > hiderAngles[i] - selectionDegree && _selectionArrow.transform.localRotation.eulerAngles.y < hiderAngles[i] + selectionDegree)
+                    {
+                        hiders[i].ToggleSelection(true);
+                    }
+                    else
+                        hiders[i].ToggleSelection(false);
+                }
             })
             .OnComplete(() =>
         {
             float firstScale = _selectionArrow.transform.localScale.x;
-            _selectionArrow.transform.DOScale(firstScale * 1.2f, 0.3f).SetEase(Ease.InQuad).OnComplete(() =>
+            _selectionArrow.transform.DOScale(firstScale * 1.2f, 0.3f)
+            .SetEase(Ease.InQuad)
+            .OnComplete(() =>
             {
-                _selectionArrow.transform.DOScale(firstScale, 0.3f).SetEase(Ease.OutQuad);
+                _selectionArrow.transform.DOScale(firstScale, 0.3f)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() =>
+                {
+                    _playerHideController.GetName().enabled = true;
+                });
             });
-            foreach (var item in hiders)
-            {
-                item.GetName().enabled = true;
-            }
         });
 
+        DOVirtual.DelayedCall(4.5f, () =>
+        {
+            EventManager.GameStart();
+            CameraManager.Instance.ChangeCameraTo(CameraTypes.PlayerFollowCam);
+            CurrentGameState = GameState.Hide;
+            _selectionArrow.SetActive(false);
+            _playerHideController.ToggleSelection(false);
+            for (int i = 0; i < hiders.Count; i++)
+            {
+                hiders[i].GetName().enabled = true;
+            }
+        });
     }
 
     private void ResetGamePlay()
     {
         CameraManager.Instance.ChangeCameraTo(CameraTypes.SelectionCam);
+        _isSelectionPartPlaying = false;
         CurrentGameState = GameState.Start;
-        Hunter.SetActive(false);
+        _hunter.SetActive(false);
         isHideButtonPressed = false;
         HideHideButton();
-        playTimeText.text = "";
         PlaceCircular();
     }
     private void OnDrawGizmos()
     {
-        if (characterCreatePivot == null)
+        if (_characterCreatePivot == null)
             return;
         for (int i = 0; i < 5; i++)
         {
             float radius = 5;
             float angle = i * Mathf.PI *2f / radius;
-            Gizmos.DrawWireSphere(characterCreatePivot.position + (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))),0.3f);
+            Gizmos.DrawWireSphere(_characterCreatePivot.position + (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))),0.3f);
         }
     }
     private void GetCurrentPlayTime()
     {
-        playTime = LevelManager.Instance.GetCurrentLevelData().PlayTime;
-        playTimeText.text = playTime.ToString();
+        _playTime = LevelManager.Instance.GetCurrentLevelData().PlayTime;
+        _playTimeText.text = _playTime.ToString();
     }
     public void OnEnvironmentLoaded(EnvironmentData environmentData)
     {
