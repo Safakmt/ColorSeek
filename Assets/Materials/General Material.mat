@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: General Material
-  m_Shader: {fileID: 4800000, guid: 1526c808ddcf1481abffe57c4da31bab, type: 3}
+  m_Shader: {fileID: 4800000, guid: 630b07f1142b0473fbb4a366f4ac637c, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
@@ -77,12 +77,12 @@ Material:
     - _Outline: 0.5
     - _Parallax: 0.02
     - _RampSmooth: 0.001
-    - _RampThreshold: 0.327
-    - _RimMax: 0.984
-    - _RimMin: 0.605
-    - _Smoothness: 0.08
+    - _RampThreshold: 0
+    - _RimMax: 0.594
+    - _RimMin: 0.589
+    - _Smoothness: 0.13
     - _SmoothnessTextureChannel: 1
-    - _SpecSmooth: 0
+    - _SpecSmooth: 0.038
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _TexLod: 5
@@ -94,10 +94,10 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HColor: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+    - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 0}
     - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
-    - _SColor: {r: 0.5372549, g: 0.5372549, b: 0.5372549, a: 1}
-    - _SpecColor: {r: 0.21568629, g: 0.21568629, b: 0.21568629, a: 1}
+    - _SColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecColor: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
   m_BuildTextureStacks: []
