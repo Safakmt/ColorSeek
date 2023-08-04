@@ -45,10 +45,18 @@ public class HideController : MonoBehaviour
     }
     public bool IsHidingRightSpot()
     {
-        if (_closestSpot == _rightSpot)
+
+        if (_closestSpot.GetHidingColor() == _rightSpot.GetHidingColor())
+        {
+            Debug.Log(true);
             return true;
+        }
         else
+        {
+            Debug.Log(false);
             return false;
+
+        }
     }
     public void Hide()
     {
