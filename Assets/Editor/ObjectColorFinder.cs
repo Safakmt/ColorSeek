@@ -44,11 +44,11 @@ public class RaycastEditorScript : EditorWindow
             return;
         }
 
-        Collider col = Selection.activeGameObject.GetComponent<Collider>();
-        col.enabled = false;
+        //Collider col = Selection.activeGameObject.GetComponent<Collider>();
+        //col.enabled = false;
 
-        MeshCollider meshColl = Selection.activeGameObject.AddComponent<MeshCollider>();
-        meshColl.enabled = true;
+        //MeshCollider meshColl = Selection.activeGameObject.AddComponent<MeshCollider>();
+        //meshColl.enabled = true;
 
         Ray ray = new Ray(startPoint.position, (endPoint.position - startPoint.position).normalized);
 
@@ -72,7 +72,7 @@ public class RaycastEditorScript : EditorWindow
             }
         }
 
-        col.enabled = true;
-        DestroyImmediate(meshColl);
+        //col.enabled = true;
+        //DestroyImmediate(meshColl);
     }
 }
