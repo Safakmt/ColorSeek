@@ -2399,6 +2399,7 @@ MonoBehaviour:
   charSpawnPos: {fileID: 2474695617166344677}
   hunterSpawnPos: {fileID: 5059886082752878366}
   hunterCamPos: {fileID: 2276237973678289899}
+  followCamPos: {fileID: 0}
   environment: 4
   hidingSpots:
   - {fileID: 356484948145613772}
