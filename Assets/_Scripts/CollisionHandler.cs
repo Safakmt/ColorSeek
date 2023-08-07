@@ -17,7 +17,7 @@ public class CollisionHandler : MonoBehaviour
     {
         if (other.gameObject.layer == _layerIndex)
         {
-            HidingSpot currentSpot = other.GetComponent<HidingSpot>();
+            HidingSpot currentSpot = other.GetComponentInChildren<HidingSpot>();
             if (currentSpot == null)
             {
                 currentSpot = other.GetComponentInParent<HidingSpot>();
