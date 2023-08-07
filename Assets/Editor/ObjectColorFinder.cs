@@ -17,8 +17,8 @@ public class RaycastEditorScript : EditorWindow
 
     private void OnGUI()
     {
-
-        if (Selection.activeGameObject.TryGetComponent<HidingSpot>(out hidingSpot))
+        hidingSpot = Selection.activeGameObject.GetComponentInChildren<HidingSpot>();
+        if (hidingSpot != null)
         {
             startPoint = hidingSpot.GetHidingTransform();
             endPoint = Selection.activeGameObject.transform;
