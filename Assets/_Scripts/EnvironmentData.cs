@@ -14,6 +14,7 @@ public class EnvironmentData : MonoBehaviour
     public Transform charSpawnPos;
     public Transform hunterSpawnPos;
     public Transform hunterCamPos;
+    public Transform followCamPos;
     public Environment environment;
     public List<HidingSpot> hidingSpots;
     public Vector3 hunterScale;
