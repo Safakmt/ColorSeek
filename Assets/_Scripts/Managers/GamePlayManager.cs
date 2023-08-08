@@ -215,6 +215,7 @@ public class GamePlayManager : MonoBehaviour
         _hunterController.SetCatchDistance(environmentData.hunterCatchDistance);
         _characterCreatePivot = environmentData.charSpawnPos;
         CameraManager.Instance.SetSelectionFollowAndLookAt(_characterCreatePivot);
+        CameraManager.Instance.SetPlayerFollowCamPosition(environmentData.followCamPos);
         GetCurrentPlayTime();
         ResetGamePlay();
         EventManager.RefrencesSet();

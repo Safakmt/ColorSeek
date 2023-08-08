@@ -84,4 +84,9 @@ public class CameraManager : MonoBehaviour
         SelectionCam.LookAt = lookAtTransform;
         SelectionCam.Follow = lookAtTransform;
     }
+
+    public void SetPlayerFollowCamPosition(Transform position)
+    {
+        PlayerFollowCam.transform.position = position;
+    }
 }
