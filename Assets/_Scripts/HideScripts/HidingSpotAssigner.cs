@@ -22,6 +22,17 @@ public class HidingSpotAssigner : MonoBehaviour
         {
             foreach (var item in _hiders)
             {
+
+                if (!item.GetComponent<PlayerController>())
+                {
+                    item.gameObject.SetActive(false);
+                }
+            }
+
+            _hiders[1].gameObject.SetActive(true);
+
+            foreach (var item in _hiders)
+            {
                 if (item.gameObject.activeSelf)
                 {
                     HidingSpot Spot = _hidingSpotList.First();
@@ -29,7 +40,6 @@ public class HidingSpotAssigner : MonoBehaviour
                     usedSpots.Add(Spot);
                     item.SetRightSpot(Spot);
                 }
-
             }
         }
         else
