@@ -5,7 +5,7 @@ public enum Environment
 {
     kitchen,
     childroom,
-    table,
+    dinnertable,
     tutorial,
     chineseshop,
     kitchen1
