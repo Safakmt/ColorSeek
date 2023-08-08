@@ -85,8 +85,8 @@ public class CameraManager : MonoBehaviour
         SelectionCam.Follow = lookAtTransform;
     }
 
-    public void SetPlayerFollowCamPosition(Transform transform)
+    public void SetPlayerFollowCamPosition(Transform FollowTransform)
     {
-        PlayerFollowCam.transform.position = transform.position;
+        PlayerFollowCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = FollowTransform.localPosition;
     }
 }

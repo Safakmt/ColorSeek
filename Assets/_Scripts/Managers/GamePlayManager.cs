@@ -1,11 +1,9 @@
-using Cinemachine;
 using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using TMPro;
-using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -107,6 +105,10 @@ public class GamePlayManager : MonoBehaviour
     public void PlaceCircular()
     {
         Shuffle(hiders);
+        if (hiderAngles.Count != 0)
+        {
+            hiderAngles.Clear();
+        }
         for (int i = 0; i < hiders.Count; i++)
         {
             float degreeForEach = 360 / hiders.Count;
@@ -124,12 +126,13 @@ public class GamePlayManager : MonoBehaviour
     private void PlaySelectionSection()
     {
         EventManager.SelectionStart();
+        _playerController.StopTakingInput();
         _isSelectionPartPlaying = true;
         _selectionArrow.transform.position = _characterCreatePivot.position;
         _selectionArrow.SetActive(true);
         float selectionDegree = 360 / hiderAngles.Count;
         selectionDegree = selectionDegree * 0.5f;
-        _selectionArrow.transform.DORotate(new Vector3(0,360,0) * 3 +new Vector3(0,_playerAngle,0), 2.5f, RotateMode.FastBeyond360)
+        _selectionArrow.transform.DORotate(new Vector3(0,360,0) * 2 +new Vector3(0,_playerAngle,0), 2f, RotateMode.FastBeyond360)
             .SetEase(Ease.Linear)
             .OnUpdate(() =>
             {
@@ -165,9 +168,10 @@ public class GamePlayManager : MonoBehaviour
             });
         });
 
-        DOVirtual.DelayedCall(4.3f, () =>
+        DOVirtual.DelayedCall(3.8f, () =>
         {
             EventManager.GameStart();
+            _playerController.StartTakingInputs();
             CameraManager.Instance.ChangeCameraTo(CameraTypes.PlayerFollowCam);
             CurrentGameState = GameState.Hide;
             _selectionArrow.SetActive(false);
