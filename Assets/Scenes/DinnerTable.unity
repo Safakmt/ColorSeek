@@ -130,6 +130,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 334579008, guid: 2f79177fe63bdf94d8379761d8bf22c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 334579008, guid: 2f79177fe63bdf94d8379761d8bf22c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 334579008, guid: 2f79177fe63bdf94d8379761d8bf22c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.63
+      objectReference: {fileID: 0}
     - target: {fileID: 173215059802936132, guid: 2f79177fe63bdf94d8379761d8bf22c4, type: 3}
       propertyPath: m_Name
       value: DiningRoom
