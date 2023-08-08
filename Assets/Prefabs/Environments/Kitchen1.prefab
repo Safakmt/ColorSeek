@@ -56,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401989470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.133, y: 1.715, z: -0.489}
+  m_LocalPosition: {x: -4.081, y: 3.34, z: 0.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.33333334
+  m_VoxelSize: 0.19
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: ef76d00b31f3f0b42abb1427f2055661, type: 2}
   m_BuildHeightMesh: 0
@@ -225,8 +225,8 @@ MonoBehaviour:
   - {fileID: 3699176160352124949}
   - {fileID: 3699176160445366114}
   - {fileID: 3699176160048478136}
-  hunterScale: {x: 5, y: 5, z: 5}
-  hunterCatchDistance: 4
+  hunterScale: {x: 8, y: 8, z: 8}
+  hunterCatchDistance: 5.2
 --- !u!1 &46557149045407539
 GameObject:
   m_ObjectHideFlags: 0
@@ -3688,6 +3688,14 @@ PrefabInstance:
     - target: {fileID: 3098027945679418457, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
       propertyPath: m_Name
       value: HidingObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037027237891535077, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.241
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037027237891535077, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.497
       objectReference: {fileID: 0}
     - target: {fileID: 7448235679012835522, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
       propertyPath: m_RootOrder
