@@ -237,7 +237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5312692238112959698, guid: 1e0633c319d7fd749943e654a5bb97db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.63
       objectReference: {fileID: 0}
     - target: {fileID: 5312692238112959698, guid: 1e0633c319d7fd749943e654a5bb97db, type: 3}
       propertyPath: m_LocalPosition.z
@@ -454,6 +454,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 140295979589374772, guid: b70f6c1d71b022349b7bfdddd23807fd, type: 3}
+      propertyPath: _hidingColor.b
+      value: 0.54901963
+      objectReference: {fileID: 0}
+    - target: {fileID: 140295979589374772, guid: b70f6c1d71b022349b7bfdddd23807fd, type: 3}
+      propertyPath: _hidingColor.g
+      value: 0.17254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 140295979589374772, guid: b70f6c1d71b022349b7bfdddd23807fd, type: 3}
+      propertyPath: _hidingColor.r
+      value: 0.15294118
+      objectReference: {fileID: 0}
+    - target: {fileID: 544915837464903449, guid: b70f6c1d71b022349b7bfdddd23807fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 544915837464903449, guid: b70f6c1d71b022349b7bfdddd23807fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 544915837464903449, guid: b70f6c1d71b022349b7bfdddd23807fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 6192915869953841616, guid: b70f6c1d71b022349b7bfdddd23807fd, type: 3}
       propertyPath: m_Name
       value: ChildRoom
