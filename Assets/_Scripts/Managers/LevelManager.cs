@@ -17,6 +17,14 @@ public class LevelManager : MonoBehaviour
     }
     private void Start()
     {
+        if (PlayerPrefs.HasKey("Level"))
+        {
+            currentLevel = PlayerPrefs.GetInt("Level");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Level", 0);
+        }
         LoadLevel(levelList[currentLevel].Environment);
     }
     public void LoadLevel(Environment env)
@@ -55,6 +63,7 @@ public class LevelManager : MonoBehaviour
         if (currentLevel+1 != levelList.Count)
         {
             currentLevel++;
+            PlayerPrefs.SetInt("Level", currentLevel);
             LoadLevel(levelList[currentLevel].Environment);
             Debug.Log("loading next level");
         }

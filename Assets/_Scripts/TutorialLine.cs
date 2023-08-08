@@ -8,6 +8,7 @@ public class TutorialLine : MonoBehaviour
     [SerializeField] private List<Transform> _tutorialSpots;
     [SerializeField] private GameObject _player;
     private bool isTutorialStart = false;
+
     private void OnEnable()
     {
         EventManager.OnGameStart += InitTutorial;
@@ -20,7 +21,6 @@ public class TutorialLine : MonoBehaviour
     private void Start()
     {
         _player = FindObjectOfType<PlayerController>().gameObject;
-
     }
     private void Update()
     {
