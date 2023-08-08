@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   Environment: 4
-  PlayTime: 50
+  PlayTime: 100
