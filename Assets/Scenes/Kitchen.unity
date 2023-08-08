@@ -130,22 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 941893426979842077, guid: db97ffffc5b97dd45b26ea94369785e0, type: 3}
-      propertyPath: m_TagString
-      value: Hideable
-      objectReference: {fileID: 0}
-    - target: {fileID: 1281153844081991444, guid: db97ffffc5b97dd45b26ea94369785e0, type: 3}
-      propertyPath: m_TagString
-      value: Hideable
-      objectReference: {fileID: 0}
-    - target: {fileID: 1425380564032529938, guid: db97ffffc5b97dd45b26ea94369785e0, type: 3}
-      propertyPath: m_EndPoint.y
-      value: -1.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 2334436233494548812, guid: db97ffffc5b97dd45b26ea94369785e0, type: 3}
-      propertyPath: m_TagString
-      value: Hideable
-      objectReference: {fileID: 0}
     - target: {fileID: 2635548844942142579, guid: db97ffffc5b97dd45b26ea94369785e0, type: 3}
       propertyPath: m_Name
       value: Kitchen
@@ -193,18 +177,6 @@ PrefabInstance:
     - target: {fileID: 3447656256968849097, guid: db97ffffc5b97dd45b26ea94369785e0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6862331846557706897, guid: db97ffffc5b97dd45b26ea94369785e0, type: 3}
-      propertyPath: m_TagString
-      value: Hideable
-      objectReference: {fileID: 0}
-    - target: {fileID: 7922629332603970515, guid: db97ffffc5b97dd45b26ea94369785e0, type: 3}
-      propertyPath: m_TagString
-      value: Hideable
-      objectReference: {fileID: 0}
-    - target: {fileID: 8928845269208268253, guid: db97ffffc5b97dd45b26ea94369785e0, type: 3}
-      propertyPath: m_TagString
-      value: Hideable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db97ffffc5b97dd45b26ea94369785e0, type: 3}
