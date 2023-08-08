@@ -1,9 +1,6 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
-using TMPro.EditorUtilities;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -126,7 +123,7 @@ public class HunterMovementController : MonoBehaviour
         _huntingCount = seekingCount;
         if (LevelManager.Instance.CurrentEnvironment == Environment.tutorial)
         {
-            _huntingCount = 1;
+            _huntingCount = 2;
             foreach (var controller in _hidingList)
             {
                 if (controller != _playerHideController && controller.gameObject.activeSelf)
@@ -135,6 +132,15 @@ public class HunterMovementController : MonoBehaviour
                 }
                 else
                     _seekedList.Add(controller);
+            }
+            if (!_playerHideController.IsHidingRightSpot() || !_playerHideController.IsHiding)
+            {
+                _huntingList.Add(_playerHideController);
+                _isPlayerCatched = true;
+            }
+            else
+            {
+                _huntingCount = 1;
             }
             return;
         }
