@@ -7,7 +7,8 @@ public enum Environment
     childroom,
     table,
     tutorial,
-    chineseshop
+    chineseshop,
+    kitchen1
 }
 public class EnvironmentData : MonoBehaviour
 {
