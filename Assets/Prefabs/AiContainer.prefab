@@ -286,7 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 406aa6b6c6b760a4285f4de643f8f67a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraTransform: {fileID: 0}
 --- !u!114 &5103184495748352394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,6 +593,10 @@ PrefabInstance:
       value: Stickman
       objectReference: {fileID: 0}
     - target: {fileID: 2622753384463669962, guid: 0effab31759f5ea4ebe7c12bf0744f0e, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622753384463669962, guid: 0effab31759f5ea4ebe7c12bf0744f0e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: acf8c4f437a919043b86c9b89740385c, type: 2}
@@ -691,6 +694,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2034971455007422345, guid: 1b6f74d86892ed64787dc64638a30b23, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774694402513406743, guid: 1b6f74d86892ed64787dc64638a30b23, type: 3}
+      propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
