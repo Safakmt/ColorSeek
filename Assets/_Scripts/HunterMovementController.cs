@@ -185,25 +185,36 @@ public class HunterMovementController : MonoBehaviour
 
             _catchAnimDelayedCall = DOVirtual.DelayedCall(2f, () =>
             {
-                deactive.SetActive(false);
+                _animator.SetTrigger("Hold");
+                _animator.SetTrigger("Bite");
 
-            }).OnComplete(() =>
-            {
-                if (_huntingCount > 0)
+            }).OnComplete(()=> { 
+                DOVirtual.DelayedCall(0.7f, () =>
                 {
-                    _currentState = HunterState.Walk;
-                }
-                else if(_huntingCount == 0)
+                    deactive.SetActive(false);
+
+                }).OnComplete(() =>
                 {
-                    transform.LookAt(Camera.main.transform.position);
-                    _animator.SetTrigger("Scream");
-                    EventManager.HunterScream();
-                    DOVirtual.DelayedCall(2.8f, () =>
+                    DOVirtual.DelayedCall(0.7f, () =>
                     {
-                        EventManager.HuntingFinished(_isPlayerCatched);
-                        Debug.Log("huntung finished");
+                        if (_huntingCount > 0)
+                        {
+                            _currentState = HunterState.Walk;
+                        }
+                        else if (_huntingCount == 0)
+                        {
+                            transform.LookAt(Camera.main.transform.position);
+                            _animator.SetTrigger("Scream");
+                            EventManager.HunterScream();
+                            DOVirtual.DelayedCall(2.8f, () =>
+                            {
+                                EventManager.HuntingFinished(_isPlayerCatched);
+                                Debug.Log("huntung finished");
+                            });
+                        }
                     });
-                }
+                    
+                });
             });
         }
     }
