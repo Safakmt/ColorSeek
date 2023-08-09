@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5480168853000368760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HideTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7448235679012835522}
   - component: {fileID: 7875154125693377291}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HidingObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6037027237891535077}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HidingSpot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
