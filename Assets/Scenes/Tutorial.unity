@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 703916486399722557, guid: 6bd94d9e08dab4e45b0c00e48426cbed, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f5674bfb4e4a6514891ac22fbe76f75a, type: 2}
     - target: {fileID: 3806551227631292829, guid: 6bd94d9e08dab4e45b0c00e48426cbed, type: 3}
       propertyPath: m_Name
       value: TutorialLevel
