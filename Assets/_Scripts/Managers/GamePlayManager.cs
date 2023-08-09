@@ -31,6 +31,7 @@ public class GamePlayManager : MonoBehaviour
     private float _playerAngle;
     private List<HideController> hiders = new List<HideController>();
     private List<float> hiderAngles = new List<float>();
+    private GameObject _wallToClose;
     public GameState CurrentGameState { get; set; }
     public static GamePlayManager Instance { get; private set; }
 
@@ -80,6 +81,10 @@ public class GamePlayManager : MonoBehaviour
             if (!_hunter.activeSelf)
             {
                 EventManager.SeekState();
+                if (_wallToClose)
+                {
+                _wallToClose.SetActive(true);
+                }
                 _hunter.SetActive(true);
                 CameraManager.Instance.ChangeCameraTo(CameraTypes.HunterCam);
                 _hideButton.SetActive(false);
@@ -171,6 +176,10 @@ public class GamePlayManager : MonoBehaviour
         DOVirtual.DelayedCall(3.8f, () =>
         {
             EventManager.GameStart();
+            if (_wallToClose)
+            {
+                _wallToClose.SetActive(false);
+            }
             _playerController.StartTakingInputs();
             CameraManager.Instance.ChangeCameraTo(CameraTypes.PlayerFollowCam);
             CurrentGameState = GameState.Hide;
@@ -186,6 +195,10 @@ public class GamePlayManager : MonoBehaviour
     private void ResetGamePlay()
     {
         CameraManager.Instance.ChangeCameraTo(CameraTypes.SelectionCam);
+        if (_wallToClose)
+        {
+            _wallToClose.SetActive(true);
+        }
         _isSelectionPartPlaying = false;
         CurrentGameState = GameState.Start;
         _hunter.SetActive(false);
@@ -220,6 +233,7 @@ public class GamePlayManager : MonoBehaviour
         _characterCreatePivot = environmentData.charSpawnPos;
         CameraManager.Instance.SetSelectionFollowAndLookAt(_characterCreatePivot);
         CameraManager.Instance.SetPlayerFollowCamPosition(environmentData.followCamPos);
+        _wallToClose = environmentData.Wall;
         GetCurrentPlayTime();
         ResetGamePlay();
         EventManager.RefrencesSet();
