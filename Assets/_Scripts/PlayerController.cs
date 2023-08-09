@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Windows;
-
+using DG.Tweening;
 public enum PlayerState
 {
     Idle,
@@ -125,6 +124,8 @@ public class PlayerController : MonoBehaviour
         {
             playerVisual.rotation = Quaternion.Euler(Vector3.zero);
             _hideController.Hide();
+            _isTakingInput = false;
+            DOVirtual.DelayedCall(0.9f, () => { IsTakingInput = true; });
             characterController.enabled = false;
             _animatorController.PlayTPoseAnim();
             _isHiding = true;
