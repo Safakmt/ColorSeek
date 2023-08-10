@@ -48,12 +48,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
+        EventManager.OnGameStart += SetActiveJoystick; 
         EventManager.OnSceneLoad += ResetPlayer;
         EventManager.OnSceneUnload += StopTakingInput;
         EventManager.OnSeekState += OnSeekStateChange;
     }
     private void OnDisable()
     {
+        EventManager.OnGameStart -= SetActiveJoystick; 
         EventManager.OnSceneLoad -= ResetPlayer;
         EventManager.OnSceneUnload -= StopTakingInput;
         EventManager.OnSeekState -= OnSeekStateChange;
@@ -61,6 +63,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         IsTakingInput = false;
+        SetDeactiveJoystick();
         _currentState = PlayerState.Moving;
     }
 
@@ -99,6 +102,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnSeekStateChange()
     {
+        SetDeactiveJoystick();
         if (!_isHiding)
         {
             _currentState = PlayerState.Escape;
@@ -170,11 +174,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SetActiveJoystick()
+    {
+        joystick.gameObject.SetActive(true);
+    }
+    public void SetDeactiveJoystick()
+    {
+        joystick.gameObject.SetActive(false);
+    }
     private void ResetPlayer()
     {
         StartTakingInputs();
         _currentState = PlayerState.Idle;
         ResetTransform();
+        _isHiding = false;
         _hideController.Unhide();
     }
     private void ResetTransform()
@@ -186,6 +199,7 @@ public class PlayerController : MonoBehaviour
     public void StopTakingInput()
     {
         IsTakingInput = false;
+        
     }
     public void StartTakingInputs()
     {
