@@ -1490,7 +1490,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.19
+  m_VoxelSize: 0.30666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 571b5d2466a97f74ea66835d833ede1c, type: 2}
   m_BuildHeightMesh: 0
@@ -2468,7 +2468,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 7466140592968860590, guid: bb1084065552f1e4fb9dc5d6488e89b3, type: 3}
+  m_Mesh: {fileID: 8967006016015615665, guid: bb1084065552f1e4fb9dc5d6488e89b3, type: 3}
 --- !u!1 &4206208719052368004
 GameObject:
   m_ObjectHideFlags: 0
@@ -2567,7 +2567,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 6681037884777033280, guid: bb1084065552f1e4fb9dc5d6488e89b3, type: 3}
+  m_Mesh: {fileID: 8246494051924840529, guid: bb1084065552f1e4fb9dc5d6488e89b3, type: 3}
 --- !u!1 &4553510545370372201
 GameObject:
   m_ObjectHideFlags: 0
@@ -6337,7 +6337,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6841672410974261196}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.6
   m_Height: 1
