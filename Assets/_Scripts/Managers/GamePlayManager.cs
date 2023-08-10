@@ -23,6 +23,7 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField] private HideController _playerHideController;
     [SerializeField] private float _playTime;
     [SerializeField] private TextMeshProUGUI _playTimeText;
+    [SerializeField] private TextMeshProUGUI _hideText;
     [SerializeField] private Transform _characterCreatePivot;
     [SerializeField] private HidingSpotAssigner _hidingSpotAssigner;
     [SerializeField] private GameObject _selectionArrow;
@@ -60,7 +61,6 @@ public class GamePlayManager : MonoBehaviour
     }
     private void Update()
     {
-
         if (CurrentGameState == GameState.Start && Input.GetMouseButtonDown(0) && !_isSelectionPartPlaying) 
         {
             PlaySelectionSection();
@@ -176,6 +176,7 @@ public class GamePlayManager : MonoBehaviour
         DOVirtual.DelayedCall(3.8f, () =>
         {
             EventManager.GameStart();
+            PlayHideTextAnim();
             if (_wallToClose)
             {
                 _wallToClose.SetActive(false);
@@ -191,7 +192,20 @@ public class GamePlayManager : MonoBehaviour
             }
         });
     }
-
+    private void PlayHideTextAnim()
+    {
+        _hideText.rectTransform.localScale = Vector3.zero;
+        _hideText.gameObject.SetActive(true);
+        _hideText.rectTransform.DOScale(new Vector3(2, 2, 1), 1.5f).SetEase(Ease.OutElastic).OnComplete(() =>
+        {
+            DOVirtual.DelayedCall(0.5f, () =>
+            {
+                _hideText.rectTransform.DOScale(Vector3.zero, 0.7f).SetEase(Ease.InBack).OnComplete(()=> {
+                    _hideText.gameObject.SetActive(false);
+                });
+            });
+        });
+    }
     private void ResetGamePlay()
     {
         CameraManager.Instance.ChangeCameraTo(CameraTypes.SelectionCam);
