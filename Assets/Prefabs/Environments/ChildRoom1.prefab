@@ -1087,6 +1087,7 @@ GameObject:
   - component: {fileID: 8734015756014121160}
   - component: {fileID: 3175576162319348444}
   - component: {fileID: 8291344302872803464}
+  - component: {fileID: 8291344302042639249}
   m_Layer: 0
   m_Name: Bed
   m_TagString: Untagged
@@ -1174,6 +1175,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6508942946276188115, guid: acdf64618846806488faebf1cf6087cc, type: 3}
+--- !u!114 &8291344302042639249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096858266630801985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: 466f31ca
 --- !u!1 &3264858555861619842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1930,7 +1947,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 3767
   m_UseGeometry: 0
   m_DefaultArea: 4
   m_IgnoreNavMeshAgent: 1
@@ -1940,7 +1957,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.30666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 2c363f2a251d8ac44bc2d8637c82c138, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 00a84d073857ae5469d22a3b24e702af, type: 2}
   m_BuildHeightMesh: 0
 --- !u!114 &8291344303718548099
 MonoBehaviour:
@@ -1969,7 +1986,7 @@ MonoBehaviour:
   - {fileID: 2187323650083324631}
   - {fileID: 2187323650746314759}
   hunterScale: {x: 6, y: 6, z: 6}
-  hunterCatchDistance: 4
+  hunterCatchDistance: 5.5
 --- !u!1001 &8291344301861677836
 PrefabInstance:
   m_ObjectHideFlags: 0
