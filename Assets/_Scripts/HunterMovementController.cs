@@ -188,31 +188,32 @@ public class HunterMovementController : MonoBehaviour
                 _animator.SetTrigger("Hold");
                 _animator.SetTrigger("Bite");
 
-            }).OnComplete(()=> { 
-                DOVirtual.DelayedCall(0.7f, () =>
-                {
-                    deactive.SetActive(false);
-
-                }).OnComplete(() =>
-                {
+            })
+                .OnComplete(()=> { 
                     DOVirtual.DelayedCall(0.7f, () =>
                     {
-                        if (_huntingCount > 0)
+                        deactive.SetActive(false);
+
+                    })
+                    .OnComplete(() => {
+                        DOVirtual.DelayedCall(0.7f, () =>
                         {
-                            _currentState = HunterState.Walk;
-                        }
-                        else if (_huntingCount == 0)
-                        {
-                            transform.LookAt(Camera.main.transform.position);
-                            _animator.SetTrigger("Scream");
-                            EventManager.HunterScream();
-                            DOVirtual.DelayedCall(2.8f, () =>
+                            if (_huntingCount > 0)
                             {
-                                EventManager.HuntingFinished(_isPlayerCatched);
-                                Debug.Log("huntung finished");
-                            });
-                        }
-                    });
+                                _currentState = HunterState.Walk;
+                            }
+                            else if (_huntingCount == 0)
+                            {
+                                transform.LookAt(Camera.main.transform.position);
+                                _animator.SetTrigger("Scream");
+                                EventManager.HunterScream();
+                                DOVirtual.DelayedCall(2.8f, () =>
+                                {
+                                    EventManager.HuntingFinished(_isPlayerCatched);
+                                    Debug.Log("huntung finished");
+                                });
+                            }
+                        });
                     
                 });
             });
