@@ -130,6 +130,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1344085530, guid: 2f79177fe63bdf94d8379761d8bf22c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344085530, guid: 2f79177fe63bdf94d8379761d8bf22c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344085530, guid: 2f79177fe63bdf94d8379761d8bf22c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9022641
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344085530, guid: 2f79177fe63bdf94d8379761d8bf22c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.12785923
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344085530, guid: 2f79177fe63bdf94d8379761d8bf22c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.40771723
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344085530, guid: 2f79177fe63bdf94d8379761d8bf22c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.057777323
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344085530, guid: 2f79177fe63bdf94d8379761d8bf22c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 16.131
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344085530, guid: 2f79177fe63bdf94d8379761d8bf22c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -48.635
+      objectReference: {fileID: 0}
     - target: {fileID: 173215059802936132, guid: 2f79177fe63bdf94d8379761d8bf22c4, type: 3}
       propertyPath: m_Name
       value: DiningRoom
