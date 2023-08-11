@@ -7,12 +7,10 @@ public class TutorialLine : MonoBehaviour
     [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private List<Transform> _tutorialSpots;
     [SerializeField] private GameObject _player;
-    private bool isTutorialStart = false;
-
+    private bool _isTutorialStart = false;
     private void OnEnable()
     {
         EventManager.OnGameStart += InitTutorial;
-
     }
     private void OnDisable()
     {
@@ -24,18 +22,21 @@ public class TutorialLine : MonoBehaviour
     }
     private void Update()
     {
-        if (!isTutorialStart)
-            return;
-        if (_tutorialSpots.Count == 0)
-            return;
-        _lineRenderer.SetPosition(_tutorialSpots.Count, _player.transform.position);
-        if (Vector3.Distance(_player.transform.position, _tutorialSpots[_tutorialSpots.Count-1].position) < 0.5f)
+        if (_isTutorialStart)
         {
-            _tutorialSpots.RemoveAt(_tutorialSpots.Count-1);
+            _lineRenderer.SetPosition(_tutorialSpots.Count, _player.transform.position);
+        }
+
+    }
+    public void PointReached(TutorialPoint tutPoint)
+    {
+        if (_tutorialSpots[_tutorialSpots.Count-1].GetComponent<TutorialPoint>() == tutPoint && _tutorialSpots.Count != 1)
+        {
+            _tutorialSpots.RemoveAt(_tutorialSpots.Count - 1);
             _lineRenderer.positionCount--;
+
         }
     }
-
     private void InitTutorial()
     {
         _lineRenderer.positionCount = _tutorialSpots.Count + 1;
@@ -43,6 +44,6 @@ public class TutorialLine : MonoBehaviour
         {
             _lineRenderer.SetPosition(i, _tutorialSpots[i].position);
         }
-        isTutorialStart = true;
+        _isTutorialStart = true;
     }
 }
