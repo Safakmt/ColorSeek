@@ -7,6 +7,7 @@ public class HidingSpotAssigner : MonoBehaviour
 {
     [SerializeField] private List<HideController> _hiders = new List<HideController>();
     [SerializeField] private List<HidingSpot> _hidingSpotList = new List<HidingSpot>();
+
     private List<HidingSpot> usedSpots= new List<HidingSpot>();
 
     public void SetHideSpotList(List<HidingSpot> hidingSpotList)
@@ -18,6 +19,7 @@ public class HidingSpotAssigner : MonoBehaviour
 
     private void SetNewPositions()
     {
+        Debug.Log(LevelManager.Instance.CurrentEnvironment);
         if (LevelManager.Instance.CurrentEnvironment == Environment.tutorial )
         {
             foreach (var item in _hiders)
@@ -28,8 +30,14 @@ public class HidingSpotAssigner : MonoBehaviour
                     item.gameObject.SetActive(false);
                 }
             }
-
-            _hiders[1].gameObject.SetActive(true);
+            foreach (var item in _hiders)
+            {
+                if (!item.GetComponent<PlayerController>())
+                {
+                    item.gameObject.SetActive(true);
+                    break;
+                }
+            }
 
             foreach (var item in _hiders)
             {

@@ -12,10 +12,18 @@ public class HideController : MonoBehaviour
     [SerializeField] private HidingSpot _rightSpot;
     [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private GameObject _selectionHighlight;
+    [SerializeField] private bool _isPlayer = false;
     public bool IsHiding { get; set; }
     public void SetClosestSpot(HidingSpot spot)
     {
-        if (!IsHiding)
+        if (_isPlayer)
+        {
+            if (!IsHiding && spot.canPlayerHide)
+            {
+                _closestSpot = spot;
+            }
+        }
+        else if(!_isPlayer && !IsHiding)
         {
             _closestSpot = spot;
         }

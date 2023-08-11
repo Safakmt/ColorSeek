@@ -10,6 +10,7 @@ public class HidingSpot : MonoBehaviour
     [SerializeField] private PoseType _type;
     private HideController currentHider;
     private bool _isFree = true;
+    public bool canPlayerHide = true;
     public void SetCurrentHider(HideController currentHider)
     {
         _isFree = false;
