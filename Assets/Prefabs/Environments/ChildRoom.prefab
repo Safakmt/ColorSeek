@@ -2122,14 +2122,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6117567036317821569}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.565, y: 6.14, z: 4.835}
+  m_LocalRotation: {x: 0.19674672, y: -0.39599156, z: 0.104141966, w: 0.89086246}
+  m_LocalPosition: {x: 6.36, y: 10.27, z: -6.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6825900678578832234}
   m_RootOrder: 24
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 25.66, y: -47.5, z: 1.89}
 --- !u!1 &6192915869953841616
 GameObject:
   m_ObjectHideFlags: 0
@@ -2298,7 +2298,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.19
+  m_VoxelSize: 0.30666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: d4e55b5559f5a5844a0ac06014d31528, type: 2}
   m_BuildHeightMesh: 0
@@ -3086,7 +3086,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9221892952653318673}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.26, y: 0.715, z: -5.37}
+  m_LocalPosition: {x: 3.07, y: 0.71, z: -3.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4437,6 +4437,22 @@ PrefabInstance:
       propertyPath: _renderer
       value: 
       objectReference: {fileID: 4909209229236632146}
+    - target: {fileID: 7875154125693377291, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
+      propertyPath: _hidingColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875154125693377291, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
+      propertyPath: _hidingColor.b
+      value: 0.11372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875154125693377291, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
+      propertyPath: _hidingColor.g
+      value: 0.11372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875154125693377291, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
+      propertyPath: _hidingColor.r
+      value: 0.11372549
+      objectReference: {fileID: 0}
     - target: {fileID: 7885927938119475708, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -4752,6 +4768,22 @@ PrefabInstance:
       propertyPath: _renderer
       value: 
       objectReference: {fileID: 6846321445945259539}
+    - target: {fileID: 7875154125693377291, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
+      propertyPath: _hidingColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875154125693377291, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
+      propertyPath: _hidingColor.b
+      value: 0.8980392
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875154125693377291, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
+      propertyPath: _hidingColor.g
+      value: 0.8980392
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875154125693377291, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
+      propertyPath: _hidingColor.r
+      value: 0.8980392
+      objectReference: {fileID: 0}
     - target: {fileID: 7885927938119475708, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
       propertyPath: m_Layer
       value: 8
