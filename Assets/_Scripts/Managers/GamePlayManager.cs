@@ -68,8 +68,14 @@ public class GamePlayManager : MonoBehaviour
         }
         if (CurrentGameState == GameState.Hide)
         {
-            _playTime -= Time.deltaTime;
-            _playTimeText.text = _playTime.ToString("0.0");
+            if(LevelManager.Instance.CurrentEnvironment == Environment.tutorial)
+            {
+            }
+            else
+            {
+                _playTime -= Time.deltaTime;
+                _playTimeText.text = _playTime.ToString("0.0");
+            }
             if (_playTime <= 0 || isHideButtonPressed)
             {
                 CurrentGameState = GameState.Seek;
@@ -215,7 +221,6 @@ public class GamePlayManager : MonoBehaviour
         }
         _isSelectionPartPlaying = false;
         CurrentGameState = GameState.Start;
-        _hunter.SetActive(false);
         isHideButtonPressed = false;
         HideHideButton();
         PlaceCircular();
@@ -233,12 +238,22 @@ public class GamePlayManager : MonoBehaviour
     }
     private void GetCurrentPlayTime()
     {
+        if (LevelManager.Instance.CurrentEnvironment == Environment.tutorial)
+        {
+            _playTimeText.gameObject.SetActive(false);
+            _playTime = 1;
+        }
+        else
+        {
+            _playTimeText.gameObject.SetActive(true);
         _playTime = LevelManager.Instance.GetCurrentLevelData().PlayTime;
-        _playTimeText.text = _playTime.ToString();
+            _playTimeText.text = _playTime.ToString();
+        }
     }
     public void OnEnvironmentLoaded(EnvironmentData environmentData)
     {
         LevelManager.Instance.ActiveEnvData = environmentData;
+        _hunter.SetActive(false);
         _hidingSpotAssigner.SetHideSpotList(environmentData.hidingSpots);
         CameraManager.Instance.SetHunterCameraPos(environmentData.hunterCamPos.position);
         _hunter.transform.position = environmentData.hunterSpawnPos.position;   
