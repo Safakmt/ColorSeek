@@ -676,7 +676,7 @@ GameObject:
   - component: {fileID: 1297162299000829753}
   - component: {fileID: 6577737107036390434}
   - component: {fileID: 37340735062179775}
-  - component: {fileID: 6334329248816726468}
+  - component: {fileID: 8099478707732488469}
   m_Layer: 0
   m_Name: FlowerPot.003
   m_TagString: Untagged
@@ -749,7 +749,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6334329248816726468
+--- !u!64 &8099478707732488469
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1162,6 +1162,7 @@ GameObject:
   - component: {fileID: 3446215084729561167}
   - component: {fileID: 3446215084729561166}
   - component: {fileID: 3446215084729561161}
+  - component: {fileID: 6334329248816726468}
   m_Layer: 0
   m_Name: TutorialLevel
   m_TagString: Untagged
@@ -1315,7 +1316,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.30666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: fa0a6f8f6c2dc9744a75e60e85405941, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: c093ad3e89070a148a4bd03d031025f4, type: 2}
   m_BuildHeightMesh: 0
 --- !u!114 &3446215084729561161
 MonoBehaviour:
@@ -1340,6 +1341,22 @@ MonoBehaviour:
   - {fileID: 1988342442786514991}
   hunterScale: {x: 6, y: 6, z: 6}
   hunterCatchDistance: 4
+--- !u!114 &6334329248816726468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3806551227631292829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 4, y: 3, z: 12.92}
+  m_Center: {x: 5.09, y: 1, z: 0}
+  m_Area: 1
+  m_AffectedAgents: 466f31ca
 --- !u!1 &3927240750179610804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1826,7 +1843,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6334329249317913441}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.91, y: 9.45, z: -3.186}
+  m_LocalPosition: {x: -5.39, y: 9.45, z: -3.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1857,7 +1874,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6334329249680482585}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.88, y: 1.53, z: 4.12}
+  m_LocalPosition: {x: -3.57, y: 1.53, z: 4.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2911,6 +2928,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 6037027237891535077, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7002033
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037027237891535077, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -1.7763568e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037027237891535077, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7139436
+      objectReference: {fileID: 0}
+    - target: {fileID: 6037027237891535077, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -91.113
+      objectReference: {fileID: 0}
     - target: {fileID: 7448235679012835522, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2953,6 +2986,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7448235679012835522, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875154125693377291, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
+      propertyPath: canPlayerHide
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7875154125693377291, guid: e5c0606f87ad7ca488ce3b896caf740b, type: 3}
