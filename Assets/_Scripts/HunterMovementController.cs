@@ -22,6 +22,7 @@ public class HunterMovementController : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private HideController _playerHideController;
     [SerializeField] private List<HideController> _hidingList = new List<HideController>();
+    [SerializeField] private ParticleSystem _bloodParticle;
 
     [Header("Values")]
     [SerializeField] private int seekingCount;
@@ -187,6 +188,10 @@ public class HunterMovementController : MonoBehaviour
             {
                 _animator.SetTrigger("Hold");
                 _animator.SetTrigger("Bite");
+                DOVirtual.DelayedCall(0.5f,() =>
+                {
+                    StartCoroutine(ParticleEffect());
+                });
 
             })
                 .OnComplete(()=> { 
@@ -227,7 +232,13 @@ public class HunterMovementController : MonoBehaviour
     {
         currentChasedTransform.SetParent(_catchingHandPosition);
         currentChasedTransform.localPosition = Vector3.zero;
+    }
 
+    IEnumerator ParticleEffect()
+    {
+        _bloodParticle.Play();
+        yield return new WaitForSeconds(0.7f);
+        _bloodParticle.Stop();
     }
     private void OnDrawGizmosSelected()
     {
