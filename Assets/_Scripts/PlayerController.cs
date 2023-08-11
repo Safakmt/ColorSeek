@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform playerVisual;
     [SerializeField] private HideController _hideController;
     [SerializeField] private AnimatorController _animatorController;
-
     [Header("Values")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotationSpeed;
@@ -48,6 +47,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
+        EventManager.OnHunterCatch += ResetVisualPosition;
         EventManager.OnGameStart += SetActiveJoystick; 
         EventManager.OnSceneLoad += ResetPlayer;
         EventManager.OnSceneUnload += StopTakingInput;
@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnDisable()
     {
+        EventManager.OnHunterCatch -= ResetVisualPosition;
         EventManager.OnGameStart -= SetActiveJoystick; 
         EventManager.OnSceneLoad -= ResetPlayer;
         EventManager.OnSceneUnload -= StopTakingInput;
@@ -174,6 +175,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void ResetVisualPosition()
+    {
+        StartCoroutine(ResetVisual());
+    }
+    IEnumerator ResetVisual()
+    {
+        yield return null;
+        playerVisual.transform.localPosition = Vector3.zero;
+    }
     public void SetActiveJoystick()
     {
         joystick.gameObject.SetActive(true);
