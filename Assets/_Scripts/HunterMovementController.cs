@@ -39,7 +39,7 @@ public class HunterMovementController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnHunterCatch += OnCatchAnimationEvent;
-        transform.LookAt(Camera.main.transform.position);
+        transform.LookAt(CameraManager.Instance.GetHunterCamPos(), Vector3.up);
         HunterScreamActivities();
         CreateHuntingList();
     }

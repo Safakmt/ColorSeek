@@ -70,7 +70,10 @@ public class CameraManager : MonoBehaviour
             HunterCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0f;
         });
     }
-
+    public Transform GetHunterCamPos()
+    {
+        return HunterCam.transform;
+    }
     public void SetHunterCameraPos(Vector3 position)
     {
         HunterCam.transform.position = position;
