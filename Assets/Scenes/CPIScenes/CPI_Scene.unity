@@ -343,6 +343,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Office
       objectReference: {fileID: 0}
+    - target: {fileID: 4370951913967234905, guid: 4017078bd76d3fd4eb4d5d3b9ff7056c, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4017078bd76d3fd4eb4d5d3b9ff7056c, type: 3}
 --- !u!1 &550219893
