@@ -54,6 +54,7 @@ public class RoboticArmCatch : MonoBehaviour
                             CatchableObjectScript holdingScript = leftHoldingObjects[i];
                             catchScript.gameObject.SetActive(false);
                             holdingScript.gameObject.SetActive(true);
+                            holdingScript.transform.DOKill();
                             DOVirtual.DelayedCall(1f,() =>
                             {
                                 holdingScript.transform.DOScale(0, 0.4f)
@@ -88,6 +89,7 @@ public class RoboticArmCatch : MonoBehaviour
                             CatchableObjectScript holdingScript = rightHoldingObjects[i];
                             catchScript.gameObject.SetActive(false);
                             holdingScript.gameObject.SetActive(true);
+                            holdingScript.transform.DOKill();
                             DOVirtual.DelayedCall(1f, () =>
                             {
                                 holdingScript.transform.DOScale(0, 0.4f)
