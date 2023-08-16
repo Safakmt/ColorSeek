@@ -362,7 +362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &550219894
 AudioListener:
   m_ObjectHideFlags: 0
@@ -912,7 +912,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1205638643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1570,14 +1570,86 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rightHand: {fileID: 1954145474}
   _leftHand: {fileID: 283126811}
-  catchingObjects: []
   leftHoldingObjects: []
   rightHoldingObjects: []
   _castAim: {fileID: 0}
   _mask:
     serializedVersion: 2
     m_Bits: 0
-  _cam: {fileID: 0}
+  _mainCam: {fileID: 0}
+--- !u!1001 &1646483362
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2968001760242276548, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968001760242276548, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.554
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968001760242276548, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 24.050001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968001760242276548, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 25.508
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968001760242276548, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968001760242276548, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968001760242276548, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968001760242276548, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968001760242276548, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968001760242276548, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968001760242276548, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968001760242276550, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: m_Name
+      value: Hunter
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968001761326329173, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: field of view
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968001761326329178, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.90700006
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968001761326329178, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.749998
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968001761326329178, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.1079998
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a8a7a1138368144439c4d30f1242c6b3, type: 3}
 --- !u!4 &1788118955 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: da9f4bab5cb67b4409caabad115d0b71, type: 3}
