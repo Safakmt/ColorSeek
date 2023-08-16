@@ -30,14 +30,14 @@ public class RoboticArmCatch : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            RightHandCatch();
+            LeftHandCatch();
         }
         if (Input.GetMouseButtonDown(1))
         {
-            LeftHandCatch();
+            RightHandCatch();
         }
     }
-    private void RightHandCatch()
+    private void LeftHandCatch()
     {
         isHit = Physics.BoxCast(_mainCam.transform.position, Vector3.one * 0.5f, _mainCam.transform.forward + new Vector3(0,_downParameter, 0), out hit, transform.rotation, _mask);
 
@@ -45,22 +45,23 @@ public class RoboticArmCatch : MonoBehaviour
         {
             if (isHit)
             {
-                Debug.Log(hit.transform);
                 if (hit.transform.TryGetComponent<CatchableObjectScript>(out CatchableObjectScript catchScript))
                 {
                     for (int i = 0; i < leftHoldingObjects.Count; i++)
                     {
                         if (leftHoldingObjects[i].objType == catchScript.objType)
                         {
-                            Transform tf = leftHoldingObjects[i].transform;
-                            leftHoldingObjects[i].gameObject.SetActive(true);
+                            CatchableObjectScript holdingScript = leftHoldingObjects[i];
                             catchScript.gameObject.SetActive(false);
-                            DOVirtual.DelayedCall(1f, () =>
+                            holdingScript.gameObject.SetActive(true);
+                            DOVirtual.DelayedCall(1f,() =>
                             {
-                                tf.DOScale(0, 0.4f).SetEase(Ease.InBack).OnComplete(() =>
+                                holdingScript.transform.DOScale(0, 0.4f)
+                                .SetEase(Ease.InBack)
+                                .OnComplete(() =>
                                 {
-                                    tf.transform.localScale = leftHoldingObjects[i].initScale;
-                                    tf.gameObject.SetActive(false);
+                                    holdingScript.transform.localScale = holdingScript.initScale;
+                                    holdingScript.gameObject.SetActive(false);
                                 });
                             });
                         }
@@ -70,7 +71,7 @@ public class RoboticArmCatch : MonoBehaviour
             _leftHand.transform.DOLocalMoveZ(_leftHandPos, 0.3f);
         });
     }
-    private void LeftHandCatch()
+    private void RightHandCatch()
     {
         isHit = Physics.BoxCast(_mainCam.transform.position, Vector3.one * 0.5f, _mainCam.transform.forward + new Vector3(0, _downParameter, 0), out hit, transform.rotation, _mask);
 
@@ -78,22 +79,23 @@ public class RoboticArmCatch : MonoBehaviour
         {
             if (isHit)
             {
-                Debug.Log(hit.transform);
                 if (hit.transform.TryGetComponent<CatchableObjectScript>(out CatchableObjectScript catchScript))
                 {
                     for (int i = 0; i < rightHoldingObjects.Count; i++)
                     {
                         if (rightHoldingObjects[i].objType == catchScript.objType)
                         {
-                            Transform tf = rightHoldingObjects[i].transform;
-                            rightHoldingObjects[i].gameObject.SetActive(true);
+                            CatchableObjectScript holdingScript = rightHoldingObjects[i];
                             catchScript.gameObject.SetActive(false);
+                            holdingScript.gameObject.SetActive(true);
                             DOVirtual.DelayedCall(1f, () =>
                             {
-                                tf.DOScale(0, 0.4f).SetEase(Ease.InBack).OnComplete(() =>
+                                holdingScript.transform.DOScale(0, 0.4f)
+                                .SetEase(Ease.InBack)
+                                .OnComplete(() =>
                                 {
-                                    tf.transform.localScale = rightHoldingObjects[i].initScale;
-                                    tf.gameObject.SetActive(false);
+                                    holdingScript.transform.localScale = holdingScript.initScale;
+                                    holdingScript.gameObject.SetActive(false);
                                 });
                             });
                         }
