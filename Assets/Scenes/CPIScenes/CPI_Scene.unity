@@ -539,6 +539,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivy: 250
   playerTransform: {fileID: 1738851814}
+  _controller: {fileID: 1738851813}
+  _speed: 10
 --- !u!1 &651993769 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0effab31759f5ea4ebe7c12bf0744f0e, type: 3}
