@@ -23,7 +23,6 @@ public class RoboticArmCatch : MonoBehaviour
     {
         _leftHandPos = _leftHand.transform.localPosition.z;
         _rightHandPos = _rightHand.transform.localPosition.z;
-        Cursor.lockState = CursorLockMode.Locked;
     }
     private void Update()
     {
