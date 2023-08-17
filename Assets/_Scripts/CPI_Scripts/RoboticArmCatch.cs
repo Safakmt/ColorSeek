@@ -66,8 +66,12 @@ public class RoboticArmCatch : MonoBehaviour
                             });
                         }
                     }
+                }else if(hit.transform.TryGetComponent<RagdollController>(out RagdollController controller))
+                {
+                    controller.RagdollToggle(true);
                 }
             }
+
             _leftHand.transform.DOLocalMoveZ(_leftHandPos, 0.3f);
         });
     }
@@ -101,6 +105,9 @@ public class RoboticArmCatch : MonoBehaviour
                             });
                         }
                     }
+                }else if (hit.transform.TryGetComponent<RagdollController>(out RagdollController controller))
+                {
+                    controller.RagdollToggle(true);
                 }
             }
             _rightHand.transform.DOLocalMoveZ(_rightHandPos, 0.3f);
