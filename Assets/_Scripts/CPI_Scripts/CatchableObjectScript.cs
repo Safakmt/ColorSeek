@@ -11,7 +11,10 @@ public enum CatchableObjectType
     Throphy1,
     Throphy2,
     ThropyStickman,
-    Stickman
+    StickmanWhite,
+    StickmanGrey,
+    StickmanPurple,
+    StickmanRed
 }
 public class CatchableObjectScript : MonoBehaviour
 {
