@@ -260,10 +260,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18df509c65e4b2640831a5fc1a45e3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivy: 250
+  mouseSensitivy: 1.75
   playerTransform: {fileID: 2968001760242276548}
   _controller: {fileID: 2968001760242276551}
   _speed: 10
+  _snappiness: 10
 --- !u!1001 &4713262263566093074
 PrefabInstance:
   m_ObjectHideFlags: 0

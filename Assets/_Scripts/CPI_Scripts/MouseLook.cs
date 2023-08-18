@@ -37,8 +37,8 @@ public class MouseLook : MonoBehaviour
 
     private void HunterLook()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivy * Time.deltaTime;
-        mouseY -= Input.GetAxis("Mouse Y") * mouseSensitivy * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivy;
+        mouseY -= Input.GetAxis("Mouse Y") * mouseSensitivy;
 
 
         xVelocity = Mathf.Lerp(xVelocity, mouseX, _snappiness * Time.deltaTime);
