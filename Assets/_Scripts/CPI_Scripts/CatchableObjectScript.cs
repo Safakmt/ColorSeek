@@ -14,7 +14,10 @@ public enum CatchableObjectType
     StickmanWhite,
     StickmanGrey,
     StickmanPurple,
-    StickmanRed
+    StickmanRed,
+    StickmanLightGrey,
+    StickmanBlue,
+    StickmanYellow
 }
 public class CatchableObjectScript : MonoBehaviour
 {
