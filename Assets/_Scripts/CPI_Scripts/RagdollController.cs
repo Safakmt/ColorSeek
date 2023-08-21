@@ -16,6 +16,10 @@ public class RagdollController : MonoBehaviour
     }
     public void RagdollToggle(bool state)
     {
+        _mainCollider.enabled = !state;
+        //_mainRigid.isKinematic = true;
+        _animator.enabled = !state;
+
         foreach (var body in _bodies)
         {
             body.isKinematic = !state;
@@ -25,8 +29,12 @@ public class RagdollController : MonoBehaviour
             col.enabled = state;
         }
 
-        _mainCollider.enabled = !state;
-        //_mainRigid.isKinematic = true;
-        _animator.enabled = !state;
+    }
+    public void AddHitForce(Vector3 point)
+    {
+        foreach (var body in _bodies)
+        {
+            body.AddExplosionForce(5000, point, 10);
+        }
     }
 }
