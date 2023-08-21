@@ -69,6 +69,7 @@ public class RoboticArmCatch : MonoBehaviour
                 }else if(hit.transform.TryGetComponent<RagdollController>(out RagdollController controller))
                 {
                     controller.RagdollToggle(true);
+                    controller.AddHitForce(hit.point);
                 }
             }
 
@@ -108,6 +109,8 @@ public class RoboticArmCatch : MonoBehaviour
                 }else if (hit.transform.TryGetComponent<RagdollController>(out RagdollController controller))
                 {
                     controller.RagdollToggle(true);
+                    controller.AddHitForce(hit.point);
+                    
                 }
             }
             _rightHand.transform.DOLocalMoveZ(_rightHandPos, 0.3f);
@@ -124,6 +127,7 @@ public class RoboticArmCatch : MonoBehaviour
             Gizmos.DrawRay(_mainCam.transform.position, (_mainCam.transform.forward + new Vector3(0, _downParameter, 0)) * hit.distance);
             //Draw a cube that extends to where the hit exists
             Gizmos.DrawWireCube(_mainCam.transform.position + (_mainCam.transform.forward + new Vector3(0, _downParameter, 0)) * hit.distance, Vector3.one * 0.5f);
+            Gizmos.DrawWireSphere(hit.point, 5f);
         }
         //If there hasn't been a hit yet, draw the ray at the maximum distance
         else
